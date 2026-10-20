@@ -641,8 +641,9 @@ const MONTHS=['January','February','March','April','May','June','July','August',
 const today=new Date(); today.setHours(12,0,0,0);
 const isHigh=d=>d.getMonth()>=4&&d.getMonth()<=8;
 $('#seasonTxt').textContent=(isHigh(today)?'Now high season: from 1300 zł (325 €) per night':'Now low season: from 1200 zł (300 €) per night')+' for the whole property';
-$(isHigh(today)?'#rate-high':'#rate-low').classList.add('is-now');
-$(isHigh(today)?'#rate-high header':'#rate-low header').insertAdjacentHTML('beforeend','<span class="now-badge">now</span>');
+function markRates(on,txt){['high','low'].forEach(k=>{const el=$('#rate-'+k);if(!el)return;const h=on.includes(k);el.classList.toggle('is-now',h);const b=el.querySelector('.now-badge');if(b)b.remove();if(h)el.querySelector('header').insertAdjacentHTML('beforeend','<span class="now-badge">'+txt+'</span>')})}
+const markNow=()=>markRates([isHigh(today)?'high':'low'],'now');
+markNow();
 
 /* ---------- House ---------- */
 const ROOMS=[
@@ -825,16 +826,17 @@ $('#dOut').onchange=calc;
 let lastQuote='';
 function calc(){
   const warn=[],lines=[];
-  if(!$('#dIn').value||!$('#dOut').value){$('#calcLines').innerHTML='';$('#calcTotal').textContent='–';return}
+  if(!$('#dIn').value||!$('#dOut').value){markNow();$('#calcLines').innerHTML='';$('#calcTotal').textContent='–';return}
   const a=parse($('#dIn').value),b=parse($('#dOut').value);
   const nights=Math.round((b-a)/864e5);
   if(nights>0){stayN=nights;NIGHTLY.forEach(k=>{if(st[k]>nights){st[k]=nights;$('#'+k).textContent=nights}})}
   $('#xgRow').hidden=st.guests<=10;
-  if(nights<1){$('#calcWarn').innerHTML='<p class="warn">The departure date must be after the arrival date.</p>';$('#calcLines').innerHTML='';$('#calcTotal').textContent='–';$('#calcPacks').innerHTML='';return}
+  if(nights<1){markNow();$('#calcWarn').innerHTML='<p class="warn">The departure date must be after the arrival date.</p>';$('#calcLines').innerHTML='';$('#calcTotal').textContent='–';$('#calcPacks').innerHTML='';return}
   let wk=0,slow=0,sum=0,junAug=false,julAug=false,anyHol=false,allJunSep=true,allWarm=true;
   for(let i=0;i<nights;i++){const d=addDays(a,i),hi=isHigh(d),p=isPremium(d),r=RATES[hi?'high':'low'];
     if(p){wk++;}else{slow++;} sum+=p?r.wk:r.slow;
     if(d.getMonth()===6||d.getMonth()===7)julAug=true; if(d.getMonth()>=5&&d.getMonth()<=7)junAug=true; if(isHol(d)||isHol(addDays(d,1)))anyHol=true; if(d.getMonth()<5||d.getMonth()>8)allJunSep=false; if(!isWarm(d))allWarm=false;}
+  {let hN=0;for(let i=0;i<nights;i++)if(isHigh(addDays(a,i)))hN++;markRates([hN?'high':'',hN<nights?'low':''],'your dates')}
   const minN=julAug?3:2;
   if(nights<minN)warn.push(`The minimum stay for these dates is ${minN} nights${julAug?' (3 nights in summer)':''}.`);
   if(!allWarm&&st.guests>10)warn.push('From October to March up to 10 people can sleep in the house.');

@@ -235,7 +235,8 @@ PAIRS = [
 ("$('#seasonTxt').textContent=(isHigh(today)?'Teraz sezon wysoki: od 1300 zł za dobę':'Teraz sezon niski: od 1200 zł za dobę')+' za cały obiekt';",
  "$('#seasonTxt').textContent=(isHigh(today)?'Now high season: from 1300 zł (325 €) per night':'Now low season: from 1200 zł (300 €) per night')+' for the whole property';",
  "$('#seasonTxt').textContent=(isHigh(today)?'Jetzt Hauptsaison: ab 1300 zł (325 €) pro Nacht':'Jetzt Nebensaison: ab 1200 zł (300 €) pro Nacht')+' für das ganze Anwesen';"),
-("'<span class=\"now-badge\">teraz</span>'", "'<span class=\"now-badge\">now</span>'", "'<span class=\"now-badge\">jetzt</span>'"),
+("?'high':'low'],'teraz')", "?'high':'low'],'now')", "?'high':'low'],'jetzt')"),
+("'low':''],'Twój termin')", "'low':''],'your dates')", "'low':''],'Ihr Termin')"),
 
 # ---------- skrypt: dom ----------
 ("{n:'Sypialnia 5-osobowa',d:'Pięć łóżek jednoosobowych.'", "{n:'Bedroom for 5',d:'Five single beds.'", "{n:'Schlafzimmer für 5',d:'Fünf Einzelbetten.'"),
