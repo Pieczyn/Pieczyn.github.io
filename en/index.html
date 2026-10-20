@@ -92,6 +92,7 @@ section{padding-block:clamp(56px,9vw,112px)}
 .top .btn{padding:9px 16px;font-size:.9rem}
 .ig-top{order:3;display:inline-flex;align-items:center;gap:7px;text-decoration:none;font:600 .9rem var(--body);color:#fff;background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);padding:8px 14px;border-radius:999px;white-space:nowrap}
 .ig-top:hover{filter:brightness(1.08)}
+.fb-top{background:#1877F2}
 .top .wrap>.btn{order:4}
 .menu-btn{display:none;margin-left:auto;background:none;border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:8px 14px;font:500 .9rem var(--body)}
 @media (max-width:920px){
@@ -301,7 +302,7 @@ footer.foot a{text-decoration:none}
 footer.foot a:hover{color:var(--accent)}
 .preview-note{background:var(--accent);color:var(--accent-ink);font-size:.86rem}
 .preview-note .wrap{padding-block:8px}
-.nav a,.top .btn{white-space:nowrap}.ig-top span{display:none}.ig-top{padding:8px 10px}@media (max-width:1200px){.nav{display:none;position:absolute;left:0;right:0;top:64px;flex-direction:column;background:var(--bg);border-bottom:1px solid var(--line);padding:8px max(16px,env(safe-area-inset-right,0px)) 16px max(16px,env(safe-area-inset-left,0px))}.nav.open{display:flex}.menu-btn{display:block;margin-left:0}.ig-top{order:0;margin-left:auto;padding:8px 10px}}.langsw{order:2;display:flex;gap:2px;border:1px solid var(--line);border-radius:999px;padding:2px}.langsw a{font:600 .78rem var(--mono);letter-spacing:.06em;text-decoration:none;padding:5px 8px;border-radius:999px;color:var(--ink-2)}.langsw a[aria-current]{background:var(--ink);color:var(--bg)}@media (max-width:1200px){.langsw{margin-left:auto;order:0}.ig-top{margin-left:8px}}@media (max-width:480px){.top .wrap{gap:8px}.ig-top{display:none}.langsw a{padding:5px 6px}}
+.nav a,.top .btn{white-space:nowrap}.ig-top span{display:none}.ig-top{padding:8px 10px}@media (max-width:1380px){.nav{display:none;position:absolute;left:0;right:0;top:64px;flex-direction:column;background:var(--bg);border-bottom:1px solid var(--line);padding:8px max(16px,env(safe-area-inset-right,0px)) 16px max(16px,env(safe-area-inset-left,0px))}.nav.open{display:flex}.menu-btn{display:block;margin-left:0}.ig-top{order:0;margin-left:auto;padding:8px 10px}}.langsw{order:2;display:flex;gap:2px;border:1px solid var(--line);border-radius:999px;padding:2px}.langsw a{font:600 .78rem var(--mono);letter-spacing:.06em;text-decoration:none;padding:5px 8px;border-radius:999px;color:var(--ink-2)}.langsw a[aria-current]{background:var(--ink);color:var(--bg)}@media (max-width:1380px){.langsw{margin-left:8px;order:0}.ig-top{margin-left:8px}.ig-top:not(.fb-top){margin-left:auto}}@media (max-width:480px){.top .wrap{gap:8px}.ig-top{display:none}.langsw a{padding:5px 6px}}
 .top .wrap>.btn{display:none}
 </style>
 </head>
@@ -316,6 +317,7 @@ footer.foot a:hover{color:var(--accent)}
       <img class="wordmark" src="../assets/logo-14894.png" alt="Narnia" width="59" height="38">
     </a>
     <a class="ig-top" href="https://www.instagram.com/narniaglamp/" target="_blank" rel="noopener" aria-label="Narnia on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.4" cy="6.6" r="1.3" fill="currentColor"/></svg><span>@narniaglamp</span></a>
+    <a class="ig-top fb-top" href="https://www.facebook.com/NarniaGlamp" target="_blank" rel="noopener" aria-label="Narnia on Facebook"><svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.6c0-.9.3-1.5 1.5-1.5h1.5V4.4c-.3 0-1.2-.1-2.2-.1-2.2 0-3.7 1.3-3.7 3.8v2.4H8.1v3h2.5V21z"/></svg></a>
     <nav class="langsw" aria-label="Język / Language / Sprache"><a href="../" hreflang="pl" lang="pl">PL</a><a href="../en/" hreflang="en" lang="en" aria-current="true">EN</a><a href="../de/" hreflang="de" lang="de">DE</a></nav>
     <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav">Menu</button>
     <nav class="nav" id="nav">
@@ -380,7 +382,7 @@ footer.foot a:hover{color:var(--accent)}
     </div>
     <div data-panel="w-domu">
       <div class="rooms" id="rooms"></div>
-      <div class="counter"><b class="num">19</b><span>beds in spring and summer: 12 in the house and 7 in glamping tents, plus a camping field. The house price covers 10 people; each additional person is 100 zł (25 €) per night.</span></div>
+      <div class="counter"><b class="num">19</b><span>beds in spring and summer: 12 in the house and 7 in glamping tents, plus a camping field. The house price covers 10 people; each additional person is 25 € per night.</span></div>
     </div>
     <div data-panel="na-zewnatrz" hidden>
       <div class="spots" id="spots"></div>
@@ -448,29 +450,29 @@ footer.foot a:hover{color:var(--accent)}
     <div class="sec-head">
       <span class="eyebrow">Prices</span>
       <h2>Price per night for the whole property</h2>
-      <p class="lead">Up to 10 people included. <strong>Minimum stay is 2 nights, in summer (July–August) 3 nights.</strong> One-off cleaning fee 400 zł (100 €).</p>
+      <p class="lead">Up to 10 people included. <strong>Minimum stay is 2 nights, in summer (July–August) 3 nights.</strong> One-off cleaning fee 100 €.</p>
     </div>
     <div class="rate-grid">
       <article class="rate" id="rate-high">
         <header><h3>High season</h3><small>May – September</small></header>
-        <dl><dt>Weekends &amp; holidays</dt><dd>1800 zł (450 €)</dd><dt>SLOW days (Mon–Thu)</dt><dd>1300 zł (325 €)</dd></dl>
+        <dl><dt>Weekends &amp; holidays</dt><dd>450 €</dd><dt>SLOW days (Mon–Thu)</dt><dd>325 €</dd></dl>
       </article>
       <article class="rate" id="rate-low">
         <header><h3>Low season</h3><small>October – April</small></header>
-        <dl><dt>Weekends &amp; holidays</dt><dd>1600 zł (400 €)</dd><dt>SLOW days (Mon–Thu)</dt><dd>1200 zł (300 €)</dd></dl>
+        <dl><dt>Weekends &amp; holidays</dt><dd>400 €</dd><dt>SLOW days (Mon–Thu)</dt><dd>300 €</dd></dl>
       </article>
     </div>
 
     <article class="rate" style="margin:-24px 0 40px">
       <header><h3>Glamping tents &amp; camping field</h3><small>spring – summer</small></header>
-      <dl><dt>Glamping tent for 3</dt><dd id="pG3"></dd><dt>Glamping tent for 4</dt><dd id="pG4"></dd><dt>Camping field (own tent or camper)</dt><dd>60 zł (15 €) / person / night</dd></dl>
+      <dl><dt>Glamping tent for 3</dt><dd id="pG3"></dd><dt>Glamping tent for 4</dt><dd id="pG4"></dd><dt>Camping field (own tent or camper)</dt><dd>15 € / person / night</dd></dl>
       <p style="font-size:.95rem"><strong>Glamping tents and the camping field are only available as an add-on to renting the house.</strong></p>
       <p style="font-size:.9rem;color:var(--ink-2)">Guests sleeping in glamping tents don't pay for the camping field. Children up to 4 stay free.</p>
     </article>
 
     <div class="calc" id="kalkulator">
       <div class="calc-in">
-        <div style="display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap"><div><span class="eyebrow">Stay calculator</span><h3 style="margin-top:6px">Price your dates</h3></div><div role="group" aria-label="Currency" style="display:flex;gap:6px"><button type="button" class="chip" data-cur="pln" aria-pressed="true">zł</button><button type="button" class="chip" data-cur="eur" aria-pressed="false">€</button></div></div>
+        <div style="display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap"><div><span class="eyebrow">Stay calculator</span><h3 style="margin-top:6px">Price your dates</h3></div><div role="group" aria-label="Currency" style="display:none;gap:6px"><button type="button" class="chip" data-cur="pln" aria-pressed="true">zł</button><button type="button" class="chip" data-cur="eur" aria-pressed="false">€</button></div></div>
         <div class="row2">
           <div class="field"><label for="dIn">Arrival</label><input type="date" id="dIn"></div>
           <div class="field"><label for="dOut">Departure</label><input type="date" id="dOut"></div>
@@ -481,7 +483,7 @@ footer.foot a:hover{color:var(--accent)}
           <div class="field"><span class="fs-label" id="lp">Dogs or cats</span>
             <div class="stepper" role="group" aria-labelledby="lp"><button type="button" data-step="pets" data-d="-1" aria-label="Fewer pets">−</button><output id="pets">0</output><button type="button" data-step="pets" data-d="1" aria-label="More pets">+</button></div></div>
         </div>
-        <div class="extra" id="xgRow" hidden><span class="lbl"><span>People above 10 in the house: for how many nights?</span><small>100 zł (25 €) · person / night</small></span><div class="stepper" role="group" aria-label="Nights for people above 10"><button type="button" data-step="xgN" data-d="-1" aria-label="Fewer nights">−</button><output id="xgN">0</output><button type="button" data-step="xgN" data-d="1" aria-label="More nights">+</button></div></div>
+        <div class="extra" id="xgRow" hidden><span class="lbl"><span>People above 10 in the house: for how many nights?</span><small>25 € · person / night</small></span><div class="stepper" role="group" aria-label="Nights for people above 10"><button type="button" data-step="xgN" data-d="-1" aria-label="Fewer nights">−</button><output id="xgN">0</output><button type="button" data-step="xgN" data-d="1" aria-label="More nights">+</button></div></div>
         <div class="field"><span class="fs-label">Extras</span><small style="color:var(--ink-2)">Glamping tents and the camping field are added to the house rental.</small>
           <div class="extras" id="extras"></div>
         </div>
@@ -490,7 +492,7 @@ footer.foot a:hover{color:var(--accent)}
         <span class="eyebrow">Estimated price</span>
         <div id="calcWarn"></div>
         <div class="lines" id="calcLines"></div>
-        <div class="total"><span>Total</span><b class="num" id="calcTotal">0 zł</b></div>
+        <div class="total"><span>Total</span><b class="num" id="calcTotal">0 €</b></div>
         <div id="calcPacks" style="display:grid;gap:8px"></div>
         <p class="note" id="calcNote"></p>
         <a class="btn" href="#kontakt" id="toForm">Ask about these dates</a>
@@ -499,11 +501,11 @@ footer.foot a:hover{color:var(--accent)}
 
     <div class="packages">
       <article class="package">
-        <span class="eyebrow">Package</span><h3>Magical Weekend</h3><span class="price num">3700 zł (925 €)</span>
-        <ul><li>up to 12 people, Friday – Sunday</li><li>early arrival from 2 pm, late departure until 2 pm</li><li>hot tub, cleaning and 2 hours of sauna included</li><li>extra day 599 zł, two extra days 999 zł</li><li>not in June, July, August or on public holidays</li></ul>
+        <span class="eyebrow">Package</span><h3>Magical Weekend</h3><span class="price num">925 €</span>
+        <ul><li>up to 12 people, Friday – Sunday</li><li>early arrival from 2 pm, late departure until 2 pm</li><li>hot tub, cleaning and 2 hours of sauna included</li><li>extra day 149.75 €, two extra days 249.75 €</li><li>not in June, July, August or on public holidays</li></ul>
       </article>
       <article class="package">
-        <span class="eyebrow">Package</span><h3>Summer weeks 2027</h3><span class="price num">7500 zł (1875 €) / 7 days</span>
+        <span class="eyebrow">Package</span><h3>Summer weeks 2027</h3><span class="price num">1875 € / 7 days</span>
         <ul><li>up to 10 people, June – September</li><li>hot tub and cleaning included</li><li>2 hours of sauna a day</li><li>3 portions of firewood</li></ul>
       </article>
     </div>
@@ -640,7 +642,7 @@ $$('#nav a').forEach(a=>a.onclick=()=>$('#nav').classList.remove('open'));
 const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
 const today=new Date(); today.setHours(12,0,0,0);
 const isHigh=d=>d.getMonth()>=4&&d.getMonth()<=8;
-$('#seasonTxt').textContent=(isHigh(today)?'Now high season: from 1300 zł (325 €) per night':'Now low season: from 1200 zł (300 €) per night')+' for the whole property';
+$('#seasonTxt').textContent=(isHigh(today)?'Now high season: from 325 € per night':'Now low season: from 300 € per night')+' for the whole property';
 function markRates(on,txt){['high','low'].forEach(k=>{const el=$('#rate-'+k);if(!el)return;const h=on.includes(k);el.classList.toggle('is-now',h);const b=el.querySelector('.now-badge');if(b)b.remove();if(h)el.querySelector('header').insertAdjacentHTML('beforeend','<span class="now-badge">'+txt+'</span>')})}
 const markNow=()=>markRates([isHigh(today)?'high':'low'],'now');
 markNow();
@@ -664,8 +666,8 @@ const SPOTS=[
   ['Tea terrace','Covered, overlooking the greenery and the beach. For afternoon tea.','Taras herbaciany'],
   ['Grill terrace','Covered, south-facing, with tables and benches for shared meals.','Taras grillowy'],
   ['South terrace','Sunny, off the living room, right next to the hot tub and sauna.','Taras południowy'],
-  ['Glamping tents','Two tents with real beds: for 3 people (90 € / 360 zł per night) and for 4 people (120 € / 480 zł per night). Spring and summer, only as an add-on to renting the house.','Namioty glampingowe'],
-  ['Camping field','Space for your own tents and campers, 60 zł (15 €) per person per night. Only as an add-on to renting the house.','Pole kempingowe'],
+  ['Glamping tents','Two tents with real beds: for 3 people (90 € per night) and for 4 people (120 € per night). Spring and summer, only as an add-on to renting the house.','Namioty glampingowe'],
+  ['Camping field','Space for your own tents and campers, 15 € per person per night. Only as an add-on to renting the house.','Pole kempingowe'],
   ['Fire circle','A stone fire pit with benches under a string of lights. Evenings with a guitar.','Krąg ogniskowy'],
   ['Mini golf','A mini golf course for spring and summer.','Mini golf'],
   ['Archery target','Archery at a target, in spring and summer.','Tarcza łucznicza'],
@@ -771,7 +773,7 @@ const PRICES={glamp3:360,glamp4:480}; // 90 € i 120 € za noc, osoby w namioc
 const EUR=4; // 1 € = 4 zł
 let cur='eur';
 const isWarm=d=>d.getMonth()>=3&&d.getMonth()<=8; // kwiecień–wrzesień: 12 miejsc w domu, namioty czynne
-const priceTxt=p=>p==null?'to be confirmed':p+' zł ('+p/EUR+' €) / night';
+const priceTxt=p=>p==null?'to be confirmed':p/EUR+' € / night';
 $('#pG3').textContent=priceTxt(PRICES.glamp3);$('#pG4').textContent=priceTxt(PRICES.glamp4);
 function easter(y){const a=y%19,b=Math.floor(y/100),c=y%100,d=Math.floor(b/4),e=b%4,f=Math.floor((b+8)/25),g=Math.floor((b-f+1)/3),h=(19*a+b-d-g+15)%30,i=Math.floor(c/4),k=c%4,l=(32+2*e+2*i-h-k)%7,m=Math.floor((a+11*h+22*l)/451),mo=Math.floor((h+l-7*m+114)/31),da=((h+l-7*m+114)%31)+1;return new Date(y,mo-1,da,12)}
 const holCache={};
@@ -787,7 +789,7 @@ const isHol=d=>holidays(d.getFullYear()).has(key(d));
 const addDays=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x};
 // Noc liczona po stawce weekendowej: z piątku na sobotę, z soboty na niedzielę albo noc przed świętem / w święto.
 const isPremium=d=>d.getDay()===5||d.getDay()===6||isHol(d)||isHol(addDays(d,1));
-const pln=n=>cur==='eur'?(Math.round(n/EUR*100)/100).toLocaleString('en-GB')+' €':n.toLocaleString('en-GB')+' zł';
+const pln=n=>cur==='eur'?(Math.round(n/EUR*100)/100).toLocaleString('en-GB',{minimumFractionDigits:n%EUR?2:0})+' €':n.toLocaleString('en-GB')+' zł';
 const fmt=d=>d.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
 
 const EXTRAS=[
@@ -884,7 +886,7 @@ calc();
 /* ---------- Fees ---------- */
 const FEES=[['Dog or cat (per stay)',100],['Each person above 10 (per night)',100],['Camping field, own tent or camper (person/night)',60],['One-off cleaning',400],['Hot tub preparation with firewood',300],['Sauna (per hour)',50],['Campfire wood',50],['Hot tub firewood',60],['Sauna kilt rental',10],['Lost golf ball',10],['Patio heater with 11 kg gas bottle',200],['Departure until 4 pm (if possible)',200],['Departure until 2 pm (if possible)',120],['Arrival from 12 noon (if possible)',200],['Arrival from 2 pm (if possible)',120],['Waste not sorted',150],['Extra cleaning',200]];
 FEES.push(['Glamping tent for 3 (night)',360],['Glamping tent for 4 (night)',480],['Electricity: 100 kWh included, each further kWh','0.5 ct'],['Electric car charging (kWh)','0.5 ct'],['Refundable deposit (events: individual quote)',1000]);
-$('#fees').innerHTML=FEES.map(f=>`<div><span>${f[0]}</span><span>${typeof f[1]==='number'?f[1]+' zł ('+(f[1]/4).toLocaleString('en-GB')+' €)':f[1]}</span></div>`).join('');
+$('#fees').innerHTML=FEES.map(f=>`<div><span>${f[0]}</span><span>${typeof f[1]==='number'?(f[1]/4).toLocaleString('en-GB')+' €':f[1]}</span></div>`).join('');
 
 /* ---------- Events ---------- */
 const EVENTS=[
@@ -908,9 +910,9 @@ const FAQ=[
   ['What is the minimum stay?','2 nights; in summer (July and August) 3 nights.'],
   ['What are the check-in and check-out times?','Arrival from 4 pm, departure by 12 noon. Check-in is self-service with access codes. Early arrival or late departure for a surcharge, if the calendar allows.'],
   ['How do I book?','Via the form, by email or phone, or through Slowhop, Airbnb or AlohaCamp. A 50% down payment within 3 days confirms the booking.'],
-  ['When do I pay the rest and how much is the deposit?','The balance and the 1000 zł (250 €) deposit are due 7 days before arrival. The deposit is returned within 7 days after departure.'],
+  ['When do I pay the rest and how much is the deposit?','The balance and the 250 € deposit are due 7 days before arrival. The deposit is returned within 7 days after departure.'],
   ['How many people can come?','In spring and summer up to 12 people sleep in the house (10 off-season), plus 7 more in two glamping tents. There is also a camping field. Tents and the field are only available as an add-on to renting the house. Up to 20 people in total can stay on site. The house price covers 10 people. Children up to 4 stay free.'],
-  ['Can I bring my dog?','Yes, a dog or cat costs 100 zł (25 €) per stay.'],
+  ['Can I bring my dog?','Yes, a dog or cat costs 25 € per stay.'],
   ['Can we hold a party or a wedding?','Yes, but events above 20 people need a separate agreement. Write to us and we\'ll prepare an offer: weddings, company events, workshops, festival-style birthdays.'],
   ['Quiet hours?','From 10 pm to 7 am. Loud music in the barn until 10 pm.'],
   ['Where are the full rules?','In the <a href="../regulamin.html">house rules</a> (in Polish; ask us for the English version).']

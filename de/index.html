@@ -92,6 +92,7 @@ section{padding-block:clamp(56px,9vw,112px)}
 .top .btn{padding:9px 16px;font-size:.9rem}
 .ig-top{order:3;display:inline-flex;align-items:center;gap:7px;text-decoration:none;font:600 .9rem var(--body);color:#fff;background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);padding:8px 14px;border-radius:999px;white-space:nowrap}
 .ig-top:hover{filter:brightness(1.08)}
+.fb-top{background:#1877F2}
 .top .wrap>.btn{order:4}
 .menu-btn{display:none;margin-left:auto;background:none;border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:8px 14px;font:500 .9rem var(--body)}
 @media (max-width:920px){
@@ -301,7 +302,7 @@ footer.foot a{text-decoration:none}
 footer.foot a:hover{color:var(--accent)}
 .preview-note{background:var(--accent);color:var(--accent-ink);font-size:.86rem}
 .preview-note .wrap{padding-block:8px}
-.nav a,.top .btn{white-space:nowrap}.ig-top span{display:none}.ig-top{padding:8px 10px}@media (max-width:1200px){.nav{display:none;position:absolute;left:0;right:0;top:64px;flex-direction:column;background:var(--bg);border-bottom:1px solid var(--line);padding:8px max(16px,env(safe-area-inset-right,0px)) 16px max(16px,env(safe-area-inset-left,0px))}.nav.open{display:flex}.menu-btn{display:block;margin-left:0}.ig-top{order:0;margin-left:auto;padding:8px 10px}}.langsw{order:2;display:flex;gap:2px;border:1px solid var(--line);border-radius:999px;padding:2px}.langsw a{font:600 .78rem var(--mono);letter-spacing:.06em;text-decoration:none;padding:5px 8px;border-radius:999px;color:var(--ink-2)}.langsw a[aria-current]{background:var(--ink);color:var(--bg)}@media (max-width:1200px){.langsw{margin-left:auto;order:0}.ig-top{margin-left:8px}}@media (max-width:480px){.top .wrap{gap:8px}.ig-top{display:none}.langsw a{padding:5px 6px}}
+.nav a,.top .btn{white-space:nowrap}.ig-top span{display:none}.ig-top{padding:8px 10px}@media (max-width:1380px){.nav{display:none;position:absolute;left:0;right:0;top:64px;flex-direction:column;background:var(--bg);border-bottom:1px solid var(--line);padding:8px max(16px,env(safe-area-inset-right,0px)) 16px max(16px,env(safe-area-inset-left,0px))}.nav.open{display:flex}.menu-btn{display:block;margin-left:0}.ig-top{order:0;margin-left:auto;padding:8px 10px}}.langsw{order:2;display:flex;gap:2px;border:1px solid var(--line);border-radius:999px;padding:2px}.langsw a{font:600 .78rem var(--mono);letter-spacing:.06em;text-decoration:none;padding:5px 8px;border-radius:999px;color:var(--ink-2)}.langsw a[aria-current]{background:var(--ink);color:var(--bg)}@media (max-width:1380px){.langsw{margin-left:8px;order:0}.ig-top{margin-left:8px}.ig-top:not(.fb-top){margin-left:auto}}@media (max-width:480px){.top .wrap{gap:8px}.ig-top{display:none}.langsw a{padding:5px 6px}}
 .top .wrap>.btn{display:none}
 </style>
 </head>
@@ -316,6 +317,7 @@ footer.foot a:hover{color:var(--accent)}
       <img class="wordmark" src="../assets/logo-14894.png" alt="Narnia" width="59" height="38">
     </a>
     <a class="ig-top" href="https://www.instagram.com/narniaglamp/" target="_blank" rel="noopener" aria-label="Narnia auf Instagram"><svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.4" cy="6.6" r="1.3" fill="currentColor"/></svg><span>@narniaglamp</span></a>
+    <a class="ig-top fb-top" href="https://www.facebook.com/NarniaGlamp" target="_blank" rel="noopener" aria-label="Narnia auf Facebook"><svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><path fill="currentColor" d="M13.5 21v-7.5h2.5l.4-3h-2.9V8.6c0-.9.3-1.5 1.5-1.5h1.5V4.4c-.3 0-1.2-.1-2.2-.1-2.2 0-3.7 1.3-3.7 3.8v2.4H8.1v3h2.5V21z"/></svg></a>
     <nav class="langsw" aria-label="Język / Language / Sprache"><a href="../" hreflang="pl" lang="pl">PL</a><a href="../en/" hreflang="en" lang="en">EN</a><a href="../de/" hreflang="de" lang="de" aria-current="true">DE</a></nav>
     <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav">Menü</button>
     <nav class="nav" id="nav">
@@ -380,7 +382,7 @@ footer.foot a:hover{color:var(--accent)}
     </div>
     <div data-panel="w-domu">
       <div class="rooms" id="rooms"></div>
-      <div class="counter"><b class="num">19</b><span>Schlafplätze im Frühling und Sommer: 12 im Haus und 7 in Glampingzelten, dazu eine Zeltwiese. Der Hauspreis gilt für 10 Personen, jede weitere kostet 100 zł (25 €) pro Nacht.</span></div>
+      <div class="counter"><b class="num">19</b><span>Schlafplätze im Frühling und Sommer: 12 im Haus und 7 in Glampingzelten, dazu eine Zeltwiese. Der Hauspreis gilt für 10 Personen, jede weitere kostet 25 € pro Nacht.</span></div>
     </div>
     <div data-panel="na-zewnatrz" hidden>
       <div class="spots" id="spots"></div>
@@ -448,29 +450,29 @@ footer.foot a:hover{color:var(--accent)}
     <div class="sec-head">
       <span class="eyebrow">Preise</span>
       <h2>Preis pro Nacht für das gesamte Anwesen</h2>
-      <p class="lead">Bis zu 10 Personen inklusive. <strong>Mindestaufenthalt 2 Nächte, im Sommer (Juli–August) 3 Nächte.</strong> Einmalige Endreinigung 400 zł (100 €).</p>
+      <p class="lead">Bis zu 10 Personen inklusive. <strong>Mindestaufenthalt 2 Nächte, im Sommer (Juli–August) 3 Nächte.</strong> Einmalige Endreinigung 100 €.</p>
     </div>
     <div class="rate-grid">
       <article class="rate" id="rate-high">
         <header><h3>Hauptsaison</h3><small>Mai – September</small></header>
-        <dl><dt>Wochenenden &amp; Feiertage</dt><dd>1800 zł (450 €)</dd><dt>SLOW-Tage (Mo–Do)</dt><dd>1300 zł (325 €)</dd></dl>
+        <dl><dt>Wochenenden &amp; Feiertage</dt><dd>450 €</dd><dt>SLOW-Tage (Mo–Do)</dt><dd>325 €</dd></dl>
       </article>
       <article class="rate" id="rate-low">
         <header><h3>Nebensaison</h3><small>Oktober – April</small></header>
-        <dl><dt>Wochenenden &amp; Feiertage</dt><dd>1600 zł (400 €)</dd><dt>SLOW-Tage (Mo–Do)</dt><dd>1200 zł (300 €)</dd></dl>
+        <dl><dt>Wochenenden &amp; Feiertage</dt><dd>400 €</dd><dt>SLOW-Tage (Mo–Do)</dt><dd>300 €</dd></dl>
       </article>
     </div>
 
     <article class="rate" style="margin:-24px 0 40px">
       <header><h3>Glampingzelte &amp; Zeltwiese</h3><small>Frühling – Sommer</small></header>
-      <dl><dt>Glampingzelt für 3 Personen</dt><dd id="pG3"></dd><dt>Glampingzelt für 4 Personen</dt><dd id="pG4"></dd><dt>Zeltwiese (eigenes Zelt oder Camper)</dt><dd>60 zł (15 €) / Person / Nacht</dd></dl>
+      <dl><dt>Glampingzelt für 3 Personen</dt><dd id="pG3"></dd><dt>Glampingzelt für 4 Personen</dt><dd id="pG4"></dd><dt>Zeltwiese (eigenes Zelt oder Camper)</dt><dd>15 € / Person / Nacht</dd></dl>
       <p style="font-size:.95rem"><strong>Glampingzelte und Zeltwiese gibt es nur zusätzlich zur Miete des Hauses.</strong></p>
       <p style="font-size:.9rem;color:var(--ink-2)">Wer im Glampingzelt schläft, zahlt nicht für die Zeltwiese. Kinder bis 4 Jahre kostenlos.</p>
     </article>
 
     <div class="calc" id="kalkulator">
       <div class="calc-in">
-        <div style="display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap"><div><span class="eyebrow">Preisrechner</span><h3 style="margin-top:6px">Ihren Termin berechnen</h3></div><div role="group" aria-label="Währung" style="display:flex;gap:6px"><button type="button" class="chip" data-cur="pln" aria-pressed="true">zł</button><button type="button" class="chip" data-cur="eur" aria-pressed="false">€</button></div></div>
+        <div style="display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap"><div><span class="eyebrow">Preisrechner</span><h3 style="margin-top:6px">Ihren Termin berechnen</h3></div><div role="group" aria-label="Währung" style="display:none;gap:6px"><button type="button" class="chip" data-cur="pln" aria-pressed="true">zł</button><button type="button" class="chip" data-cur="eur" aria-pressed="false">€</button></div></div>
         <div class="row2">
           <div class="field"><label for="dIn">Anreise</label><input type="date" id="dIn"></div>
           <div class="field"><label for="dOut">Abreise</label><input type="date" id="dOut"></div>
@@ -481,7 +483,7 @@ footer.foot a:hover{color:var(--accent)}
           <div class="field"><span class="fs-label" id="lp">Hunde oder Katzen</span>
             <div class="stepper" role="group" aria-labelledby="lp"><button type="button" data-step="pets" data-d="-1" aria-label="Weniger Tiere">−</button><output id="pets">0</output><button type="button" data-step="pets" data-d="1" aria-label="Mehr Tiere">+</button></div></div>
         </div>
-        <div class="extra" id="xgRow" hidden><span class="lbl"><span>Personen über 10 im Haus: für wie viele Nächte?</span><small>100 zł (25 €) · Person / Nacht</small></span><div class="stepper" role="group" aria-label="Nächte für Personen über 10"><button type="button" data-step="xgN" data-d="-1" aria-label="Weniger Nächte">−</button><output id="xgN">0</output><button type="button" data-step="xgN" data-d="1" aria-label="Mehr Nächte">+</button></div></div>
+        <div class="extra" id="xgRow" hidden><span class="lbl"><span>Personen über 10 im Haus: für wie viele Nächte?</span><small>25 € · Person / Nacht</small></span><div class="stepper" role="group" aria-label="Nächte für Personen über 10"><button type="button" data-step="xgN" data-d="-1" aria-label="Weniger Nächte">−</button><output id="xgN">0</output><button type="button" data-step="xgN" data-d="1" aria-label="Mehr Nächte">+</button></div></div>
         <div class="field"><span class="fs-label">Extras</span><small style="color:var(--ink-2)">Glampingzelte und Zeltwiese werden zur Hausmiete dazugebucht.</small>
           <div class="extras" id="extras"></div>
         </div>
@@ -490,7 +492,7 @@ footer.foot a:hover{color:var(--accent)}
         <span class="eyebrow">Unverbindliche Preisschätzung</span>
         <div id="calcWarn"></div>
         <div class="lines" id="calcLines"></div>
-        <div class="total"><span>Gesamt</span><b class="num" id="calcTotal">0 zł</b></div>
+        <div class="total"><span>Gesamt</span><b class="num" id="calcTotal">0 €</b></div>
         <div id="calcPacks" style="display:grid;gap:8px"></div>
         <p class="note" id="calcNote"></p>
         <a class="btn" href="#kontakt" id="toForm">Diesen Termin anfragen</a>
@@ -499,11 +501,11 @@ footer.foot a:hover{color:var(--accent)}
 
     <div class="packages">
       <article class="package">
-        <span class="eyebrow">Paket</span><h3>Magisches Wochenende</h3><span class="price num">3700 zł (925 €)</span>
-        <ul><li>bis zu 12 Personen, Freitag – Sonntag</li><li>frühere Anreise ab 14:00, spätere Abreise bis 14:00</li><li>Badezuber, Endreinigung und 2 Stunden Sauna inklusive</li><li>Verlängerung um 1 Tag 599 zł, um 2 Tage 999 zł</li><li>nicht im Juni, Juli, August und an Feiertagen</li></ul>
+        <span class="eyebrow">Paket</span><h3>Magisches Wochenende</h3><span class="price num">925 €</span>
+        <ul><li>bis zu 12 Personen, Freitag – Sonntag</li><li>frühere Anreise ab 14:00, spätere Abreise bis 14:00</li><li>Badezuber, Endreinigung und 2 Stunden Sauna inklusive</li><li>Verlängerung um 1 Tag 149,75 €, um 2 Tage 249,75 €</li><li>nicht im Juni, Juli, August und an Feiertagen</li></ul>
       </article>
       <article class="package">
-        <span class="eyebrow">Paket</span><h3>Sommerwochen 2027</h3><span class="price num">7500 zł (1875 €) / 7 Tage</span>
+        <span class="eyebrow">Paket</span><h3>Sommerwochen 2027</h3><span class="price num">1875 € / 7 Tage</span>
         <ul><li>bis zu 10 Personen, Juni – September</li><li>Badezuber und Endreinigung inklusive</li><li>2 Stunden Sauna pro Tag</li><li>3 Portionen Holz</li></ul>
       </article>
     </div>
@@ -640,7 +642,7 @@ $$('#nav a').forEach(a=>a.onclick=()=>$('#nav').classList.remove('open'));
 const MONTHS=['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
 const today=new Date(); today.setHours(12,0,0,0);
 const isHigh=d=>d.getMonth()>=4&&d.getMonth()<=8;
-$('#seasonTxt').textContent=(isHigh(today)?'Jetzt Hauptsaison: ab 1300 zł (325 €) pro Nacht':'Jetzt Nebensaison: ab 1200 zł (300 €) pro Nacht')+' für das ganze Anwesen';
+$('#seasonTxt').textContent=(isHigh(today)?'Jetzt Hauptsaison: ab 325 € pro Nacht':'Jetzt Nebensaison: ab 300 € pro Nacht')+' für das ganze Anwesen';
 function markRates(on,txt){['high','low'].forEach(k=>{const el=$('#rate-'+k);if(!el)return;const h=on.includes(k);el.classList.toggle('is-now',h);const b=el.querySelector('.now-badge');if(b)b.remove();if(h)el.querySelector('header').insertAdjacentHTML('beforeend','<span class="now-badge">'+txt+'</span>')})}
 const markNow=()=>markRates([isHigh(today)?'high':'low'],'jetzt');
 markNow();
@@ -664,8 +666,8 @@ const SPOTS=[
   ['Teeterrasse','Überdacht, mit Blick ins Grüne und auf den Strand. Für den Nachmittagstee.','Taras herbaciany'],
   ['Grillterrasse','Überdacht, nach Süden, mit Tischen und Bänken für gemeinsame Mahlzeiten.','Taras grillowy'],
   ['Südterrasse','Sonnig, direkt vom Wohnzimmer aus, gleich neben Badezuber und Sauna.','Taras południowy'],
-  ['Glampingzelte','Zwei Zelte mit echten Betten: für 3 Personen (90 € / 360 zł pro Nacht) und für 4 Personen (120 € / 480 zł pro Nacht). Im Frühling und Sommer, nur zusätzlich zur Hausmiete.','Namioty glampingowe'],
-  ['Zeltwiese','Platz für eigene Zelte und Camper, 60 zł (15 €) pro Person und Nacht. Nur zusätzlich zur Hausmiete.','Pole kempingowe'],
+  ['Glampingzelte','Zwei Zelte mit echten Betten: für 3 Personen (90 € pro Nacht) und für 4 Personen (120 € pro Nacht). Im Frühling und Sommer, nur zusätzlich zur Hausmiete.','Namioty glampingowe'],
+  ['Zeltwiese','Platz für eigene Zelte und Camper, 15 € pro Person und Nacht. Nur zusätzlich zur Hausmiete.','Pole kempingowe'],
   ['Feuerkreis','Steinerne Feuerstelle mit Bänken unter einer Lichterkette. Abende mit Gitarre.','Krąg ogniskowy'],
   ['Minigolf','Eine Minigolfbahn für Frühling und Sommer.','Mini golf'],
   ['Bogenschießen','Bogenschießen auf eine Zielscheibe, im Frühling und Sommer.','Tarcza łucznicza'],
@@ -771,7 +773,7 @@ const PRICES={glamp3:360,glamp4:480}; // 90 € i 120 € za noc, osoby w namioc
 const EUR=4; // 1 € = 4 zł
 let cur='eur';
 const isWarm=d=>d.getMonth()>=3&&d.getMonth()<=8; // kwiecień–wrzesień: 12 miejsc w domu, namioty czynne
-const priceTxt=p=>p==null?'auf Anfrage':p+' zł ('+p/EUR+' €) / Nacht';
+const priceTxt=p=>p==null?'auf Anfrage':p/EUR+' € / Nacht';
 $('#pG3').textContent=priceTxt(PRICES.glamp3);$('#pG4').textContent=priceTxt(PRICES.glamp4);
 function easter(y){const a=y%19,b=Math.floor(y/100),c=y%100,d=Math.floor(b/4),e=b%4,f=Math.floor((b+8)/25),g=Math.floor((b-f+1)/3),h=(19*a+b-d-g+15)%30,i=Math.floor(c/4),k=c%4,l=(32+2*e+2*i-h-k)%7,m=Math.floor((a+11*h+22*l)/451),mo=Math.floor((h+l-7*m+114)/31),da=((h+l-7*m+114)%31)+1;return new Date(y,mo-1,da,12)}
 const holCache={};
@@ -787,7 +789,7 @@ const isHol=d=>holidays(d.getFullYear()).has(key(d));
 const addDays=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x};
 // Noc liczona po stawce weekendowej: z piątku na sobotę, z soboty na niedzielę albo noc przed świętem / w święto.
 const isPremium=d=>d.getDay()===5||d.getDay()===6||isHol(d)||isHol(addDays(d,1));
-const pln=n=>cur==='eur'?(Math.round(n/EUR*100)/100).toLocaleString('de-DE')+' €':n.toLocaleString('de-DE')+' zł';
+const pln=n=>cur==='eur'?(Math.round(n/EUR*100)/100).toLocaleString('de-DE',{minimumFractionDigits:n%EUR?2:0})+' €':n.toLocaleString('de-DE')+' zł';
 const fmt=d=>d.toLocaleDateString('de-DE',{day:'numeric',month:'long',year:'numeric'});
 
 const EXTRAS=[
@@ -884,7 +886,7 @@ calc();
 /* ---------- Fees ---------- */
 const FEES=[['Hund oder Katze (pro Aufenthalt)',100],['Jede Person über 10 (pro Nacht)',100],['Zeltwiese, eigenes Zelt oder Camper (Pers./Nacht)',60],['Einmalige Endreinigung',400],['Vorbereitung des Badezubers mit Holz',300],['Sauna (pro Stunde)',50],['Holz fürs Lagerfeuer',50],['Holz für den Badezuber',60],['Saunakilt leihen',10],['Verlorener Golfball',10],['Heizstrahler mit 11-kg-Gasflasche',200],['Abreise bis 16:00 (wenn möglich)',200],['Abreise bis 14:00 (wenn möglich)',120],['Anreise ab 12:00 (wenn möglich)',200],['Anreise ab 14:00 (wenn möglich)',120],['Müll nicht getrennt',150],['Zusätzliche Reinigung',200]];
 FEES.push(['Glampingzelt für 3 (Nacht)',360],['Glampingzelt für 4 (Nacht)',480],['Strom: 100 kWh inklusive, jede weitere kWh','0,5 ct'],['Laden eines E-Autos (kWh)','0,5 ct'],['Kaution (Events: individuell)',1000]);
-$('#fees').innerHTML=FEES.map(f=>`<div><span>${f[0]}</span><span>${typeof f[1]==='number'?f[1]+' zł ('+(f[1]/4).toLocaleString('de-DE')+' €)':f[1]}</span></div>`).join('');
+$('#fees').innerHTML=FEES.map(f=>`<div><span>${f[0]}</span><span>${typeof f[1]==='number'?(f[1]/4).toLocaleString('de-DE')+' €':f[1]}</span></div>`).join('');
 
 /* ---------- Events ---------- */
 const EVENTS=[
@@ -908,9 +910,9 @@ const FAQ=[
   ['Wie lange ist der Mindestaufenthalt?','2 Nächte, im Sommer (Juli und August) 3 Nächte.'],
   ['Wann sind Check-in und Check-out?','Anreise ab 16:00, Abreise bis 12:00. Der Check-in erfolgt selbstständig mit Zugangscodes. Frühere Anreise oder spätere Abreise gegen Aufpreis, wenn der Kalender es zulässt.'],
   ['Wie kann ich buchen?','Über das Formular, per E-Mail oder Telefon oder über Slowhop, Airbnb oder AlohaCamp. Eine Anzahlung von 50 % innerhalb von 3 Tagen bestätigt die Buchung.'],
-  ['Wann zahle ich den Rest und wie hoch ist die Kaution?','Restbetrag und Kaution von 1000 zł (250 €) sind 7 Tage vor der Anreise fällig. Die Kaution kommt innerhalb von 7 Tagen nach der Abreise zurück.'],
+  ['Wann zahle ich den Rest und wie hoch ist die Kaution?','Restbetrag und Kaution von 250 € sind 7 Tage vor der Anreise fällig. Die Kaution kommt innerhalb von 7 Tagen nach der Abreise zurück.'],
   ['Wie viele Personen können kommen?','Im Frühling und Sommer schlafen bis zu 12 Personen im Haus (außerhalb der Saison 10), dazu 7 weitere in zwei Glampingzelten. Außerdem gibt es eine Zeltwiese. Zelte und Zeltwiese gibt es nur zusätzlich zur Hausmiete. Insgesamt dürfen bis zu 20 Personen auf dem Gelände sein. Der Hauspreis gilt für 10 Personen. Kinder bis 4 Jahre kostenlos.'],
-  ['Darf ich meinen Hund mitbringen?','Ja, ein Hund oder eine Katze kostet 100 zł (25 €) pro Aufenthalt.'],
+  ['Darf ich meinen Hund mitbringen?','Ja, ein Hund oder eine Katze kostet 25 € pro Aufenthalt.'],
   ['Kann man eine Feier oder Hochzeit veranstalten?','Ja, Events mit mehr als 20 Personen brauchen jedoch einen eigenen Vertrag. Schreiben Sie uns, wir erstellen ein Angebot: Hochzeiten, Firmenevents, Workshops, Geburtstage im Festival-Stil.'],
   ['Nachtruhe?','Von 22:00 bis 7:00. Laute Musik in der Scheune bis 22:00.'],
   ['Wo finde ich die vollständigen Regeln?','In der <a href="../regulamin.html">Hausordnung</a> (auf Polnisch; die deutsche Fassung schicken wir Ihnen gern).']

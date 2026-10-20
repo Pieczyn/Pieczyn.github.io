@@ -18,6 +18,7 @@ LANGS = ["en", "de"]
 
 # (pl, en, de) — dokładne fragmenty z index.html. Dłuższe fragmenty są podmieniane jako pierwsze.
 PAIRS = [
+('aria-label="Narnia na Facebooku"', 'aria-label="Narnia on Facebook"', 'aria-label="Narnia auf Facebook"'),
 # ---------- <head> ----------
 ('content="Narnia Glamp – dom na odludziu na wyłączność"',
  'content="Narnia Glamp – a secluded house all to yourselves"',
@@ -384,9 +385,9 @@ PAIRS += [
 ("const priceTxt=p=>p==null?'do potwierdzenia':p+' zł ('+p/EUR+' €) / noc';",
  "const priceTxt=p=>p==null?'to be confirmed':p+' zł ('+p/EUR+' €) / night';",
  "const priceTxt=p=>p==null?'auf Anfrage':p+' zł ('+p/EUR+' €) / Nacht';"),
-("const pln=n=>cur==='eur'?(Math.round(n/EUR*100)/100).toLocaleString('pl-PL')+' €':n.toLocaleString('pl-PL')+' zł';",
- "const pln=n=>cur==='eur'?(Math.round(n/EUR*100)/100).toLocaleString('en-GB')+' €':n.toLocaleString('en-GB')+' zł';",
- "const pln=n=>cur==='eur'?(Math.round(n/EUR*100)/100).toLocaleString('de-DE')+' €':n.toLocaleString('de-DE')+' zł';"),
+("const pln=n=>cur==='eur'?(Math.round(n/EUR*100)/100).toLocaleString('pl-PL',{minimumFractionDigits:n%EUR?2:0})+' €':n.toLocaleString('pl-PL')+' zł';",
+ "const pln=n=>cur==='eur'?(Math.round(n/EUR*100)/100).toLocaleString('en-GB',{minimumFractionDigits:n%EUR?2:0})+' €':n.toLocaleString('en-GB')+' zł';",
+ "const pln=n=>cur==='eur'?(Math.round(n/EUR*100)/100).toLocaleString('de-DE',{minimumFractionDigits:n%EUR?2:0})+' €':n.toLocaleString('de-DE')+' zł';"),
 ("const fmt=d=>d.toLocaleDateString('pl-PL',{day:'numeric',month:'long',year:'numeric'});",
  "const fmt=d=>d.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});",
  "const fmt=d=>d.toLocaleDateString('de-DE',{day:'numeric',month:'long',year:'numeric'});"),
@@ -528,11 +529,11 @@ def switcher(cur):
 
 SW_CSS = (".nav a,.top .btn{white-space:nowrap}"
           ".ig-top span{display:none}.ig-top{padding:8px 10px}"
-          "@media (max-width:1200px){.nav{display:none;position:absolute;left:0;right:0;top:64px;flex-direction:column;background:var(--bg);border-bottom:1px solid var(--line);padding:8px max(16px,env(safe-area-inset-right,0px)) 16px max(16px,env(safe-area-inset-left,0px))}.nav.open{display:flex}.menu-btn{display:block;margin-left:0}.ig-top{order:0;margin-left:auto;padding:8px 10px}}"
+          "@media (max-width:1380px){.nav{display:none;position:absolute;left:0;right:0;top:64px;flex-direction:column;background:var(--bg);border-bottom:1px solid var(--line);padding:8px max(16px,env(safe-area-inset-right,0px)) 16px max(16px,env(safe-area-inset-left,0px))}.nav.open{display:flex}.menu-btn{display:block;margin-left:0}.ig-top{order:0;margin-left:auto;padding:8px 10px}}"
           ".langsw{order:2;display:flex;gap:2px;border:1px solid var(--line);border-radius:999px;padding:2px}"
           ".langsw a{font:600 .78rem var(--mono);letter-spacing:.06em;text-decoration:none;padding:5px 8px;border-radius:999px;color:var(--ink-2)}"
           ".langsw a[aria-current]{background:var(--ink);color:var(--bg)}"
-          "@media (max-width:1200px){.langsw{margin-left:auto;order:0}.ig-top{margin-left:8px}}"
+          "@media (max-width:1380px){.langsw{margin-left:8px;order:0}.ig-top{margin-left:8px}.ig-top:not(.fb-top){margin-left:auto}}"
           "@media (max-width:480px){.top .wrap{gap:8px}.ig-top{display:none}.langsw a{padding:5px 6px}}")
 HREFLANG = ('<link rel="alternate" hreflang="pl" href="https://narniaglamp.com/">'
             '<link rel="alternate" hreflang="en" href="https://narniaglamp.com/en/">'
@@ -567,11 +568,36 @@ def replace_array_texts(html, name, translated):
         out.append(f"  ['{esc(t_name)}','{esc(t_desc)}'{seasons},'{pl}']")
     return html[:m.start(1)] + ",\n".join(out) + html[m.end(1):]
 
+# ---------- waluty: PL tylko złote, EN/DE tylko euro ----------
+PAIR_ZL_EUR = r"(\d[\d ]*) zł \((\d[\d,.]*) €\)"
+def pl_fix(s):
+    s = re.sub(PAIR_ZL_EUR, r"\1 zł", s)
+    s = re.sub(r"(\d+) € / (\d+) zł", r"\2 zł", s)
+    s = s.replace("p+' zł ('+p/EUR+' €)", "p+' zł")
+    s = re.sub(r"f\[1\]\+' zł \('\+\(f\[1\]/4\)\.toLocaleString\('[a-zA-Z-]+'\)\+' €\)'", "f[1]+' zł'", s)
+    s = s.replace('style="display:flex;gap:6px"><button type="button" class="chip" data-cur', 'style="display:none;gap:6px"><button type="button" class="chip" data-cur')
+    return s
+
+def eur_fix(s, lang):
+    loc = "en-GB" if lang == "en" else "de-DE"
+    def num(z):
+        v = int(z.replace(" ", "")) / 4
+        txt = ("%d" % v) if v == int(v) else ("%.2f" % v)
+        return txt.replace(".", ",") if lang == "de" else txt
+    s = re.sub(PAIR_ZL_EUR, r"\2 €", s)
+    s = re.sub(r"(\d+) € / (\d+) zł", r"\1 €", s)
+    s = s.replace("p+' zł ('+p/EUR+' €)", "p/EUR+' €")
+    s = re.sub(r"f\[1\]\+' zł \('\+\(f\[1\]/4\)\.toLocaleString\('[a-zA-Z-]+'\)\+' €\)'", lambda m: f"(f[1]/4).toLocaleString('{loc}')+' €'", s)
+    s = s.replace(">0 zł<", ">0 €<")
+    s = re.sub(r"(?<![=\d])(?<!= )\b(\d+) zł\b", lambda m: num(m.group(1)) + " €", s)
+    return s
+
 def build(lang):
     src = (ROOT / "index.html").read_text(encoding="utf8")
     html = src
     missing = []
     for pl, en, de in sorted(PAIRS, key=lambda p: -len(p[0])):
+        pl = pl_fix(pl)
         if pl not in html:
             missing.append(pl[:90])
             continue
@@ -598,6 +624,7 @@ def build(lang):
         p = ROOT / name; p.parent.mkdir(exist_ok=True)
         if not p.exists() or p.read_bytes() != data: p.write_bytes(data)
     html = add_switcher(html, lang)
+    html = eur_fix(html, lang)
     # dłuższe pozycje menu po angielsku i niemiecku: bez przycisku „Sprawdź cenę” w nagłówku (jest w sekcji powitalnej)
     html = html.replace("</style>", ".top .wrap>.btn{display:none}\n</style>", 1)
     out = ROOT / lang / "index.html"
@@ -619,7 +646,7 @@ def build(lang):
 
 def main():
     pl = (ROOT / "index.html").read_text(encoding="utf8")
-    pl2 = add_switcher(pl, "pl")
+    pl2 = pl_fix(add_switcher(pl, "pl"))
     if pl2 != pl:
         (ROOT / "index.html").write_text(pl2, encoding="utf8")
     ok = True
