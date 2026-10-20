@@ -18,6 +18,21 @@ LANGS = ["en", "de"]
 
 # (pl, en, de) — dokładne fragmenty z index.html. Dłuższe fragmenty są podmieniane jako pierwsze.
 PAIRS = [
+# ---------- plan terenu i czat na stronie ----------
+('id="tab-plan">Plan terenu</button>', 'id="tab-plan">Site map</button>', 'id="tab-plan">Geländeplan</button>'),
+('aria-label="Plan terenu Narnii"', 'aria-label="Map of the Narnia grounds"', 'aria-label="Plan des Narnia-Geländes"'),
+('>Dom</text>', '>House</text>', '>Haus</text>'),
+('>Wjazd</text>', '>Entrance</text>', '>Einfahrt</text>'),
+('>Las · setki hektarów</text>', '>Forest · hundreds of hectares</text>', '>Wald · Hunderte Hektar</text>'),
+('<p class="plan-note">Kliknij punkt na mapie, żeby zobaczyć zdjęcie i opis. Plan jest poglądowy: 2 hektary ogrodzonego terenu, a za płotem las i rzeka.</p>',
+ '<p class="plan-note">Tap a point on the map to see a photo and description. The map is illustrative: 2 fenced hectares, with forest and the river beyond the fence.</p>',
+ '<p class="plan-note">Tippen Sie auf einen Punkt, um Foto und Beschreibung zu sehen. Der Plan ist schematisch: 2 Hektar eingezäuntes Gelände, dahinter Wald und Fluss.</p>'),
+('aria-label="Zapytaj asystenta Narnii"', 'aria-label="Ask the Narnia assistant"', 'aria-label="Den Narnia-Assistenten fragen"'),
+('<span>Zapytaj Narnię</span>', '<span>Ask Narnia</span>', '<span>Fragen Sie Narnia</span>'),
+('"Czat z asystentem Narnii"', '"Chat with the Narnia assistant"', '"Chat mit dem Narnia-Assistenten"'),
+('<strong>Asystent Narnii · 24/7</strong>', '<strong>Narnia assistant · 24/7</strong>', '<strong>Narnia-Assistent · 24/7</strong>'),
+('aria-label="Zamknij czat"', 'aria-label="Close chat"', 'aria-label="Chat schließen"'),
+('// Pozycje punktów w % szerokości i wysokości mapy (plan poglądowy: przesuń liczby, żeby zgadzały się z terenem)', '// map pin positions in %', '// map pin positions in %'),
 ('aria-label="Narnia na Facebooku"', 'aria-label="Narnia on Facebook"', 'aria-label="Narnia auf Facebook"'),
 # ---------- <head> ----------
 ('content="Narnia Glamp – dom na odludziu na wyłączność"',
@@ -513,9 +528,6 @@ PAIRS += [
 ("subject:'Zapytanie o termin – Narnia'", "subject:'Zapytanie o termin (EN) – Narnia'", "subject:'Zapytanie o termin (DE) – Narnia'"),
 ("'<p><strong>Dziękujemy!</strong> Zapytanie dotarło, odpiszemy na podany e-mail.</p>'", "'<p><strong>Thank you!</strong> Your enquiry has arrived – we will reply by email.</p>'", "'<p><strong>Vielen Dank!</strong> Ihre Anfrage ist angekommen – wir antworten per E-Mail.</p>'"),
 ("err.textContent='Nie udało się wysłać wiadomości. Spróbuj ponownie albo napisz na info@narniaglamp.com.'", "err.textContent='The message could not be sent. Please try again or write to info@narniaglamp.com.'", "err.textContent='Die Nachricht konnte nicht gesendet werden. Bitte erneut versuchen oder an info@narniaglamp.com schreiben.'"),
-("'<p><strong>Podgląd strony:</strong> formularz jeszcze nie wysyła wiadomości. Na gotowej stronie trafi ona prosto na info@narniaglamp.com. Tak będzie wyglądać:</p><pre></pre>'",
- "'<p><strong>Preview:</strong> the form does not send messages yet. Your message would look like this:</p><pre></pre>'",
- "'<p><strong>Vorschau:</strong> Das Formular versendet noch keine Nachrichten. So würde Ihre Nachricht aussehen:</p><pre></pre>'"),
 ]
 
 # Przełącznik języka (wstawiany do wszystkich trzech wersji) i ścieżki zasobów dla /en/ i /de/

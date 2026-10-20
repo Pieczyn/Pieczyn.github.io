@@ -147,6 +147,40 @@ section{padding-block:clamp(56px,9vw,112px)}
 .spot .ph{aspect-ratio:16/10}
 .spot div.txt{padding:16px 18px 20px;display:grid;gap:6px;align-content:start}
 .spot p{font-size:.95rem;color:var(--ink-2)}
+/* ---------- Plan terenu ---------- */
+.plan{--pl-forest:#2f4a33;--pl-tree:#3f6140;--pl-grass:#a9bf8f;--pl-path:#efe6cf;--pl-water:#7fb0c4;--pl-sand:#ead6a6;--pl-bld:#6e4b2c;--pl-txt:#16261f;display:grid;grid-template-columns:minmax(0,1.6fr) minmax(260px,1fr);gap:20px;align-items:start}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .plan{--pl-forest:#13221a;--pl-tree:#1f3527;--pl-grass:#4b6544;--pl-path:#8a8064;--pl-water:#2f6075;--pl-sand:#a08a5a;--pl-bld:#d1a77c;--pl-txt:#e9ede4}}
+:root[data-theme="dark"] .plan{--pl-forest:#13221a;--pl-tree:#1f3527;--pl-grass:#4b6544;--pl-path:#8a8064;--pl-water:#2f6075;--pl-sand:#a08a5a;--pl-bld:#d1a77c;--pl-txt:#e9ede4}
+@media (max-width:860px){.plan{grid-template-columns:1fr}}
+.plan-map{position:relative;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);background:var(--pl-forest)}
+.plan-map svg{display:block;width:100%;height:auto}
+.pin{position:absolute;transform:translate(-50%,-50%);width:30px;height:30px;border-radius:50%;border:2px solid #fff;background:var(--accent);color:var(--accent-ink);font:700 .78rem var(--mono);display:grid;place-items:center;cursor:pointer;box-shadow:0 2px 6px rgba(0,0,0,.35);padding:0;transition:transform .15s}
+.pin:hover{transform:translate(-50%,-50%) scale(1.12)}
+.pin[aria-pressed="true"]{background:var(--ink);color:var(--bg);transform:translate(-50%,-50%) scale(1.22);z-index:2;box-shadow:0 0 0 5px var(--glow)}
+.pin:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+@media (max-width:520px){.pin{width:22px;height:22px;font-size:.62rem;border-width:1.5px}}
+.plan-card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.plan-card .ph{aspect-ratio:16/10}
+.plan-card .txt{padding:16px 18px 20px;display:grid;gap:6px}
+.plan-card p{color:var(--ink-2);font-size:.95rem}
+.plan-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.plan-list button{font:500 .82rem var(--body);border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:5px 11px 5px 6px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.plan-list button b{font:700 .7rem var(--mono);background:var(--bg-2);border-radius:999px;min-width:20px;height:20px;display:inline-grid;place-items:center}
+.plan-list button[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 2px var(--glow)}
+.plan-list button[aria-pressed="true"] b{background:var(--accent);color:var(--accent-ink)}
+.plan-note{font-size:.82rem;color:var(--ink-2);margin-top:10px}
+
+/* ---------- Czat na stronie ---------- */
+.chat-fab{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:max(16px,env(safe-area-inset-bottom,0px));z-index:70;display:flex;align-items:center;gap:8px;border:0;border-radius:999px;padding:12px 18px 12px 14px;background:var(--accent);color:var(--accent-ink);font:600 .95rem var(--body);box-shadow:0 6px 20px rgba(0,0,0,.25);cursor:pointer}
+.chat-fab:hover{filter:brightness(1.06)}
+.chat-fab svg{width:22px;height:22px}
+.chat-pop{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:84px;z-index:71;width:min(400px,calc(100vw - 32px));height:min(620px,calc(100dvh - 110px));background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 18px 50px rgba(0,0,0,.3);display:grid;grid-template-rows:auto 1fr}
+.chat-bar{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:10px 10px 10px 16px;background:var(--ink);color:var(--bg);font-size:.95rem}
+.chat-bar button{background:none;border:0;color:inherit;font-size:1.1rem;cursor:pointer;padding:4px 10px;border-radius:6px}
+.chat-bar button:focus-visible{outline:2px solid var(--accent)}
+.chat-pop iframe{border:0;width:100%;height:100%;background:var(--bg)}
+@media (max-width:560px){.chat-pop{inset:0;width:auto;height:auto;border-radius:0;border:0}.chat-fab span{display:none}.chat-fab{padding:14px}}
+
 
 /* Activities */
 .act-tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:28px}
@@ -379,6 +413,7 @@ footer.foot a:hover{color:var(--accent)}
     <div class="tabs" role="tablist">
       <button class="chip" role="tab" aria-selected="true" data-tab="w-domu" id="tab-dom">In the house</button>
       <button class="chip" role="tab" aria-selected="false" data-tab="na-zewnatrz" id="tab-zew">Outdoors</button>
+      <button class="chip" role="tab" aria-selected="false" data-tab="plan" id="tab-plan">Site map</button>
     </div>
     <div data-panel="w-domu">
       <div class="rooms" id="rooms"></div>
@@ -386,6 +421,44 @@ footer.foot a:hover{color:var(--accent)}
     </div>
     <div data-panel="na-zewnatrz" hidden>
       <div class="spots" id="spots"></div>
+    </div>
+    <div data-panel="plan" hidden>
+      <div class="plan">
+        <div>
+          <div class="plan-map">
+        <svg viewBox="0 0 1000 640" role="img" aria-label="Map of the Narnia grounds">
+          <rect width="1000" height="640" fill="var(--pl-forest)"/>
+          <g fill="var(--pl-tree)"><circle cx="404" cy="49" r="15"/><circle cx="596" cy="59" r="22"/><circle cx="219" cy="38" r="15"/><circle cx="71" cy="246" r="15"/><circle cx="60" cy="579" r="15"/><circle cx="970" cy="228" r="24"/><circle cx="970" cy="63" r="23"/><circle cx="50" cy="226" r="14"/><circle cx="120" cy="584" r="18"/><circle cx="105" cy="595" r="23"/><circle cx="560" cy="64" r="23"/><circle cx="61" cy="633" r="17"/><circle cx="476" cy="599" r="21"/><circle cx="83" cy="588" r="18"/><circle cx="294" cy="623" r="15"/><circle cx="431" cy="40" r="24"/><circle cx="79" cy="571" r="23"/><circle cx="70" cy="95" r="18"/><circle cx="62" cy="317" r="24"/><circle cx="23" cy="472" r="19"/><circle cx="172" cy="625" r="15"/><circle cx="505" cy="60" r="17"/><circle cx="938" cy="508" r="15"/><circle cx="980" cy="236" r="16"/><circle cx="84" cy="180" r="16"/><circle cx="12" cy="496" r="23"/><circle cx="288" cy="4" r="16"/><circle cx="378" cy="624" r="23"/><circle cx="670" cy="55" r="21"/><circle cx="63" cy="195" r="15"/><circle cx="348" cy="615" r="14"/><circle cx="104" cy="0" r="23"/><circle cx="628" cy="26" r="15"/><circle cx="978" cy="355" r="23"/><circle cx="87" cy="147" r="15"/><circle cx="528" cy="23" r="17"/><circle cx="973" cy="540" r="19"/><circle cx="936" cy="27" r="26"/><circle cx="930" cy="171" r="19"/><circle cx="748" cy="29" r="14"/><circle cx="198" cy="619" r="19"/><circle cx="977" cy="373" r="15"/><circle cx="860" cy="1" r="21"/><circle cx="931" cy="352" r="26"/><circle cx="931" cy="397" r="26"/><circle cx="88" cy="405" r="21"/><circle cx="28" cy="154" r="23"/><circle cx="926" cy="476" r="26"/><circle cx="21" cy="14" r="26"/><circle cx="994" cy="105" r="22"/><circle cx="28" cy="257" r="17"/><circle cx="246" cy="600" r="19"/><circle cx="62" cy="362" r="21"/><circle cx="522" cy="19" r="21"/><circle cx="623" cy="4" r="26"/><circle cx="484" cy="633" r="25"/><circle cx="123" cy="569" r="14"/><circle cx="58" cy="254" r="17"/><circle cx="283" cy="43" r="26"/><circle cx="463" cy="575" r="14"/><circle cx="778" cy="64" r="21"/><circle cx="333" cy="627" r="22"/><circle cx="74" cy="246" r="20"/><circle cx="74" cy="217" r="24"/><circle cx="962" cy="374" r="16"/><circle cx="990" cy="478" r="17"/><circle cx="19" cy="346" r="22"/><circle cx="720" cy="18" r="20"/><circle cx="524" cy="65" r="15"/><circle cx="940" cy="234" r="15"/><circle cx="86" cy="271" r="18"/><circle cx="40" cy="185" r="18"/><circle cx="91" cy="285" r="14"/><circle cx="275" cy="17" r="24"/><circle cx="90" cy="266" r="15"/><circle cx="68" cy="270" r="15"/><circle cx="464" cy="11" r="19"/><circle cx="948" cy="274" r="23"/><circle cx="132" cy="44" r="22"/><circle cx="960" cy="112" r="16"/><circle cx="268" cy="51" r="16"/><circle cx="822" cy="18" r="18"/><circle cx="37" cy="15" r="14"/><circle cx="993" cy="518" r="18"/><circle cx="55" cy="132" r="14"/><circle cx="72" cy="640" r="25"/><circle cx="56" cy="86" r="24"/><circle cx="46" cy="470" r="16"/><circle cx="456" cy="3" r="18"/><circle cx="35" cy="316" r="17"/><circle cx="1" cy="343" r="20"/><circle cx="85" cy="486" r="18"/><circle cx="794" cy="5" r="15"/><circle cx="600" cy="42" r="20"/><circle cx="23" cy="306" r="18"/><circle cx="86" cy="599" r="22"/><circle cx="44" cy="525" r="24"/><circle cx="582" cy="16" r="24"/><circle cx="87" cy="31" r="14"/><circle cx="982" cy="107" r="20"/><circle cx="571" cy="51" r="24"/><circle cx="19" cy="544" r="24"/><circle cx="270" cy="3" r="21"/><circle cx="94" cy="538" r="15"/><circle cx="78" cy="490" r="24"/><circle cx="294" cy="47" r="23"/><circle cx="79" cy="614" r="16"/><circle cx="136" cy="12" r="21"/><circle cx="62" cy="497" r="18"/><circle cx="995" cy="101" r="25"/><circle cx="87" cy="484" r="14"/><circle cx="78" cy="518" r="21"/><circle cx="76" cy="595" r="15"/><circle cx="135" cy="617" r="24"/><circle cx="403" cy="25" r="16"/><circle cx="3" cy="503" r="24"/><circle cx="1" cy="332" r="26"/><circle cx="730" cy="12" r="25"/><circle cx="78" cy="369" r="20"/><circle cx="874" cy="49" r="18"/></g>
+          <path d="M560,640 C640,600 730,585 810,560 S950,515 1000,470 L1000,640 Z" fill="var(--pl-water)"/>
+          <path d="M120,88 L860,68 Q902,70 906,110 L922,468 Q924,522 872,530 L162,562 Q108,563 104,510 L94,140 Q94,90 120,88Z" fill="var(--pl-grass)" stroke="#fff" stroke-opacity=".55" stroke-width="3" stroke-dasharray="10 8"/>
+          <g fill="var(--pl-tree)" opacity=".85"><circle cx="150" cy="120" r="18"/><circle cx="880" cy="120" r="18"/><circle cx="890" cy="250" r="18"/><circle cx="120" cy="500" r="18"/><circle cx="700" cy="110" r="18"/><circle cx="260" cy="110" r="18"/><circle cx="905" cy="420" r="18"/></g>
+          <path d="M60,150 C160,160 260,215 330,250 S430,275 470,270" fill="none" stroke="var(--pl-path)" stroke-width="12" stroke-linecap="round"/>
+          <path d="M470,270 C540,300 600,340 640,400 S760,470 820,475" fill="none" stroke="var(--pl-path)" stroke-width="8" stroke-linecap="round" stroke-dasharray="1 0"/>
+          <path d="M480,280 C520,230 600,200 690,195" fill="none" stroke="var(--pl-path)" stroke-width="6" stroke-linecap="round"/>
+          <ellipse cx="815" cy="485" rx="70" ry="30" fill="var(--pl-sand)"/>
+          <g fill="var(--pl-bld)">
+            <rect x="425" y="235" width="110" height="66" rx="4"/>
+            <rect x="255" y="160" width="95" height="58" rx="4"/>
+            <rect x="375" y="118" width="105" height="40" rx="4"/>
+            <rect x="565" y="330" width="44" height="30" rx="3"/>
+            <path d="M690,165 L715,212 L665,212Z"/>
+            <path d="M205,345 L228,378 L182,378Z"/><path d="M245,350 L266,380 L224,380Z"/>
+          </g>
+          <circle cx="660" cy="300" r="20" fill="none" stroke="var(--pl-bld)" stroke-width="5"/>
+          <rect x="405" y="462" width="70" height="36" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="2.5"/>
+          <path d="M310,410 q20,-25 40,0 t40,0" fill="none" stroke="#fff" stroke-opacity=".7" stroke-width="3"/>
+          <text x="480" y="225" text-anchor="middle" class="pl-lbl" font-size="20" font-weight="700" fill="var(--pl-txt)">House</text>
+          <text x="40" y="138" class="pl-lbl" font-size="16" font-weight="600" fill="#fff">Entrance</text>
+          <text x="900" y="610" text-anchor="middle" font-size="22" font-style="italic" font-weight="600" fill="#fff" opacity=".9">Bóbr</text>
+          <text x="500" y="38" text-anchor="middle" class="pl-lbl" font-size="15" font-weight="600" fill="#fff" opacity=".85">Forest · hundreds of hectares</text>
+        </svg>
+            <div id="planPins"></div>
+          </div>
+          <div class="plan-list" id="planList"></div>
+          <p class="plan-note">Tap a point on the map to see a photo and description. The map is illustrative: 2 fenced hectares, with forest and the river beyond the fence.</p>
+        </div>
+        <article class="plan-card" id="planCard" aria-live="polite"></article>
+      </div>
     </div>
   </div>
 </section>
@@ -606,6 +679,12 @@ footer.foot a:hover{color:var(--accent)}
   </div>
 </footer>
 
+
+<button class="chat-fab" id="chatFab" type="button" aria-controls="chatPop" aria-expanded="false" aria-label="Ask the Narnia assistant"><svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M4 4h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H9l-5 4v-4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm3 6.2a1.3 1.3 0 1 0 0 2.6 1.3 1.3 0 0 0 0-2.6zm5 0a1.3 1.3 0 1 0 0 2.6 1.3 1.3 0 0 0 0-2.6zm5 0a1.3 1.3 0 1 0 0 2.6 1.3 1.3 0 0 0 0-2.6z"/></svg><span>Ask Narnia</span></button>
+<div class="chat-pop" id="chatPop" hidden role="dialog" aria-label="Chat with the Narnia assistant">
+  <div class="chat-bar"><strong>Narnia assistant · 24/7</strong><button type="button" id="chatClose" aria-label="Close chat">✕</button></div>
+  <iframe id="chatFrame" title="Chat with the Narnia assistant"></iframe>
+</div>
 <div class="lightbox" id="lb" hidden role="dialog" aria-modal="true" aria-label="Photo gallery">
   <div class="bar"><span id="lbCount"></span><button id="lbClose">Close ✕</button></div>
   <div class="stage" id="lbStage"></div>
@@ -617,6 +696,7 @@ footer.foot a:hover{color:var(--accent)}
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 // --- KONFIGURACJA (uzupełnić przed uruchomieniem strony) ---
 const WEB3FORMS_KEY='f742d370-ac9c-4857-b177-4fd3f469aa47'; // klucz z web3forms.com: zapytania z formularza przychodzą na e-mail podany przy jego tworzeniu
+const NARNIA_API='https://narnia-concierge.rafal-70a.workers.dev'; // czat i zapytania trafiają do panelu Narnii (po przeniesieniu DNS: https://czat.narniaglamp.com)
 const UMAMI_ID='e418fc3b-02f8-4653-ae12-73d18c319f30';      // identyfikator strony z cloud.umami.is: statystyki odwiedzin (miasta, kraje, źródła)
 if(UMAMI_ID){const u=document.createElement('script');u.defer=true;u.src='https://cloud.umami.is/script.js';u.dataset.websiteId=UMAMI_ID;document.head.appendChild(u)}
 const IMG_BASE='https://static.wixstatic.com/media/';
@@ -685,6 +765,18 @@ $$('[role=tab]').forEach(t=>t.onclick=()=>{
   $$('[role=tab]').forEach(x=>x.setAttribute('aria-selected',x===t));
   $$('[data-panel]').forEach(p=>p.hidden=p.dataset.panel!==t.dataset.tab);
 });
+
+/* ---------- Plan terenu ---------- */
+// map pin positions in %
+const PLAN={'Stodoła':[30.2,29.5],'Bar w starej stajni':[40,21.5],'Rowerownia':[45.6,21.5],'Szamańskie tipi':[69,25.5],'Taras herbaciany':[55,38],'Taras grillowy':[41.5,47.5],'Taras południowy':[49,50.5],'Sauna i balia':[58.7,56.5],'Krąg ogniskowy':[66,47],'Platforma widokowa':[86,52],'Plaża':[81.5,74],'Narniowy ogród':[62,64],'Polana hamakowa południowa':[55,74.5],'Boisko do siatkówki':[44,77.5],'Mini golf':[35,61],'Namioty glampingowe':[22.4,55],'Pole kempingowe':[20,73],'Tarcza łucznicza':[17,36],'Polana hamakowa zachodnia':[14,51]};
+const spotKey=s=>s[2]||s[0];
+const planSpots=SPOTS.filter(s=>PLAN[spotKey(s)]).sort((a,b)=>PLAN[spotKey(a)][1]-PLAN[spotKey(b)][1]);
+$('#planPins').innerHTML=planSpots.map((s,i)=>`<button type="button" class="pin" data-i="${i}" style="left:${PLAN[spotKey(s)][0]}%;top:${PLAN[spotKey(s)][1]}%" aria-label="${i+1}. ${s[0]}" title="${s[0]}" aria-pressed="false">${i+1}</button>`).join('');
+$('#planList').innerHTML=planSpots.map((s,i)=>`<button type="button" data-i="${i}" aria-pressed="false"><b>${i+1}</b>${s[0]}</button>`).join('');
+function planShow(i){const s=planSpots[i];$$('#planPins .pin,#planList button').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.i===i));
+  const c=$('#planCard');c.innerHTML=`${fig(SPOT_IMG[spotKey(s)],s[0],640,400)}<div class="txt"><span class="eyebrow">${i+1} / ${planSpots.length}</span><h3>${s[0]}</h3><p>${s[1]}</p></div>`;paint(c.querySelector('figure'))}
+$$('#planPins .pin,#planList button').forEach(b=>b.onclick=()=>{planShow(+b.dataset.i);if(innerWidth<860)$('#planCard').scrollIntoView({behavior:'smooth',block:'nearest'})});
+planShow(0);
 
 /* ---------- Activities ---------- */
 const ACTS=[
@@ -825,9 +917,9 @@ $('#dIn').value=iso(fri);$('#dOut').value=iso(addDays(fri,2));$('#dIn').min=iso(
 $('#dIn').onchange=()=>{const a=parse($('#dIn').value);if(!$('#dOut').value||parse($('#dOut').value)<=a)$('#dOut').value=iso(addDays(a,2));calc()};
 $('#dOut').onchange=calc;
 
-let lastQuote='';
+let lastQuote='',lastCalc=null;
 function calc(){
-  const warn=[],lines=[];
+  const warn=[],lines=[];lastCalc=null;
   if(!$('#dIn').value||!$('#dOut').value){markNow();$('#calcLines').innerHTML='';$('#calcTotal').textContent='–';return}
   const a=parse($('#dIn').value),b=parse($('#dOut').value);
   const nights=Math.round((b-a)/864e5);
@@ -864,6 +956,7 @@ function calc(){
   $('#calcWarn').innerHTML=warn.map(w=>`<p class="warn">${w}</p>`).join('');
   $('#calcLines').innerHTML=lines.map(l=>`<div><span>${l[0]}</span><span>${pln(l[1])}</span></div>`).join('')+tbd.map(t=>`<div><span>${t}</span><span>price on request</span></div>`).join('');
   $('#calcTotal').textContent=pln(total);
+  lastCalc={start:$('#dIn').value,end:$('#dOut').value,nights,guests:st.guests,totalPLN:total};
   $('#calcNote').textContent=`Plus a refundable deposit of ${pln(1000)} (set individually for events). A 50% down payment confirms the booking. Electricity: 100 kWh included, above that 0.5 ct per kWh. We confirm the final price by email.`;
 
   // Pakiety
@@ -932,14 +1025,22 @@ $('#form').addEventListener('submit',async e=>{
   err.hidden=true;
   const body=`[EN] ${lastQuote}\n\nOd: ${name}\nE-mail: ${email}\nTelefon: ${$('#fPhone').value.trim()||'–'}\n\n${$('#fMsg').value.trim()}`;
   if($('#fHp').checked)return;
-  if(WEB3FORMS_KEY){
-    try{const r=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({access_key:WEB3FORMS_KEY,name,email,replyto:email,from_name:'Strona Narnia',message:body,subject:'Zapytanie o termin (EN) – Narnia'})});
-      if(!r.ok)throw 0; $('#sent').innerHTML='<p><strong>Thank you!</strong> Your enquiry has arrived – we will reply by email.</p>'; $('#sent').hidden=false; return}catch(x){err.textContent='The message could not be sent. Please try again or write to info@narniaglamp.com.';err.hidden=false;return}
-  }
-  $('#sent').innerHTML='<p><strong>Preview:</strong> the form does not send messages yet. Your message would look like this:</p><pre></pre>';
-  $('#sent pre').textContent=body; $('#sent').hidden=false;
+  const sendBtn=$('#form button[type=submit]');sendBtn.disabled=true;
+  const toPanel=NARNIA_API?fetch(NARNIA_API+'/api/inquiry',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,email,phone:$('#fPhone').value.trim(),message:$('#fMsg').value.trim(),quote:lastQuote,lang:document.documentElement.lang,...(lastCalc||{})})}).then(r=>r.ok,()=>false):Promise.resolve(false);
+  const toMail=WEB3FORMS_KEY?fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({access_key:WEB3FORMS_KEY,name,email,replyto:email,from_name:'Strona Narnia',message:body,subject:'Zapytanie o termin (EN) – Narnia'})}).then(r=>r.ok,()=>false):Promise.resolve(false);
+  const [okPanel,okMail]=await Promise.all([toPanel,toMail]);sendBtn.disabled=false;
+  if(okPanel||okMail){$('#sent').innerHTML='<p><strong>Thank you!</strong> Your enquiry has arrived – we will reply by email.</p>';$('#sent').hidden=false;$('#form').querySelectorAll('input,textarea').forEach(x=>{if(x.id!=='fHp')x.value=''});return}
+  err.textContent='The message could not be sent. Please try again or write to info@narniaglamp.com.';err.hidden=false;
 });
 $('#toForm').onclick=()=>setTimeout(()=>$('#fName').focus({preventScroll:true}),400);
+
+/* ---------- Czat ---------- */
+const chatFab=$('#chatFab'),chatPop=$('#chatPop');
+function chatToggle(open){chatPop.hidden=!open;chatFab.setAttribute('aria-expanded',open);
+  if(open){const f=$('#chatFrame');if(!f.getAttribute('src'))f.src=NARNIA_API+'/?src=www&lang='+document.documentElement.lang;setTimeout(()=>{try{f.focus()}catch(e){}},300)}
+  document.documentElement.style.overflow=open&&innerWidth<=560?'hidden':''}
+chatFab.onclick=()=>chatToggle(chatPop.hidden);$('#chatClose').onclick=()=>{chatToggle(false);chatFab.focus()};
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!chatPop.hidden){chatToggle(false);chatFab.focus()}});
 
 /* ---------- Photos ---------- */
 $$('figure.ph[data-img]').forEach(f=>{if(!f.querySelector('img'))paint(f)});
