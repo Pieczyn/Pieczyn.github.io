@@ -64,7 +64,7 @@ PAIRS = [
 # ---------- hero ----------
 ('<span class="eyebrow">Krzywa · dolina Bobru · lubuskie</span>',
  '<span class="eyebrow">Krzywa · Bóbr valley · western Poland</span>',
- '<span class="eyebrow">Krzywa · Bobertal · Westpolen</span>'),
+ '<span class="eyebrow">Krzywa · am Fluss Bober · Westpolen</span>'),
 ('<h1>Dom na odludziu. <em>Cały dla Was.</em></h1>',
  '<h1>A house in the wild. <em>All yours.</em></h1>',
  '<h1>Ein Haus in der Wildnis. <em>Ganz für Sie.</em></h1>'),
