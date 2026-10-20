@@ -1,0 +1,946 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="icon" href="../logo-narnia.png">
+<meta property="og:title" content="Narnia Glamp – a secluded house all to yourselves">
+<meta property="og:description" content="A former forester's lodge on 2 ha by the Bóbr river: sauna, hot tub, barn, tipi, bikes, beach. The whole grounds just for you.">
+<meta property="og:image" content="https://narniaglamp.com/img/f5539e_8897719c4cac4658bce55073c7bc0fb0~mv2.jpg">
+<link rel="alternate" hreflang="pl" href="https://narniaglamp.com/"><link rel="alternate" hreflang="en" href="https://narniaglamp.com/en/"><link rel="alternate" hreflang="de" href="https://narniaglamp.com/de/"><link rel="alternate" hreflang="x-default" href="https://narniaglamp.com/">
+<title>Narnia Glamp</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Narnia – a secluded holiday house in Krzywa by the Bóbr river, western Poland. 2 ha exclusively yours: sauna, hot tub, barn, tipi, bikes, beach.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gloock&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap&subset=latin-ext">
+<style>
+/* Layout: one long scroll through the property, like walking from the gate to the river.
+   Dark spruce night with lamppost-amber light; light theme = lichen morning. */
+:root{
+  --bg:#eef0ea;          /* lichen morning */
+  --bg-2:#e2e6dc;
+  --surface:#f8f9f5;
+  --ink:#16261f;         /* spruce ink */
+  --ink-2:#4a5a51;
+  --line:#c9d0c3;
+  --accent:#a8650f;      /* lamppost amber, darkened for light ground */
+  --accent-ink:#fff8ec;
+  --moss:#3d5c3a;
+  --glow:rgba(242,170,60,.28);
+  --ph-a:#3d5c3a; --ph-b:#1f3a2e; --ph-c:#c88a2c;
+  --display:"Gloock", "Georgia", "Times New Roman", serif;
+  --body:"Figtree", "Segoe UI", system-ui, -apple-system, sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  --r:6px;
+  --wm-filter:none;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f1a15; --bg-2:#14231c; --surface:#1a2b23; --ink:#e9ede4; --ink-2:#a9b7ab; --line:#2c4036;
+  --accent:#f2aa3c; --accent-ink:#1a1206; --moss:#8fb487; --glow:rgba(242,170,60,.22);
+  --ph-a:#28452f; --ph-b:#0f1f18; --ph-c:#f2aa3c; --wm-filter:brightness(2.4) saturate(.9); color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f1a15; --bg-2:#14231c; --surface:#1a2b23; --ink:#e9ede4; --ink-2:#a9b7ab; --line:#2c4036;
+  --accent:#f2aa3c; --accent-ink:#1a1206; --moss:#8fb487; --glow:rgba(242,170,60,.22);
+  --ph-a:#28452f; --ph-b:#0f1f18; --ph-c:#f2aa3c; --wm-filter:brightness(2.4) saturate(.9); color-scheme:dark}
+
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{animation:none!important;transition:none!important}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:2px}
+h1,h2,h3{font-family:var(--display);font-weight:400;line-height:1.08;text-wrap:balance;margin:0}
+h2{font-size:clamp(2rem,4.6vw,3.2rem)}
+h3{font-size:1.45rem}
+p{margin:0}
+.wrap{max-width:1160px;margin-inline:auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.eyebrow{font-family:var(--mono);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.lead{font-size:1.15rem;color:var(--ink-2);max-width:62ch}
+section{padding-block:clamp(56px,9vw,112px)}
+.sec-head{display:grid;gap:14px;margin-bottom:40px;max-width:760px}
+.btn{display:inline-flex;align-items:center;gap:8px;font:600 .98rem var(--body);padding:13px 22px;border-radius:999px;border:1.5px solid var(--accent);background:var(--accent);color:var(--accent-ink);text-decoration:none;cursor:pointer;transition:transform .15s, box-shadow .2s}
+.btn:hover{transform:translateY(-1px);box-shadow:0 6px 24px var(--glow)}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--accent)}
+.chip{font:500 .85rem var(--body);padding:7px 14px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--ink);cursor:pointer}
+.chip[aria-pressed="true"],.chip[aria-selected="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* Photo frames: real photo on top, painted forest underneath if the photo can't load */
+.ph{position:relative;overflow:hidden;background:
+  radial-gradient(circle at 78% 22%, var(--ph-c) 0 3px, transparent 4px),
+  radial-gradient(ellipse at 78% 22%, var(--glow), transparent 45%),
+  linear-gradient(180deg, transparent 55%, var(--ph-b) 100%),
+  repeating-linear-gradient(100deg, transparent 0 22px, rgba(0,0,0,.08) 22px 24px),
+  linear-gradient(165deg, var(--ph-a), var(--ph-b));margin:0}
+.ph img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.ph .ph-label{position:absolute;left:12px;bottom:10px;font:500 .72rem var(--mono);letter-spacing:.08em;text-transform:uppercase;color:#f1efe6;opacity:.85}
+.ph:not(.failed) .ph-label{display:none}
+
+/* Header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:40;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:20px;height:64px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-family:var(--display);font-size:1.55rem}
+.brand img{width:60px;height:auto;margin-block:-6px}
+.brand img.wordmark{width:auto;height:48px;margin:0;filter:var(--wm-filter)}
+.foot-logo{width:120px;height:auto}
+.nav{display:flex;gap:4px;margin-left:auto;flex-wrap:nowrap}
+.nav a{text-decoration:none;font-size:.93rem;font-weight:500;padding:8px 11px;border-radius:999px;color:var(--ink-2)}
+.nav a:hover{color:var(--ink);background:var(--bg-2)}
+.top .btn{padding:9px 16px;font-size:.9rem}
+.ig-top{order:3;display:inline-flex;align-items:center;gap:7px;text-decoration:none;font:600 .9rem var(--body);color:#fff;background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);padding:8px 14px;border-radius:999px;white-space:nowrap}
+.ig-top:hover{filter:brightness(1.08)}
+.top .wrap>.btn{order:4}
+.menu-btn{display:none;margin-left:auto;background:none;border:1px solid var(--line);color:var(--ink);border-radius:999px;padding:8px 14px;font:500 .9rem var(--body)}
+@media (max-width:920px){
+  .nav{display:none;position:absolute;left:0;right:0;top:64px;flex-direction:column;background:var(--bg);border-bottom:1px solid var(--line);padding:8px max(16px,env(safe-area-inset-right,0px)) 16px max(16px,env(safe-area-inset-left,0px))}
+  .nav.open{display:flex}
+  .menu-btn{display:block}
+  .top .btn{display:none}
+  .ig-top{order:0;margin-left:auto;padding:8px 10px}
+  .menu-btn{margin-left:0}
+}
+@media (max-width:420px){.ig-top span{display:none}}
+
+/* Hero */
+.hero{padding-block:clamp(28px,5vw,56px) clamp(48px,7vw,88px)}
+.hero-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(24px,4vw,56px);align-items:center}
+.hero h1{font-size:clamp(2.7rem,6.6vw,5.4rem);letter-spacing:-.01em}
+.hero h1 em{font-style:normal;color:var(--accent);position:relative}
+.hero-copy{display:grid;gap:22px;min-width:0}
+.hero-ctas{display:flex;flex-wrap:wrap;gap:12px}
+.hero-photo{aspect-ratio:4/5;border-radius:220px 220px var(--r) var(--r);max-width:100%;box-shadow:0 30px 80px -30px var(--glow)}
+.season{display:inline-flex;align-items:center;gap:10px;font-size:.92rem;color:var(--ink-2);background:var(--surface);border:1px solid var(--line);padding:8px 14px;border-radius:999px;width:fit-content}
+.season .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 var(--glow);animation:pulse 2.4s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 var(--accent)}70%{box-shadow:0 0 0 10px transparent}100%{box-shadow:0 0 0 0 transparent}}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line);margin-top:clamp(36px,5vw,64px)}
+.facts div{padding:18px 16px 0 0;display:grid;gap:2px}
+.facts b{font-family:var(--display);font-weight:400;font-size:2rem;line-height:1}
+.facts span{font-size:.88rem;color:var(--ink-2)}
+@media (max-width:820px){.hero-grid{grid-template-columns:1fr}.hero-photo{aspect-ratio:4/3;border-radius:160px 160px var(--r) var(--r)}.facts{grid-template-columns:repeat(2,1fr);row-gap:18px}}
+
+/* Welcome */
+.welcome{background:var(--bg-2)}
+.welcome .wrap{display:grid;grid-template-columns:1fr 1.2fr;gap:clamp(24px,5vw,72px);align-items:start}
+.welcome blockquote{margin:0;font-family:var(--display);font-size:clamp(1.6rem,3.2vw,2.3rem);line-height:1.2}
+.welcome p+p{margin-top:14px}
+@media (max-width:820px){.welcome .wrap{grid-template-columns:1fr}}
+
+/* House */
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px}
+.rooms{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+.room{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;display:grid;gap:10px;align-content:start}
+.room h3{font-size:1.25rem}
+.room p{font-size:.95rem;color:var(--ink-2)}
+.beds{display:flex;gap:6px;flex-wrap:wrap}
+.bed{width:26px;height:16px;border-radius:4px;border:1.5px solid var(--moss);position:relative}
+.bed::before{content:"";position:absolute;left:3px;top:3px;width:6px;height:7px;border-radius:2px;background:var(--moss)}
+.bed.double{width:40px}
+.bed.sofa{border-style:dashed}
+.counter{display:flex;align-items:baseline;gap:14px;margin-top:22px;padding:18px 20px;border:1px dashed var(--line);border-radius:var(--r);flex-wrap:wrap}
+.counter b{font-family:var(--display);font-weight:400;font-size:2.4rem;color:var(--accent)}
+.spots{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+.spot{display:grid;grid-template-rows:auto 1fr;border-radius:var(--r);overflow:hidden;background:var(--surface);border:1px solid var(--line)}
+.spot .ph{aspect-ratio:16/10}
+.spot div.txt{padding:16px 18px 20px;display:grid;gap:6px;align-content:start}
+.spot p{font-size:.95rem;color:var(--ink-2)}
+
+/* Activities */
+.act-tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:28px}
+.act-tools .now{margin-left:auto;font-size:.9rem;color:var(--ink-2)}
+.acts{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.act{background:var(--bg);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;display:grid;grid-template-rows:auto 1fr;transition:opacity .25s,background .25s,border-color .25s}
+.act .ph{aspect-ratio:4/3}
+.act .txt{padding:16px 18px 20px;display:grid;gap:6px;align-content:start}
+.act:hover img{transform:scale(1.04)}
+.act .tag{font:500 .7rem var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--moss)}
+.act p{font-size:.94rem;color:var(--ink-2)}
+.act.dim{opacity:.32}
+@media (max-width:600px){.act.dim{display:none}}
+.act.hot{background:var(--surface);border-color:var(--accent)}
+.act.hot .tag{color:var(--accent)}
+
+/* Trips */
+.trips{display:grid;grid-template-columns:1fr 1fr;gap:clamp(24px,4vw,48px)}
+.trip-list{display:grid;gap:12px;align-content:start}
+.trip{border:1px solid var(--line);border-radius:var(--r);background:var(--surface)}
+.trip summary{list-style:none;cursor:pointer;padding:16px 18px;display:flex;gap:14px;align-items:baseline}
+.trip summary::-webkit-details-marker{display:none}
+.trip summary .k{font:500 .75rem var(--mono);color:var(--accent);min-width:2.2em}
+.trip summary h3{font-size:1.15rem;font-family:var(--body);font-weight:600;flex:1}
+.trip summary::after{content:"+";font-family:var(--mono);color:var(--ink-2)}
+.trip[open] summary::after{content:"–"}
+.trip .body{padding:0 18px 18px 54px;color:var(--ink-2);font-size:.95rem;display:grid;gap:10px}
+.trip .body a{color:var(--accent);font-weight:600}
+@media (max-width:820px){.trips{grid-template-columns:1fr}}
+
+/* Gallery */
+.gallery{columns:4 220px;column-gap:10px}
+.gallery button{display:block;width:100%;margin:0 0 10px;padding:0;border:0;background:none;cursor:zoom-in;border-radius:4px;overflow:hidden;break-inside:avoid}
+.gallery .ph{aspect-ratio:var(--ar,4/3)}
+.gallery button:hover img{transform:scale(1.04)}
+.more{margin-top:24px;display:flex;justify-content:center}
+.ig-band{margin-top:40px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;padding:22px clamp(18px,3vw,32px);border-radius:var(--r);text-decoration:none;color:#fff;background:linear-gradient(45deg,#f09433,#e6683c 30%,#dc2743 55%,#cc2366 75%,#bc1888)}
+.ig-band .ig-txt{display:grid;flex:1;min-width:200px}
+.ig-band strong{font-family:var(--display);font-weight:400;font-size:1.6rem;line-height:1.15}
+.ig-band .ig-go{font-weight:700;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.5);padding:10px 18px;border-radius:999px}
+.ig-band:hover .ig-go{background:rgba(255,255,255,.3)}
+.lightbox{position:fixed;inset:0;z-index:80;background:rgba(6,12,9,.94);display:grid;grid-template-rows:auto 1fr auto;padding:calc(12px + env(safe-area-inset-top,0px)) max(12px,env(safe-area-inset-right,0px)) calc(12px + env(safe-area-inset-bottom,0px)) max(12px,env(safe-area-inset-left,0px));color:#f1efe6}
+.lightbox .bar{display:flex;justify-content:space-between;align-items:center;font:.85rem var(--mono)}
+.lightbox .stage{display:grid;place-items:center;min-height:0}
+.lightbox .stage .ph{width:min(1200px,100%);height:100%;max-height:82vh;background-color:#0b1510}
+.lightbox .stage img{object-fit:contain}
+.lightbox .ctrl{display:flex;justify-content:center;gap:12px}
+.lightbox button{background:rgba(255,255,255,.1);color:#f1efe6;border:1px solid rgba(255,255,255,.2);border-radius:999px;padding:9px 18px;font:500 .9rem var(--body);cursor:pointer}
+
+/* Pricing */
+.pricing{background:var(--bg-2)}
+.events{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}
+.event{display:grid;grid-template-rows:auto 1fr;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--surface)}
+.event .ph{aspect-ratio:4/3}
+.event .txt{padding:18px;display:grid;gap:10px;align-content:start}
+.event ul{margin:0;padding-left:1.1em;color:var(--ink-2);font-size:.93rem}
+.posters{display:flex;gap:14px;overflow-x:auto;padding-bottom:10px;scroll-snap-type:x mandatory;margin-top:48px}
+.posters button{flex:0 0 auto;width:min(240px,62vw);padding:0;border:0;background:none;cursor:zoom-in;scroll-snap-align:start;border-radius:var(--r);overflow:hidden}
+.posters .ph{aspect-ratio:9/16;width:100%}
+.posters .ph img{object-fit:cover}
+.rate-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:40px}
+.rate{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px;display:grid;gap:14px}
+.rate.is-now{border-color:var(--accent);box-shadow:0 0 0 3px var(--glow)}
+.rate header{display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap}
+.rate header small{font:.78rem var(--mono);color:var(--ink-2)}
+.rate dl{display:grid;grid-template-columns:1fr auto;gap:8px 16px;margin:0}
+.rate dt{color:var(--ink-2)}
+.rate dd{margin:0;font-family:var(--mono);font-size:1.1rem}
+.now-badge{font:600 .7rem var(--mono);letter-spacing:.08em;text-transform:uppercase;background:var(--accent);color:var(--accent-ink);padding:3px 8px;border-radius:999px}
+@media (max-width:720px){.rate-grid{grid-template-columns:1fr}}
+
+.calc{display:grid;grid-template-columns:1.1fr .9fr;gap:0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:var(--surface)}
+.calc-in{padding:clamp(18px,3vw,32px);display:grid;gap:22px;align-content:start;min-width:0}
+.calc-out{padding:clamp(18px,3vw,32px);background:var(--ink);color:var(--bg);display:grid;gap:16px;align-content:start;min-width:0}
+.calc-out .eyebrow{color:inherit;opacity:.7}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.field{display:grid;gap:6px;min-width:0}
+.field label,.fs-label{font-size:.85rem;font-weight:600}
+input[type=date],input[type=text],input[type=email],input[type=tel],textarea,select{width:100%;font:1rem var(--body);padding:11px 12px;border-radius:var(--r);border:1px solid var(--line);background:var(--bg);color:var(--ink)}
+textarea{min-height:110px;resize:vertical}
+.stepper{display:flex;align-items:center;border:1px solid var(--line);border-radius:var(--r);background:var(--bg);width:fit-content}
+.stepper button{width:40px;height:42px;border:0;background:none;color:var(--ink);font-size:1.2rem;cursor:pointer}
+.stepper output{min-width:38px;text-align:center;font-family:var(--mono)}
+.extras{display:grid;gap:10px}
+.extra{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--line)}
+.extra:last-child{border-bottom:0}
+.extra .lbl{display:grid;font-size:.95rem;min-width:0}
+.extra .lbl small{color:var(--ink-2);font-family:var(--mono);font-size:.78rem}
+.extra input[type=checkbox]{width:20px;height:20px;accent-color:var(--accent)}
+.lines{display:grid;gap:8px;font-size:.93rem}
+.lines div{display:flex;justify-content:space-between;gap:12px;border-bottom:1px dashed color-mix(in srgb,var(--bg) 25%,transparent);padding-bottom:6px}
+.lines div span:last-child{font-family:var(--mono);white-space:nowrap}
+.total{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.total b{font-family:var(--display);font-weight:400;font-size:2.6rem;line-height:1}
+.note{font-size:.84rem;opacity:.75}
+.warn{background:color-mix(in srgb,var(--accent) 22%,transparent);border:1px solid var(--accent);padding:10px 12px;border-radius:var(--r);font-size:.9rem}
+.pack{border:1px solid color-mix(in srgb,var(--bg) 30%,transparent);border-radius:var(--r);padding:12px 14px;font-size:.92rem;display:grid;gap:4px}
+.pack.best{border-color:var(--accent);background:color-mix(in srgb,var(--accent) 14%,transparent)}
+@media (max-width:860px){.calc{grid-template-columns:1fr}}
+@media (max-width:420px){.row2{grid-template-columns:1fr}}
+
+.packages{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:40px}
+.package{border:1px solid var(--line);border-radius:var(--r);padding:22px;display:grid;gap:10px;background:var(--bg)}
+.package .price{font-family:var(--display);font-size:2rem;color:var(--accent)}
+.package ul{margin:0;padding-left:1.1em;color:var(--ink-2);font-size:.95rem}
+@media (max-width:720px){.packages{grid-template-columns:1fr}}
+.fees{margin-top:32px;border-top:1px solid var(--line)}
+.fees summary{cursor:pointer;padding:16px 0;font-weight:600}
+.fee-table{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:0 32px}
+.fee-table div{display:flex;justify-content:space-between;gap:12px;padding:9px 0;border-bottom:1px solid var(--line);font-size:.93rem}
+.fee-table span:last-child{font-family:var(--mono);white-space:nowrap}
+
+/* Reviews */
+.reviews{display:grid;grid-template-columns:1.3fr 1fr;gap:clamp(24px,4vw,56px);align-items:start}
+.quote{display:grid;gap:16px}
+.quote p{font-family:var(--display);font-size:clamp(1.7rem,3.4vw,2.6rem);line-height:1.15}
+.quote footer{color:var(--ink-2);font-size:.92rem}
+.q-ctrl{display:flex;gap:8px;margin-top:8px}
+.platforms{display:grid;gap:10px}
+.platforms a{display:flex;justify-content:space-between;padding:14px 18px;border:1px solid var(--line);border-radius:var(--r);text-decoration:none;background:var(--surface)}
+.platforms a:hover{border-color:var(--accent)}
+.platforms a span:last-child{color:var(--accent)}
+@media (max-width:820px){.reviews{grid-template-columns:1fr}}
+
+/* FAQ */
+.faq{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
+.faq details{border:1px solid var(--line);border-radius:var(--r);padding:0 18px;background:var(--surface)}
+.faq summary{cursor:pointer;padding:16px 0;font-weight:600}
+.faq details p{padding-bottom:16px;color:var(--ink-2);font-size:.95rem}
+
+/* Contact */
+.contact{background:var(--ink);color:var(--bg)}
+.contact .eyebrow{color:inherit;opacity:.7}
+.contact-grid{display:grid;grid-template-columns:1fr 1.1fr;gap:clamp(24px,5vw,72px)}
+.contact h2{color:var(--bg)}
+.contact .lead{color:color-mix(in srgb,var(--bg) 75%,var(--ink))}
+.cinfo{display:grid;gap:18px;margin-top:28px}
+.cinfo .k{font:.75rem var(--mono);letter-spacing:.1em;text-transform:uppercase;opacity:.7}
+.cinfo .v{font-size:1.1rem}
+.copy{background:none;border:1px solid color-mix(in srgb,var(--bg) 35%,transparent);color:var(--bg);border-radius:999px;padding:4px 12px;font:.8rem var(--body);cursor:pointer;margin-left:8px}
+.portals{display:flex;flex-wrap:wrap;gap:8px}
+.portals a{color:var(--bg);text-decoration:none;border:1px solid color-mix(in srgb,var(--bg) 35%,transparent);padding:7px 14px;border-radius:999px;font-size:.9rem}
+.portals a:hover{border-color:var(--accent);color:var(--accent)}
+.form{background:var(--surface);color:var(--ink);border-radius:var(--r);padding:clamp(18px,3vw,28px);display:grid;gap:14px;align-content:start}
+.form .summary{font:.85rem var(--mono);background:var(--bg-2);padding:10px 12px;border-radius:var(--r);white-space:pre-wrap}
+.sent{display:grid;gap:10px}
+.sent pre{white-space:pre-wrap;font:.85rem var(--mono);background:var(--bg-2);padding:12px;border-radius:var(--r);margin:0;max-height:260px;overflow:auto}
+@media (max-width:820px){.contact-grid{grid-template-columns:1fr}}
+
+footer.foot{background:var(--ink);color:var(--bg);border-top:1px solid color-mix(in srgb,var(--bg) 18%,transparent)}
+footer.foot .wrap{display:flex;flex-wrap:wrap;gap:16px 28px;justify-content:space-between;align-items:center;padding-block:28px;font-size:.88rem;opacity:.85}
+footer.foot a{text-decoration:none}
+footer.foot a:hover{color:var(--accent)}
+.preview-note{background:var(--accent);color:var(--accent-ink);font-size:.86rem}
+.preview-note .wrap{padding-block:8px}
+.nav a,.top .btn{white-space:nowrap}.ig-top span{display:none}.ig-top{padding:8px 10px}@media (max-width:1200px){.nav{display:none;position:absolute;left:0;right:0;top:64px;flex-direction:column;background:var(--bg);border-bottom:1px solid var(--line);padding:8px max(16px,env(safe-area-inset-right,0px)) 16px max(16px,env(safe-area-inset-left,0px))}.nav.open{display:flex}.menu-btn{display:block;margin-left:0}.ig-top{order:0;margin-left:auto;padding:8px 10px}}.langsw{order:2;display:flex;gap:2px;border:1px solid var(--line);border-radius:999px;padding:2px}.langsw a{font:600 .78rem var(--mono);letter-spacing:.06em;text-decoration:none;padding:5px 8px;border-radius:999px;color:var(--ink-2)}.langsw a[aria-current]{background:var(--ink);color:var(--bg)}@media (max-width:1200px){.langsw{margin-left:auto;order:0}.ig-top{margin-left:8px}}@media (max-width:480px){.top .wrap{gap:8px}.ig-top{display:none}.langsw a{padding:5px 6px}}
+.top .wrap>.btn{display:none}
+</style>
+</head>
+<body>
+
+<div class="preview-note" id="photoNote" hidden><div class="wrap">Some photos did not load. Please refresh the page.</div></div>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#start" aria-label="Narnia – top of page">
+      <img src="../assets/logo-151587.png" alt="" width="60" height="55">
+      <img class="wordmark" src="../assets/logo-14894.png" alt="Narnia" width="59" height="38">
+    </a>
+    <a class="ig-top" href="https://www.instagram.com/narniaglamp/" target="_blank" rel="noopener" aria-label="Narnia on Instagram"><svg viewBox="0 0 24 24" aria-hidden="true" width="20" height="20"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.4" cy="6.6" r="1.3" fill="currentColor"/></svg><span>@narniaglamp</span></a>
+    <nav class="langsw" aria-label="Język / Language / Sprache"><a href="../" hreflang="pl" lang="pl">PL</a><a href="../en/" hreflang="en" lang="en" aria-current="true">EN</a><a href="../de/" hreflang="de" lang="de">DE</a></nav>
+    <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav">Menu</button>
+    <nav class="nav" id="nav">
+      <a href="#dom">House &amp; grounds</a>
+      <a href="#czas">Time in Narnia</a>
+      <a href="#wyprawy">Trips</a>
+      <a href="#galeria">Gallery</a>
+      <a href="#wydarzenia">Events</a>
+      <a href="#cennik">Prices</a>
+      <a href="#kontakt">Contact</a>
+    </nav>
+    <a class="btn" href="#kalkulator">Check price</a>
+  </div>
+</header>
+
+<main id="start">
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <span class="eyebrow">Krzywa · Bóbr valley · western Poland</span>
+        <h1>A house in the wild. <em>All yours.</em></h1>
+        <p class="lead">A former forester's lodge on two hectares with no neighbours, a sauna, a hot tub, a barn and a beach. We always rent out the whole property exclusively.</p>
+        <span class="season" id="seasonChip"><span class="dot"></span><span id="seasonTxt">Season</span></span>
+        <p style="font-size:.95rem;color:var(--ink-2)">Minimum stay: 2 nights, in summer 3 nights.</p>
+        <div class="hero-ctas">
+          <a class="btn" href="#kalkulator">Calculate your price</a>
+          <a class="btn ghost" href="#galeria">See photos</a>
+        </div>
+      </div>
+      <figure class="ph hero-photo" data-img="f5539e_f19215bbfe2b44f899ce5ab7d3a38849~mv2.jpg" data-w="900" data-h="1100" data-label="Narnia from above" data-alt="Narnia from above: buildings, the canal and forest to the horizon"></figure>
+    </div>
+    <div class="facts">
+      <div><b class="num">12 + 7</b><span>beds in the house and 2 glamping tents</span></div>
+      <div><b class="num">2 ha</b><span>of grounds just for you</span></div>
+      <div><b class="num">16</b><span>adult bikes + 4 for kids</span></div>
+      <div><b class="num">8</b><span>people in the sauna, 8 in the hot tub</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="welcome">
+  <div class="wrap">
+    <blockquote>Narnia is more than a holiday house.</blockquote>
+    <div>
+      <p class="lead">It's a place for unforgettable moments, for finding your balance again and returning to the magic of childhood dreams.</p>
+      <p class="lead">Far from noise and neighbours, with views you will remember. Hundreds of hectares of forest beyond the fence and a wild beach on the Bóbr just a few minutes' walk away.</p>
+    </div>
+  </div>
+</section>
+
+<section id="dom">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">House &amp; grounds</span>
+      <h2>A forester's lodge for the whole crew</h2>
+      <p class="lead">In spring and summer up to 12 people in the house, plus two glamping tents for 3 and 4 people and a camping field.</p>
+    </div>
+    <div class="tabs" role="tablist">
+      <button class="chip" role="tab" aria-selected="true" data-tab="w-domu" id="tab-dom">In the house</button>
+      <button class="chip" role="tab" aria-selected="false" data-tab="na-zewnatrz" id="tab-zew">Outdoors</button>
+    </div>
+    <div data-panel="w-domu">
+      <div class="rooms" id="rooms"></div>
+      <div class="counter"><b class="num">19</b><span>beds in spring and summer: 12 in the house and 7 in glamping tents, plus a camping field. The house price covers 10 people; each additional person is 100 zł (25 €) per night.</span></div>
+    </div>
+    <div data-panel="na-zewnatrz" hidden>
+      <div class="spots" id="spots"></div>
+    </div>
+  </div>
+</section>
+
+<section id="czas" style="background:var(--bg-2)">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Time in Narnia</span>
+      <h2>What awaits you</h2>
+      <p class="lead">Pick a season and we'll highlight what's best at that time of year.</p>
+    </div>
+    <div class="act-tools" id="actTools">
+      <button class="chip" data-season="all" aria-pressed="false">All</button>
+      <button class="chip" data-season="lato" aria-pressed="false">Summer</button>
+      <button class="chip" data-season="jesien" aria-pressed="false">Autumn</button>
+      <button class="chip" data-season="zima" aria-pressed="false">Winter</button>
+      <button class="chip" data-season="wiosna" aria-pressed="false">Spring</button>
+      <span class="now" id="actNow"></span>
+    </div>
+    <div class="acts" id="acts"></div>
+  </div>
+</section>
+
+<section id="wyprawy">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Trips around Narnia</span>
+      <h2>Whichever way you go, it's beautiful</h2>
+      <p class="lead">We especially recommend the walk to the wild beach.</p>
+    </div>
+    <div class="trips">
+      <div>
+        <h3 style="margin-bottom:16px">On foot</h3>
+        <div class="trip-list" id="walks"></div>
+      </div>
+      <div>
+        <h3 style="margin-bottom:16px">By bike</h3>
+        <div class="trip-list" id="rides"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="galeria" style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Gallery</span>
+      <h2>Narnia in every season</h2>
+    </div>
+    <div class="gallery" id="gallery"></div>
+    <div class="more"><button class="btn ghost" id="moreBtn">Show more photos</button></div>
+    <a class="ig-band" href="https://www.instagram.com/narniaglamp/" target="_blank" rel="noopener">
+      <span class="ig-ico"><svg viewBox="0 0 24 24" aria-hidden="true" width="44" height="44"><rect x="3" y="3" width="18" height="18" rx="5" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="12" cy="12" r="4.2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="17.4" cy="6.6" r="1.3" fill="currentColor"/></svg></span>
+      <span class="ig-txt"><strong>See what's happening in Narnia right now</strong><span>Follow us on Instagram: @narniaglamp</span></span>
+      <span class="ig-go">Follow →</span>
+    </a>
+  </div>
+</section>
+
+<section id="cennik" class="pricing">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Prices</span>
+      <h2>Price per night for the whole property</h2>
+      <p class="lead">Up to 10 people included. <strong>Minimum stay is 2 nights, in summer (July–August) 3 nights.</strong> One-off cleaning fee 400 zł (100 €).</p>
+    </div>
+    <div class="rate-grid">
+      <article class="rate" id="rate-high">
+        <header><h3>High season</h3><small>May – September</small></header>
+        <dl><dt>Weekends &amp; holidays</dt><dd>1800 zł (450 €)</dd><dt>SLOW days (Mon–Thu)</dt><dd>1300 zł (325 €)</dd></dl>
+      </article>
+      <article class="rate" id="rate-low">
+        <header><h3>Low season</h3><small>October – April</small></header>
+        <dl><dt>Weekends &amp; holidays</dt><dd>1600 zł (400 €)</dd><dt>SLOW days (Mon–Thu)</dt><dd>1200 zł (300 €)</dd></dl>
+      </article>
+    </div>
+
+    <article class="rate" style="margin:-24px 0 40px">
+      <header><h3>Glamping tents &amp; camping field</h3><small>spring – summer</small></header>
+      <dl><dt>Glamping tent for 3</dt><dd id="pG3"></dd><dt>Glamping tent for 4</dt><dd id="pG4"></dd><dt>Camping field (own tent or camper)</dt><dd>60 zł (15 €) / person / night</dd></dl>
+      <p style="font-size:.95rem"><strong>Glamping tents and the camping field are only available as an add-on to renting the house.</strong></p>
+      <p style="font-size:.9rem;color:var(--ink-2)">Guests sleeping in glamping tents don't pay for the camping field. Children up to 4 stay free.</p>
+    </article>
+
+    <div class="calc" id="kalkulator">
+      <div class="calc-in">
+        <div style="display:flex;justify-content:space-between;align-items:end;gap:12px;flex-wrap:wrap"><div><span class="eyebrow">Stay calculator</span><h3 style="margin-top:6px">Price your dates</h3></div><div role="group" aria-label="Currency" style="display:flex;gap:6px"><button type="button" class="chip" data-cur="pln" aria-pressed="true">zł</button><button type="button" class="chip" data-cur="eur" aria-pressed="false">€</button></div></div>
+        <div class="row2">
+          <div class="field"><label for="dIn">Arrival</label><input type="date" id="dIn"></div>
+          <div class="field"><label for="dOut">Departure</label><input type="date" id="dOut"></div>
+        </div>
+        <div class="row2">
+          <div class="field"><span class="fs-label" id="lg">People in the house</span>
+            <div class="stepper" role="group" aria-labelledby="lg"><button type="button" data-step="guests" data-d="-1" aria-label="Fewer people">−</button><output id="guests">8</output><button type="button" data-step="guests" data-d="1" aria-label="More people">+</button></div></div>
+          <div class="field"><span class="fs-label" id="lp">Dogs or cats</span>
+            <div class="stepper" role="group" aria-labelledby="lp"><button type="button" data-step="pets" data-d="-1" aria-label="Fewer pets">−</button><output id="pets">0</output><button type="button" data-step="pets" data-d="1" aria-label="More pets">+</button></div></div>
+        </div>
+        <div class="extra" id="xgRow" hidden><span class="lbl"><span>People above 10 in the house: for how many nights?</span><small>100 zł (25 €) · person / night</small></span><div class="stepper" role="group" aria-label="Nights for people above 10"><button type="button" data-step="xgN" data-d="-1" aria-label="Fewer nights">−</button><output id="xgN">0</output><button type="button" data-step="xgN" data-d="1" aria-label="More nights">+</button></div></div>
+        <div class="field"><span class="fs-label">Extras</span><small style="color:var(--ink-2)">Glamping tents and the camping field are added to the house rental.</small>
+          <div class="extras" id="extras"></div>
+        </div>
+      </div>
+      <div class="calc-out" aria-live="polite">
+        <span class="eyebrow">Estimated price</span>
+        <div id="calcWarn"></div>
+        <div class="lines" id="calcLines"></div>
+        <div class="total"><span>Total</span><b class="num" id="calcTotal">0 zł</b></div>
+        <div id="calcPacks" style="display:grid;gap:8px"></div>
+        <p class="note" id="calcNote"></p>
+        <a class="btn" href="#kontakt" id="toForm">Ask about these dates</a>
+      </div>
+    </div>
+
+    <div class="packages">
+      <article class="package">
+        <span class="eyebrow">Package</span><h3>Magical Weekend</h3><span class="price num">3700 zł (925 €)</span>
+        <ul><li>up to 12 people, Friday – Sunday</li><li>early arrival from 2 pm, late departure until 2 pm</li><li>hot tub, cleaning and 2 hours of sauna included</li><li>extra day 599 zł, two extra days 999 zł</li><li>not in June, July, August or on public holidays</li></ul>
+      </article>
+      <article class="package">
+        <span class="eyebrow">Package</span><h3>Summer weeks 2027</h3><span class="price num">7500 zł (1875 €) / 7 days</span>
+        <ul><li>up to 10 people, June – September</li><li>hot tub and cleaning included</li><li>2 hours of sauna a day</li><li>3 portions of firewood</li></ul>
+      </article>
+    </div>
+
+    <details class="fees">
+      <summary>All surcharges, extra services, electricity and deposit</summary>
+      <div class="fee-table" id="fees"></div>
+    </details>
+  </div>
+</section>
+
+<section id="wydarzenia">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Events</span>
+      <h2>Narnia for your event</h2>
+      <p class="lead">We have experience with music festivals and take care of everything from A to Z. We love a challenge and bold ideas.</p>
+    </div>
+    <div class="events" id="events"></div>
+    <h3 style="margin-top:56px">Our offers</h3>
+    <div class="posters" id="posters"></div>
+    <div style="margin-top:28px"><a class="btn" href="#kontakt">Ask about an event</a></div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="reviews">
+      <div class="quote">
+        <span class="eyebrow">Guest reviews</span>
+        <p id="qText"></p>
+        <footer id="qWho"></footer>
+        <div class="q-ctrl"><button class="chip" id="qPrev" aria-label="Previous review">←</button><button class="chip" id="qNext" aria-label="Next review">→</button></div>
+      </div>
+      <div class="platforms">
+        <span class="eyebrow">All reviews</span>
+        <a href="https://www.airbnb.com/rooms/558402001846597864" target="_blank" rel="noopener"><span>Airbnb</span><span>→</span></a>
+        <a href="https://www.google.com/maps/search/?api=1&query=51.8427579,15.1714223" target="_blank" rel="noopener"><span>Google Maps</span><span>→</span></a>
+        <a href="https://www.facebook.com/NarniaGlamp" target="_blank" rel="noopener"><span>Facebook</span><span>→</span></a>
+        <a href="https://slowhop.com/pl/miejsca/3495-magiczna-narnia.html" target="_blank" rel="noopener"><span>Slowhop</span><span>→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Good to know</span><h2>Frequently asked questions</h2></div>
+    <div class="faq" id="faq"></div>
+  </div>
+</section>
+
+<section id="kontakt" class="contact">
+  <div class="wrap contact-grid">
+    <div>
+      <span class="eyebrow">Contact &amp; bookings</span>
+      <h2 style="margin-top:10px">Book your time in Narnia</h2>
+      <p class="lead" style="margin-top:14px">Write to us via the form or by email. Planning an event, a workshop or a wedding? We're happy to help. We speak English.</p>
+      <div class="cinfo">
+        <div><div class="k">E-mail</div><div class="v"><span id="mail">info@narniaglamp.com</span><button class="copy" data-copy="info@narniaglamp.com">Copy</button></div></div>
+        <div><div class="k">Address</div><div class="v">Krzywa 18, 66-010 Krzywa, Poland<button class="copy" data-copy="Krzywa 18, 66-010 Krzywa, Poland">Copy</button></div></div>
+        <div><div class="k">Getting here</div><div class="v"><a href="https://www.google.com/maps/dir/?api=1&destination=51.8427579,15.1714223" target="_blank" rel="noopener">Get directions in Google Maps →</a></div></div>
+        <div><div class="k">Also book via</div><div class="portals" style="margin-top:6px">
+          <a href="https://slowhop.com/pl/miejsca/3495-magiczna-narnia.html" target="_blank" rel="noopener">Slowhop</a>
+          <a href="https://www.airbnb.com/rooms/558402001846597864" target="_blank" rel="noopener">Airbnb</a>
+          <a href="https://r.alohacamp.com/oj7w9" target="_blank" rel="noopener">AlohaCamp</a>
+        </div></div>
+        <div><div class="k">Follow</div><div class="portals" style="margin-top:6px">
+          <a href="https://www.facebook.com/NarniaGlamp" target="_blank" rel="noopener">Facebook</a>
+          <a href="https://www.instagram.com/narniaglamp/" target="_blank" rel="noopener">Instagram</a>
+          <a href="https://www.tiktok.com/@narniaglamp" target="_blank" rel="noopener">TikTok</a>
+          <a href="https://www.youtube.com/channel/UC893To_Qvb9vtwfZS3naW5Q" target="_blank" rel="noopener">YouTube</a>
+        </div></div>
+      </div>
+    </div>
+    <form class="form" id="form" novalidate>
+      <h3>Booking enquiry</h3>
+      <div class="summary" id="formSummary"></div>
+      <div class="row2">
+        <div class="field"><label for="fName">Full name</label><input type="text" id="fName" autocomplete="name" required></div>
+        <div class="field"><label for="fPhone">Phone</label><input type="tel" id="fPhone" autocomplete="tel"></div>
+      </div>
+      <div class="field"><label for="fEmail">E-mail</label><input type="email" id="fEmail" autocomplete="email" required></div>
+      <div class="field"><label for="fMsg">Message</label><textarea id="fMsg" placeholder="Occasion, questions, wishes…"></textarea></div>
+      <input type="checkbox" id="fHp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
+      <p id="fErr" class="warn" hidden></p>
+      <button class="btn" type="submit">Send enquiry</button>
+      <div class="sent" id="sent" hidden></div>
+    </form>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <span style="display:flex;align-items:center;gap:16px"><img class="foot-logo" src="../assets/logo-151587.png" alt="Narnia Glamp logo">© Narnia Glamp · Krzywa 18, 66-010 Krzywa, Poland</span>
+    <span><a href="../regulamin.html">House rules (PL)</a> · <a href="#kontakt">Contact</a></span>
+  </div>
+</footer>
+
+<div class="lightbox" id="lb" hidden role="dialog" aria-modal="true" aria-label="Photo gallery">
+  <div class="bar"><span id="lbCount"></span><button id="lbClose">Close ✕</button></div>
+  <div class="stage" id="lbStage"></div>
+  <div class="ctrl"><button id="lbPrev">← Previous</button><button id="lbNext">Next →</button></div>
+</div>
+
+<script>
+(function(){
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+// --- KONFIGURACJA (uzupełnić przed uruchomieniem strony) ---
+const WEB3FORMS_KEY='f742d370-ac9c-4857-b177-4fd3f469aa47'; // klucz z web3forms.com: zapytania z formularza przychodzą na e-mail podany przy jego tworzeniu
+const UMAMI_ID='e418fc3b-02f8-4653-ae12-73d18c319f30';      // identyfikator strony z cloud.umami.is: statystyki odwiedzin (miasta, kraje, źródła)
+if(UMAMI_ID){const u=document.createElement('script');u.defer=true;u.src='https://cloud.umami.is/script.js';u.dataset.websiteId=UMAMI_ID;document.head.appendChild(u)}
+const IMG_BASE='https://static.wixstatic.com/media/';
+const LOCAL_IMG='../img/'; // na serwerze: 'img/' – zdjęcia z folderu img, a gdy któregoś brakuje, wczytywane z Wix
+const imgUrl=(id,w,h)=>IMG_BASE+id+'/v1/fill/w_'+w+',h_'+h+',al_c,q_80,enc_auto/'+id;
+let photoFail=false;
+function paint(fig){
+  const id=fig.dataset.img; if(!id){if(fig.dataset.label&&!fig.querySelector('.ph-label')){const l=document.createElement('span');l.className='ph-label';l.textContent=fig.dataset.label;fig.appendChild(l)}return}
+  const img=new Image(); img.loading='lazy'; img.alt=fig.dataset.alt||fig.dataset.label||'';
+  const wix=fig.dataset.fit?IMG_BASE+id+'/v1/fit/w_'+fig.dataset.w+',h_'+fig.dataset.h+',q_85,enc_auto/'+id:imgUrl(id,fig.dataset.w||800,fig.dataset.h||600);
+  const own=id.startsWith('own/'); let triedWix=!LOCAL_IMG||own; img.src=own?'../'+id:LOCAL_IMG?LOCAL_IMG+id:wix;
+  img.onerror=()=>{if(!triedWix){triedWix=true;img.src=wix;return}img.remove();fig.classList.add('failed');if(!photoFail){photoFail=true;$('#photoNote').hidden=false}};
+  fig.appendChild(img);
+  if(fig.dataset.label){const l=document.createElement('span');l.className='ph-label';l.textContent=fig.dataset.label;fig.appendChild(l)}
+}
+const fig=(id,label,w,h,extra='')=>`<figure class="ph${id?'':' failed'}" ${extra} data-img="${id||''}" data-w="${w}" data-h="${h}" data-label="${label}"></figure>`;
+
+/* ---------- Nav ---------- */
+$('#menuBtn').onclick=()=>{const o=$('#nav').classList.toggle('open');$('#menuBtn').setAttribute('aria-expanded',o)};
+$$('#nav a').forEach(a=>a.onclick=()=>$('#nav').classList.remove('open'));
+
+/* ---------- Dates & season ---------- */
+const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
+const today=new Date(); today.setHours(12,0,0,0);
+const isHigh=d=>d.getMonth()>=4&&d.getMonth()<=8;
+$('#seasonTxt').textContent=(isHigh(today)?'Now high season: from 1300 zł (325 €) per night':'Now low season: from 1200 zł (300 €) per night')+' for the whole property';
+$(isHigh(today)?'#rate-high':'#rate-low').classList.add('is-now');
+$(isHigh(today)?'#rate-high header':'#rate-low header').insertAdjacentHTML('beforeend','<span class="now-badge">now</span>');
+
+/* ---------- House ---------- */
+const ROOMS=[
+  {n:'Bedroom for 5',d:'Five single beds.',beds:['s','s','s','s','s']},
+  {n:'Bedroom for 2',d:'Two single beds.',beds:['s','s']},
+  {n:'Family bedroom',d:'Bunk bed: a double below and a single above. Just right for a family of three.',beds:['d','s']},
+  {n:'Living room',d:'Sofa bed for 2 extra people. Opens onto the south terrace.',beds:['f']},
+  {n:'Kitchen',d:'All the basic appliances and dishes.',beds:[]},
+  {n:'Bathrooms & toilets',d:'All year: a bathroom in the house and one in the old forestry office. In summer, 2 extra outdoor toilets: in a container and by the sauna and fire pit.',beds:[]}
+];
+$('#rooms').innerHTML=ROOMS.map(r=>`<article class="room"><h3>${r.n}</h3><div class="beds">${r.beds.map(b=>b==='s'?'<span class="bed" title="single bed"></span>':b==='d'?'<span class="bed double" title="double bed"></span>':'<span class="bed double sofa" title="sofa bed for 2"></span>').join('')}</div><p>${r.d}</p></article>`).join('');
+const HOME_IMG=['f5539e_cf3414b3317348f0916e28622d6d6f25~mv2.jpg','f5539e_4df0e3e4b32c49588c48e9de93c67d2c~mv2.jpg','f5539e_0f483a720d0b472bad83172952aa9fb3~mv2.jpg','f5539e_ff1ee4be80c14378be4a36f791059649~mv2.jpg','f5539e_936364a61d94470da1e243c32f2b446a~mv2.jpg','f5539e_92d4a3dc16584e18b6e67582382a60f1~mv2.jpg'];
+const SPOTS=[
+  ['Barn','Party and recreation space with sound system and lights, a games lounge and a tea corner. Unheated – you can add patio heaters.','Stodoła'],
+  ['Sauna & hot tub','Sauna and a hot tub, each for up to 8 people. Afterwards an ice-cold dip or the wooden shower.','Sauna i balia'],
+  ['Shaman tipi','A place for a campfire, even in the rain. Tripod grill and sausage sticks.','Szamańskie tipi'],
+  ['Viewing platform','Table and benches for meals with a view. Deer, herons and eagles are often seen.','Platforma widokowa'],
+  ['Tea terrace','Covered, overlooking the greenery and the beach. For afternoon tea.','Taras herbaciany'],
+  ['Grill terrace','Covered, south-facing, with tables and benches for shared meals.','Taras grillowy'],
+  ['South terrace','Sunny, off the living room, right next to the hot tub and sauna.','Taras południowy'],
+  ['Glamping tents','Two tents with real beds: for 3 people (90 € / 360 zł per night) and for 4 people (120 € / 480 zł per night). Spring and summer, only as an add-on to renting the house.','Namioty glampingowe'],
+  ['Camping field','Space for your own tents and campers, 60 zł (15 €) per person per night. Only as an add-on to renting the house.','Pole kempingowe'],
+  ['Fire circle','A stone fire pit with benches under a string of lights. Evenings with a guitar.','Krąg ogniskowy'],
+  ['Mini golf','A mini golf course for spring and summer.','Mini golf'],
+  ['Archery target','Archery at a target, in spring and summer.','Tarcza łucznicza'],
+  ['Beach','Sandy, with deckchairs and benches.','Plaża'],
+  ['South hammock glade','Hammocks in the shade of oaks, on the sunny side.','Polana hamakowa południowa'],
+  ['West hammock glade','The best spot for sunsets.','Polana hamakowa zachodnia'],
+  ['Bar in the old stable','A cosy bar with a projector for watching sports.','Bar w starej stajni'],
+  ['Bike shed','The bikes are waiting in the old stable.','Rowerownia'],
+  ['Volleyball court','Plus table tennis, darts and board games.','Boisko do siatkówki'],
+  ['Narnia garden','A green corner to relax in.','Narniowy ogród']
+];
+const SPOT_IMG={"Stodoła": "own/stodola.jpg", "Sauna i balia": "f5539e_98155d0b598c4d1bb42f16073e878c00~mv2.jpg", "Szamańskie tipi": "f5539e_750d6227118d4e91adecbacac89c4242~mv2.jpg", "Platforma widokowa": "f5539e_68241d05563c46f7babb58603380f183~mv2.jpg", "Plaża": "f5539e_081fe26c35304b9fb7a0f9ae1fcbaa1c~mv2.jpg", "Rowerownia": "f5539e_5702c990a5f248a7aa7d7204817abac1~mv2.png", "Mini golf": "own/mini-golf.jpg", "Tarcza łucznicza": "own/lucznictwo.jpg", "Bar w starej stajni": "own/bar.jpg", "Krąg ogniskowy": "own/ognisko.jpg", "Taras południowy": "own/balia.jpg"};
+$('#spots').innerHTML=SPOTS.map((s,i)=>`<article class="spot">${fig(SPOT_IMG[s[2]],s[0],640,400)}<div class="txt"><h3>${s[0]}</h3><p>${s[1]}</p></div></article>`).join('');
+$$('[role=tab]').forEach(t=>t.onclick=()=>{
+  $$('[role=tab]').forEach(x=>x.setAttribute('aria-selected',x===t));
+  $$('[data-panel]').forEach(p=>p.hidden=p.dataset.panel!==t.dataset.tab);
+});
+
+/* ---------- Activities ---------- */
+const ACTS=[
+  ['Kayaking','In places the Bóbr is almost a mountain river. We organise kayak trips.',['lato','wiosna'],'Spływy kajakowe'],
+  ['River next door','A few minutes\' walk to the Bóbr to cool off on hot days.',['lato'],'Rzeka tuż obok'],
+  ['Chill time','Shady spots among the trees and a sandy beach.',['lato','wiosna'],'Chilltime'],
+  ['Mushroom picking','Porcini and chanterelles in the surrounding forests. We have mushroom guides and baskets.',['jesien'],'Grzybobranie'],
+  ['Sauna','For up to 8 people all year round. Afterwards an ice-cold tub or the wooden shower.',['zima','jesien','lato','wiosna'],'Sauna'],
+  ['Hot tub','A hot soak for up to 8 under the open sky – under the stars in summer, among the frost in winter.',['zima','jesien','lato','wiosna'],'Balia'],
+  ['Mini golf','A mini golf course for the whole group.',['wiosna','lato'],'Mini golf'],
+  ['Archery','A target and bows. Who hits the bullseye?',['wiosna','lato'],'Łucznictwo'],
+  ['Campfire under the stars','A circle of benches, lights and a guitar. The best evenings end here.',['wiosna','lato','jesien'],'Ognisko pod gwiazdami'],
+  ['Shaman tipi','A fire even in bad weather, and shade and calm in summer.',['zima','jesien','lato','wiosna'],'Szamańskie tipi'],
+  ['Bikes','16 bikes in various sizes and 4 for kids. Rides to remember.',['lato','wiosna','jesien'],'Rowery'],
+  ['DAG bunkers','The complex of Alfred Nobel\'s explosives factory from 1939 in Krzystkowice, over 35 km².',['zima','jesien','lato','wiosna'],'Bunkry DAG'],
+  ['Among the forests','Hundreds of hectares of forest beyond the fence and no close neighbours.',['zima','jesien','lato','wiosna'],'Wśród lasów'],
+  ['Bar in the old stable','The match on a big projector screen at the bar in the former stable.',['zima','jesien','lato','wiosna'],'Bar w starej stajni'],
+  ['Hammocks & sunsets','Two hammock glades, south and west, with a view of the sunset.',['lato','wiosna','jesien'],'Hamaki i zachody słońca'],
+  ['Barn & games lounge','Table tennis, darts, retro games. On rainy days workshops, yoga and group activities.',['zima','jesien'],'Stodoła i salon gier'],
+  ['Walks','Forest tracks that clear your head.',['zima','jesien','wiosna'],'Spacery'],
+  ['Platform','Meditation or a meal with a view of deer, herons and eagles.',['wiosna','lato','jesien'],'Platforma']
+];
+const SEASON_OF=m=>[11,0,1].includes(m)?'zima':[2,3,4].includes(m)?'wiosna':[5,6,7].includes(m)?'lato':'jesien';
+const SEASON_NAME={lato:'summer',jesien:'autumn',zima:'winter',wiosna:'spring'};
+const ACT_IMG={"Spływy kajakowe": "f5539e_52a451b5b4274bbfb6bbb4a3a5a3bfa6~mv2.jpg", "Rzeka tuż obok": "f5539e_8eac6bf484d840c594d46110472c1b56~mv2.jpg", "Chilltime": "f5539e_081fe26c35304b9fb7a0f9ae1fcbaa1c~mv2.jpg", "Grzybobranie": "f5539e_4e3aefc2e08548ed90d1bec1ed7aace4~mv2.jpg", "Sauna": "f5539e_98155d0b598c4d1bb42f16073e878c00~mv2.jpg", "Szamańskie tipi": "f5539e_750d6227118d4e91adecbacac89c4242~mv2.jpg", "Rowery": "f5539e_5702c990a5f248a7aa7d7204817abac1~mv2.png", "Bunkry DAG": "f5539e_0c91ab86751347b9bfaf546a0f7ed490~mv2.jpg", "Wśród lasów": "f5539e_b5e3b2949087478591bbd5467704f2c1~mv2.png", "Stodoła i salon gier": "f5539e_8bb5755545a7412abd2403800b65d18f~mv2.jpg", "Spacery": "f5539e_e01fc22b03b94fdf9122705eaf111dd9~mv2.jpg", "Platforma": "f5539e_68241d05563c46f7babb58603380f183~mv2.jpg", "Ognisko pod gwiazdami": "own/ognisko.jpg", "Balia": "own/balia.jpg", "Mini golf": "own/mini-golf.jpg", "Łucznictwo": "own/lucznictwo.jpg", "Bar w starej stajni": "own/bar.jpg", "Hamaki i zachody słońca": "own/hamaki.jpg"};
+$('#acts').innerHTML=ACTS.map(a=>`<article class="act" data-s="${a[2].join(' ')}">${fig(ACT_IMG[a[3]],a[0],560,420)}<div class="txt"><span class="tag">${a[2].length===4?'all year':a[2].map(s=>SEASON_NAME[s]).join(' · ')}</span><h3>${a[0]}</h3><p>${a[1]}</p></div></article>`).join('');
+function setSeason(s){
+  $$('#actTools .chip').forEach(c=>c.setAttribute('aria-pressed',c.dataset.season===s));
+  $$('.act').forEach(a=>{const on=s==='all'||a.dataset.s.split(' ').includes(s);a.classList.toggle('dim',!on);a.classList.toggle('hot',on&&s!=='all')});
+}
+$$('#actTools .chip').forEach(c=>c.onclick=()=>setSeason(c.dataset.season));
+const curS=SEASON_OF(today.getMonth());
+$('#actNow').textContent='Now: '+MONTHS[today.getMonth()];
+setSeason(curS);
+
+/* ---------- Trips ---------- */
+const WALKS=[
+  ['Wild beach','A short walk to the wild beach by the river. Lovely sand and clean, refreshing water. Our favourite on hot days.'],
+  ['Forest tracks','A short walk along forest tracks. Perfect for a quick autumn mushroom hunt.'],
+  ['Village & river','Around the village and along the river. A playground and a wild beach on the way.'],
+  ['Canal & valley','First along the canal, back along the embankment through the valley.']
+];
+const RIDES=[
+  ['To the former DAG munitions factory','Information boards stand by the buildings. You can cut the route in half by turning back towards Narnia. <a href="https://nowogrodbobrz.pl/kombinat-dag/" target="_blank" rel="noopener">Guide (PL/DE) →</a>'],
+  ['2.5-hour loop','Along the canal, then across it to the river, idyllic villages and forest. A must-stop at the ruins of the medieval chapel in Podgórzyce. Then the town beach in Nowogród Bobrzański: a swim, ice cream, lunch. From there 30 minutes back to Narnia.'],
+  ['Quick ride','Along the Bóbr embankment, through the forest to Łagoda, back along the canal.']
+];
+const tripHtml=(l,p)=>l.map((t,i)=>`<details class="trip"${i===0?' open':''}><summary><span class="k">${p}${i+1}</span><h3>${t[0]}</h3></summary><div class="body"><p>${t[1]}</p></div></details>`).join('');
+$('#walks').innerHTML=tripHtml(WALKS,'W');
+$('#rides').innerHTML=tripHtml(RIDES,'R');
+
+/* ---------- Gallery ---------- */
+const GAL='f33d45d93eee4ea1a4fcb075408d0d98 8a40ca73b47d43468e79446b9997c28d ff2d09e790724d9ba6ed7dbf53fc649a d224268d25494b7a97ca92b28843daca b569c2ee3ce5405cb08b2d92074c5cbf 67b72b987a6f4f23a3d4bffbfae412f9 84f40419b6cf46d691b77235d048e07d 120d126a9ce34b01abaf9db621ff03df 70de7dcd060c406a98922e931532070e f91131b773454046acb20c3f028845f5 5a9006f6096f4fd591b0f32b7e0b270d 8929c988f12e43e69432de2118e4469c 36dd11088c3b44a89c62c4cb2cc10d45 8784e2fad0314391af3e5c279190f1a6 5efcf29e8ecd4c7c95dcba2c425098cd ae8b7bd3ff2e4ef896e10fa2af700fc4 d59235c1299f4fd8af916e76b15fb19b 33ac6cc559e2477eba8967f9a68fe091 869f875d61764facbe2fcb14003d4b07 3045e84ed8c949d5a489bd9c81b2d406 1b291660380a4ed3bb2ec413155beba9 58ac38c7c92f4046aae40e82ba538a27 bd13b51510b04cfea3d719d2a2f3e8c7 ab10fdab435b4c8fa30aaa4c6d4bf7ae 9f050e064d0b4e0ea97de4f4a55b0480 d0eeaa35c637463a82112e6bc3142340 b9288920f6d34fb38a0486556ceea183 7be16bc1bafd4a8d8c1ef65fec2ae4fb 2698e58486c94e34a7e54ded3845a551 2dec1cd25d384ffb810e81a3c66aedaa f689098b01624d3a80c73f231e97b737 dfe3e0baf8364ccbbea7e9af447d3108 bf9a4cb2d61d4d2995c788c7ae29dd93 6ebaae6aa645421c9565366ed7976149 4b86776d59b844d2876433796e251ea2 dba685c717fe4f78af8f83841d5a2cd7'.split(' ').map(h=>'f5539e_'+h+'~mv2.jpg');
+GAL.unshift('own/kajaki.jpg','own/ognisko.jpg','own/balia.jpg','own/rzeka.jpg','own/stodola.jpg','own/lucznictwo.jpg','own/bar.jpg','own/mini-golf.jpg');
+const ARS=['4/3','3/4','4/3','1/1','4/3','3/4'];
+let shown=0;
+function addGal(n){
+  const box=$('#gallery'), end=Math.min(GAL.length,shown+n);
+  for(let i=shown;i<end;i++){
+    const ar=ARS[i%ARS.length].split('/');
+    const b=document.createElement('button'); b.type='button'; b.dataset.i=i; b.setAttribute('aria-label','Enlarge photo '+(i+1));
+    b.innerHTML=fig(GAL[i],'Photo '+(i+1),Math.round(480),Math.round(480*ar[1]/ar[0]),`style="--ar:${ar[0]}/${ar[1]}"`);
+    box.appendChild(b); paint(b.firstChild); b.onclick=()=>openLb(i);
+  }
+  shown=end; $('#moreBtn').hidden=shown>=GAL.length;
+}
+$('#moreBtn').onclick=()=>addGal(12);
+let lbI=0,lbList=null,lbFit=false;
+function showLb(){
+  $('#lbStage').innerHTML=fig(lbList[lbI],(lbFit?'Graphic ':'Photo ')+(lbI+1),lbFit?1200:1600,lbFit?2000:1067,lbFit?'data-fit="1"':''); paint($('#lbStage .ph'));
+  $('#lbCount').textContent=(lbI+1)+' / '+lbList.length;
+}
+function openLb(i,list=GAL,fit=false){lbI=i;lbList=list;lbFit=fit;$('#lb').hidden=false;document.body.style.overflow='hidden';showLb();$('#lbClose').focus()}
+function closeLb(){$('#lb').hidden=true;document.body.style.overflow='';const b=$(`${lbFit?'#posters':'#gallery'} button[data-i="${lbI}"]`);b&&b.focus()}
+const step=d=>{lbI=(lbI+d+lbList.length)%lbList.length;showLb()};
+$('#lbClose').onclick=closeLb;$('#lbPrev').onclick=()=>step(-1);$('#lbNext').onclick=()=>step(1);
+document.addEventListener('keydown',e=>{if($('#lb').hidden)return;if(e.key==='Escape')closeLb();if(e.key==='ArrowRight')step(1);if(e.key==='ArrowLeft')step(-1)});
+let tx=null;$('#lb').addEventListener('touchstart',e=>tx=e.touches[0].clientX,{passive:true});
+$('#lb').addEventListener('touchend',e=>{if(tx===null)return;const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>50)step(dx<0?1:-1);tx=null});
+addGal(12);
+
+/* ---------- Pricing ---------- */
+const RATES={high:{wk:1800,slow:1300},low:{wk:1600,slow:1200}};
+// Ceny namiotów glampingowych za noc: wpisz liczbę, gdy będzie znana (null = do potwierdzenia)
+const PRICES={glamp3:360,glamp4:480}; // 90 € i 120 € za noc, osoby w namiocie nie płacą za pole kempingowe
+const EUR=4; // 1 € = 4 zł
+let cur='eur';
+const isWarm=d=>d.getMonth()>=3&&d.getMonth()<=8; // kwiecień–wrzesień: 12 miejsc w domu, namioty czynne
+const priceTxt=p=>p==null?'to be confirmed':p+' zł ('+p/EUR+' €) / night';
+$('#pG3').textContent=priceTxt(PRICES.glamp3);$('#pG4').textContent=priceTxt(PRICES.glamp4);
+function easter(y){const a=y%19,b=Math.floor(y/100),c=y%100,d=Math.floor(b/4),e=b%4,f=Math.floor((b+8)/25),g=Math.floor((b-f+1)/3),h=(19*a+b-d-g+15)%30,i=Math.floor(c/4),k=c%4,l=(32+2*e+2*i-h-k)%7,m=Math.floor((a+11*h+22*l)/451),mo=Math.floor((h+l-7*m+114)/31),da=((h+l-7*m+114)%31)+1;return new Date(y,mo-1,da,12)}
+const holCache={};
+function holidays(y){
+  if(holCache[y])return holCache[y];
+  const e=easter(y),add=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x};
+  const list=[[0,1],[0,6],[4,1],[4,3],[7,15],[10,1],[10,11],[11,24],[11,25],[11,26]].map(([m,d])=>new Date(y,m,d,12));
+  list.push(e,add(e,1),add(e,49),add(e,60));
+  return holCache[y]=new Set(list.map(key));
+}
+function key(d){return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()}
+const isHol=d=>holidays(d.getFullYear()).has(key(d));
+const addDays=(d,n)=>{const x=new Date(d);x.setDate(x.getDate()+n);return x};
+// Noc liczona po stawce weekendowej: z piątku na sobotę, z soboty na niedzielę albo noc przed świętem / w święto.
+const isPremium=d=>d.getDay()===5||d.getDay()===6||isHol(d)||isHol(addDays(d,1));
+const pln=n=>cur==='eur'?(Math.round(n/EUR*100)/100).toLocaleString('en-GB')+' €':n.toLocaleString('en-GB')+' zł';
+const fmt=d=>d.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});
+
+const EXTRAS=[
+  {id:'balia',n:'Hot tub with firewood',p:300,unit:'each',type:'count',max:7},
+  {id:'sauna',n:'Sauna',p:50,unit:'hour',type:'count',max:20},
+  {id:'ogn',n:'Campfire wood',p:50,unit:'portion',type:'count',max:10},
+  {id:'early',n:'Early arrival from 2 pm',p:120,unit:'if possible',type:'bool'},
+  {id:'late',n:'Late departure until 2 pm',p:120,unit:'if possible',type:'bool'},
+  {id:'umb',n:'Patio heater for the barn',p:200,unit:'with 11 kg gas bottle',type:'bool'},
+  {id:'g3',n:'Glamping tent for 3: number of nights',p:PRICES.glamp3,unit:'per night, spring–summer',type:'count',max:60,nightly:true},
+  {id:'g4',n:'Glamping tent for 4: number of nights',p:PRICES.glamp4,unit:'per night, spring–summer',type:'count',max:60,nightly:true},
+  {id:'tent',n:'Camping field: number of people',p:60,unit:'person / night',type:'count',max:20},
+  {id:'tentN',n:'Camping field: for how many nights',p:null,unit:'',type:'count',max:60,nightly:true}
+];
+const st={guests:8,pets:0,balia:1,sauna:2,ogn:1,early:false,late:false,umb:false,g3:0,g4:0,tent:0,tentN:0,xgN:0};
+$('#extras').innerHTML=EXTRAS.map(x=>`<div class="extra"><span class="lbl"><span>${x.n}</span>${x.p==null?'':`<small data-p="${x.p}" data-u="${x.unit}"></small>`}</span>${x.type==='bool'?`<input type="checkbox" id="x-${x.id}" aria-label="${x.n}">`:`<div class="stepper" role="group" aria-label="${x.n}"><button type="button" data-step="${x.id}" data-d="-1" aria-label="Less">−</button><output id="${x.id}">${st[x.id]}</output><button type="button" data-step="${x.id}" data-d="1" aria-label="More">+</button></div>`}</div>`).join('');
+function labels(){$$('#extras small[data-p]').forEach(e=>e.textContent=pln(+e.dataset.p)+' · '+e.dataset.u)}
+labels();
+$$('[data-cur]').forEach(b=>b.onclick=()=>{cur=b.dataset.cur;$$('[data-cur]').forEach(x=>x.setAttribute('aria-pressed',x===b));labels();calc()});
+const LIMITS={guests:[1,12],pets:[0,4],xgN:[0,60]};const NIGHTLY=new Set(['g3','g4','tentN','xgN']);let stayN=2;EXTRAS.forEach(x=>{if(x.type==='count')LIMITS[x.id]=[0,x.max]});
+document.addEventListener('click',e=>{const b=e.target.closest('[data-step]');if(!b)return;const k=b.dataset.step,[lo,hi]=LIMITS[k],d=+b.dataset.d;
+  if(NIGHTLY.has(k)&&st[k]===0&&d>0)st[k]=stayN; else st[k]=Math.max(lo,Math.min(hi,NIGHTLY.has(k)?Math.min(stayN,st[k]+d):st[k]+d));
+  if(k==='tent'){if(st.tent>0&&st.tentN===0)st.tentN=stayN;if(st.tent===0)st.tentN=0;$('#tentN').textContent=st.tentN}
+  if(k==='tentN'&&st.tentN>0&&st.tent===0){st.tent=1;$('#tent').textContent=1}
+  if(k==='guests'){if(st.guests>10&&st.xgN===0)st.xgN=stayN;if(st.guests<=10)st.xgN=0;$('#xgN').textContent=st.xgN}$('#'+k).textContent=st[k];calc()});
+EXTRAS.filter(x=>x.type==='bool').forEach(x=>$('#x-'+x.id).onchange=e=>{st[x.id]=e.target.checked;calc()});
+
+// Domyślnie: najbliższy piątek–niedziela za co najmniej 2 tygodnie
+const iso=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const parse=s=>{const [y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d,12)};
+let fri=addDays(today,14);while(fri.getDay()!==5)fri=addDays(fri,1);
+$('#dIn').value=iso(fri);$('#dOut').value=iso(addDays(fri,2));$('#dIn').min=iso(today);
+$('#dIn').onchange=()=>{const a=parse($('#dIn').value);if(!$('#dOut').value||parse($('#dOut').value)<=a)$('#dOut').value=iso(addDays(a,2));calc()};
+$('#dOut').onchange=calc;
+
+let lastQuote='';
+function calc(){
+  const warn=[],lines=[];
+  if(!$('#dIn').value||!$('#dOut').value){$('#calcLines').innerHTML='';$('#calcTotal').textContent='–';return}
+  const a=parse($('#dIn').value),b=parse($('#dOut').value);
+  const nights=Math.round((b-a)/864e5);
+  if(nights>0){stayN=nights;NIGHTLY.forEach(k=>{if(st[k]>nights){st[k]=nights;$('#'+k).textContent=nights}})}
+  $('#xgRow').hidden=st.guests<=10;
+  if(nights<1){$('#calcWarn').innerHTML='<p class="warn">The departure date must be after the arrival date.</p>';$('#calcLines').innerHTML='';$('#calcTotal').textContent='–';$('#calcPacks').innerHTML='';return}
+  let wk=0,slow=0,sum=0,junAug=false,julAug=false,anyHol=false,allJunSep=true,allWarm=true;
+  for(let i=0;i<nights;i++){const d=addDays(a,i),hi=isHigh(d),p=isPremium(d),r=RATES[hi?'high':'low'];
+    if(p){wk++;}else{slow++;} sum+=p?r.wk:r.slow;
+    if(d.getMonth()===6||d.getMonth()===7)julAug=true; if(d.getMonth()>=5&&d.getMonth()<=7)junAug=true; if(isHol(d)||isHol(addDays(d,1)))anyHol=true; if(d.getMonth()<5||d.getMonth()>8)allJunSep=false; if(!isWarm(d))allWarm=false;}
+  const minN=julAug?3:2;
+  if(nights<minN)warn.push(`The minimum stay for these dates is ${minN} nights${julAug?' (3 nights in summer)':''}.`);
+  if(!allWarm&&st.guests>10)warn.push('From October to March up to 10 people can sleep in the house.');
+  if(!allWarm&&(st.g3||st.g4))warn.push('Glamping tents are available from April to September.');
+  const onSite=st.guests+(st.g3?3:0)+(st.g4?4:0)+(st.tentN?st.tent:0);
+  if(onSite>20)warn.push(`Up to 20 people in total can stay on site; you selected ${onSite}.`);
+  lines.push([`Accommodation: ${nights} ${nights===1?'night':'nights'} (${wk} weekend/holiday, ${slow} SLOW)`,sum]);
+  const extraG=Math.max(0,st.guests-10); if(extraG&&st.xgN)lines.push([`People above 10: ${extraG} × ${pln(100)} × ${st.xgN} ${st.xgN===1?'night':'nights'}`,extraG*100*st.xgN]);
+  lines.push(['Final cleaning',400]);
+  if(st.pets)lines.push([`Pets: ${st.pets} × ${pln(100)}`,st.pets*100]);
+  const ex=[];
+  if(st.balia)ex.push([`Hot tub × ${st.balia}`,st.balia*300]);
+  if(st.sauna)ex.push([`Sauna ${st.sauna} h`,st.sauna*50]);
+  if(st.ogn)ex.push([`Campfire wood × ${st.ogn}`,st.ogn*50]);
+  let tbd=[];
+  [['g3',3,PRICES.glamp3],['g4',4,PRICES.glamp4]].forEach(([k,n,p])=>{if(!st[k])return;if(p==null)tbd.push(`Glamping tent for ${n}`);else ex.push([`Glamping tent for ${n} × ${st[k]} ${st[k]===1?'night':'nights'}`,p*st[k]])});
+  if(st.tent&&st.tentN)ex.push([`Camping field: ${st.tent} people × ${st.tentN} ${st.tentN===1?'night':'nights'}`,st.tent*60*st.tentN]);
+  if(st.early)ex.push(['Early arrival',120]);
+  if(st.late)ex.push(['Late departure',120]);
+  if(st.umb)ex.push(['Patio heater',200]);
+  lines.push(...ex);
+  const total=lines.reduce((s,l)=>s+l[1],0);
+  $('#calcWarn').innerHTML=warn.map(w=>`<p class="warn">${w}</p>`).join('');
+  $('#calcLines').innerHTML=lines.map(l=>`<div><span>${l[0]}</span><span>${pln(l[1])}</span></div>`).join('')+tbd.map(t=>`<div><span>${t}</span><span>price on request</span></div>`).join('');
+  $('#calcTotal').textContent=pln(total);
+  $('#calcNote').textContent=`Plus a refundable deposit of ${pln(1000)} (set individually for events). A 50% down payment confirms the booking. Electricity: 100 kWh included, above that 0.5 ct per kWh. We confirm the final price by email.`;
+
+  // Pakiety
+  const packs=[];
+  const extrasCost=(incl)=>{ // dodatki ponad to, co pakiet zawiera
+    let c=Math.max(0,st.balia-incl.balia)*300+Math.max(0,st.sauna-incl.sauna)*50+Math.max(0,st.ogn-incl.ogn)*50+st.tent*60*st.tentN+st.pets*100+(PRICES.glamp3?PRICES.glamp3*st.g3:0)+(PRICES.glamp4?PRICES.glamp4*st.g4:0)+Math.max(0,st.guests-(incl.guests||10))*100*st.xgN+(st.umb?200:0);
+    if(!incl.early&&st.early)c+=120; if(!incl.early&&st.late)c+=120; return c};
+  if(a.getDay()===5&&nights>=2&&nights<=4&&!junAug&&!anyHol&&st.guests<=12){
+    const base=nights===2?3700:nights===3?3700+599:3700+999;
+    packs.push({n:'Magical Weekend'+(nights>2?` + ${nights-2} ${nights===3?'day':'days'}`:''),p:base+extrasCost({balia:1,sauna:2,ogn:0,early:true,guests:12})});
+  }
+  if(nights===7&&allJunSep&&st.guests<=10){packs.push({n:'Summer week, 7 days',p:7500+extrasCost({balia:1,sauna:14,ogn:3,early:false})})}
+  $('#calcPacks').innerHTML=packs.map(p=>{const save=total-p.p;return `<div class="pack${save>0?' best':''}"><strong>${p.n}: ${pln(p.p)}</strong><span>${save>0?pln(save)+' cheaper than the standard price.':'With these extras the package is not cheaper.'}</span></div>`}).join('');
+
+  lastQuote=`Dates: ${fmt(a)} – ${fmt(b)} (${nights} nights)\nPeople in the house: ${st.guests}${st.g3?` + glamping tent for 3 (${st.g3} n.)`:''}${st.g4?` + glamping tent for 4 (${st.g4} n.)`:''}${st.tent&&st.tentN?` + ${st.tent} on the camping field (${st.tentN} n.)`:''}${st.pets?`, pets: ${st.pets}`:''}\nExtras: ${ex.map(e=>e[0]).concat(tbd).join(', ')||'none'}\nEstimated price: ${pln(total)}${packs.length?`\nPackage: ${packs.map(p=>p.n+' '+pln(p.p)).join('; ')}`:''}`;
+  $('#formSummary').textContent=lastQuote;
+}
+calc();
+
+/* ---------- Fees ---------- */
+const FEES=[['Dog or cat (per stay)',100],['Each person above 10 (per night)',100],['Camping field, own tent or camper (person/night)',60],['One-off cleaning',400],['Hot tub preparation with firewood',300],['Sauna (per hour)',50],['Campfire wood',50],['Hot tub firewood',60],['Sauna kilt rental',10],['Lost golf ball',10],['Patio heater with 11 kg gas bottle',200],['Departure until 4 pm (if possible)',200],['Departure until 2 pm (if possible)',120],['Arrival from 12 noon (if possible)',200],['Arrival from 2 pm (if possible)',120],['Waste not sorted',150],['Extra cleaning',200]];
+FEES.push(['Glamping tent for 3 (night)',360],['Glamping tent for 4 (night)',480],['Electricity: 100 kWh included, each further kWh','0.5 ct'],['Electric car charging (kWh)','0.5 ct'],['Refundable deposit (events: individual quote)',1000]);
+$('#fees').innerHTML=FEES.map(f=>`<div><span>${f[0]}</span><span>${typeof f[1]==='number'?f[1]+' zł ('+(f[1]/4).toLocaleString('en-GB')+' €)':f[1]}</span></div>`).join('');
+
+/* ---------- Events ---------- */
+const EVENTS=[
+  ['f5539e_3cf7ff1871c34497990d407ad9d954b0~mv2.jpg','Company event',['full event management','lighting and sound','catering','entertainment, activities and team games','tents, tables, chairs, event furniture','photo/video coverage']],
+  ['f5539e_58ac38c7c92f4046aae40e82ba538a27~mv2.jpg','Workshops',['space in the barn or under marquees','teaching aids (boards, projector)','event furniture and site lighting','catering','bikes for participants']],
+  ['f5539e_e74b82407cc04e25a9e9a5b2ce0d5eb2~mv2.jpeg','Weddings',['full service','sound, site lighting, decorations','DJ, band, host','marquees, event furniture, chill zones','catering and photo/video coverage','logistics']],
+  ['f5539e_1b291660380a4ed3bb2ec413155beba9~mv2.jpg','Festival-style birthdays',['full service from A to Z','sound, site and stage lighting','line-up','camping field','sanitary and technical support']]
+];
+$('#events').innerHTML=EVENTS.map(e=>`<article class="event">${fig(e[0],e[1],640,480)}<div class="txt"><h3>${e[1]}</h3><ul>${e[2].map(x=>`<li>${x}</li>`).join('')}</ul></div></article>`).join('');
+const POSTERS='2b058f56bba749bb8aee613b7c9c23f8 666c46c692354bdba4a24f24d00e4e5d 962e0955261a48bca7d5308f0bd6269c 70f6cd20148e41dcad795072cb89b571 8ac306adfe744d7a85ce9b5544872a69 0589e2aac8e74c17b5ed4662ede45a54 e0e4f31436f542e380bffa91eb47ca3c'.split(' ').map(h=>'f5539e_'+h+'~mv2.png');
+POSTERS.forEach((p,i)=>{const b=document.createElement('button');b.type='button';b.dataset.i=i;b.setAttribute('aria-label','Enlarge offer graphic '+(i+1));
+  b.innerHTML=fig(p,'Offer '+(i+1),480,854,'data-fit="1"');$('#posters').appendChild(b);paint(b.firstChild);b.onclick=()=>openLb(i,POSTERS,true)});
+
+/* ---------- Reviews ---------- */
+const REV=[['A beautiful place to relax.','Ewa M., July 2026 (translated from Polish)'],['Einmalig toll.','Sylke S., August 2026'],['Our second stay and it was great again: space, peace and lots to do.','P. B., July 2026 (translated from German)']];
+let qi=0;const showQ=()=>{$('#qText').textContent='„'+REV[qi][0]+'”';$('#qWho').textContent=REV[qi][1]};
+$('#qPrev').onclick=()=>{qi=(qi+REV.length-1)%REV.length;showQ()};$('#qNext').onclick=()=>{qi=(qi+1)%REV.length;showQ()};showQ();
+
+/* ---------- FAQ ---------- */
+const FAQ=[
+  ['What is the minimum stay?','2 nights; in summer (July and August) 3 nights.'],
+  ['What are the check-in and check-out times?','Arrival from 4 pm, departure by 12 noon. Check-in is self-service with access codes. Early arrival or late departure for a surcharge, if the calendar allows.'],
+  ['How do I book?','Via the form, by email or phone, or through Slowhop, Airbnb or AlohaCamp. A 50% down payment within 3 days confirms the booking.'],
+  ['When do I pay the rest and how much is the deposit?','The balance and the 1000 zł (250 €) deposit are due 7 days before arrival. The deposit is returned within 7 days after departure.'],
+  ['How many people can come?','In spring and summer up to 12 people sleep in the house (10 off-season), plus 7 more in two glamping tents. There is also a camping field. Tents and the field are only available as an add-on to renting the house. Up to 20 people in total can stay on site. The house price covers 10 people. Children up to 4 stay free.'],
+  ['Can I bring my dog?','Yes, a dog or cat costs 100 zł (25 €) per stay.'],
+  ['Can we hold a party or a wedding?','Yes, but events above 20 people need a separate agreement. Write to us and we\'ll prepare an offer: weddings, company events, workshops, festival-style birthdays.'],
+  ['Quiet hours?','From 10 pm to 7 am. Loud music in the barn until 10 pm.'],
+  ['Where are the full rules?','In the <a href="../regulamin.html">house rules</a> (in Polish; ask us for the English version).']
+];
+$('#faq').innerHTML=FAQ.map(f=>`<details><summary>${f[0]}</summary><p>${f[1]}</p></details>`).join('');
+
+/* ---------- Copy ---------- */
+$$('.copy').forEach(b=>b.onclick=()=>{const t=b.dataset.copy;const done=()=>{b.textContent='Copied';setTimeout(()=>b.textContent='Copy',1600)};
+  try{navigator.clipboard.writeText(t).then(done,()=>sel(b.previousSibling||b.parentNode))}catch(e){sel(b.parentNode)}});
+function sel(node){try{const r=document.createRange();r.selectNodeContents(node.nodeType===3?node.parentNode:node);const s=getSelection();s.removeAllRanges();s.addRange(r)}catch(e){}}
+
+/* ---------- Form ---------- */
+$('#form').addEventListener('submit',async e=>{
+  e.preventDefault();
+  const name=$('#fName').value.trim(),email=$('#fEmail').value.trim(),err=$('#fErr');
+  if(!name||!/^\S+@\S+\.\S+$/.test(email)){err.textContent='Please enter your name and a valid email address so we can reply.';err.hidden=false;return}
+  err.hidden=true;
+  const body=`[EN] ${lastQuote}\n\nOd: ${name}\nE-mail: ${email}\nTelefon: ${$('#fPhone').value.trim()||'–'}\n\n${$('#fMsg').value.trim()}`;
+  if($('#fHp').checked)return;
+  if(WEB3FORMS_KEY){
+    try{const r=await fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({access_key:WEB3FORMS_KEY,name,email,replyto:email,from_name:'Strona Narnia',message:body,subject:'Zapytanie o termin (EN) – Narnia'})});
+      if(!r.ok)throw 0; $('#sent').innerHTML='<p><strong>Thank you!</strong> Your enquiry has arrived – we will reply by email.</p>'; $('#sent').hidden=false; return}catch(x){err.textContent='The message could not be sent. Please try again or write to info@narniaglamp.com.';err.hidden=false;return}
+  }
+  $('#sent').innerHTML='<p><strong>Preview:</strong> the form does not send messages yet. Your message would look like this:</p><pre></pre>';
+  $('#sent pre').textContent=body; $('#sent').hidden=false;
+});
+$('#toForm').onclick=()=>setTimeout(()=>$('#fName').focus({preventScroll:true}),400);
+
+/* ---------- Photos ---------- */
+$$('figure.ph[data-img]').forEach(f=>{if(!f.querySelector('img'))paint(f)});
+})();
+</script>
+
+</body>
+</html>
