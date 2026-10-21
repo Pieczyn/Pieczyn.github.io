@@ -962,7 +962,7 @@ function calc(){
   $('#calcLines').innerHTML=lines.map(l=>`<div><span>${l[0]}</span><span>${pln(l[1])}</span></div>`).join('')+tbd.map(t=>`<div><span>${t}</span><span>cena do potw.</span></div>`).join('');
   $('#calcTotal').textContent=pln(total);
   lastCalc={start:$('#dIn').value,end:$('#dOut').value,nights,guests:st.guests,totalPLN:total,extras:{...st}};
-  $('#calcNote').textContent=`Do tego kaucja zwrotna ${pln(1000)} (przy wydarzeniach ustalana indywidualnie). Rezerwację potwierdza zadatek 50%. Prąd: 100 kWh w cenie, powyżej 0,5 ct za kWh. Ostateczną cenę potwierdzamy mailowo.`;
+  $('#calcNote').textContent=`Do tego kaucja zwrotna ${pln(1000)} (przy wydarzeniach ustalana indywidualnie). Rezerwację potwierdza zadatek 50%. Prąd: 100 kWh w cenie, powyżej ${pln(2)} za kWh. Ostateczną cenę potwierdzamy mailowo.`;
 
   // Pakiety
   const packs=[];
@@ -994,7 +994,7 @@ if(NARNIA_API)fetch(NARNIA_API+'/api/availability').then(r=>r.json()).then(d=>{B
 
 /* ---------- Fees ---------- */
 const FEES=[['Pies lub kot (za pobyt)',100],['Każda osoba ponad 10 (za noc)',100],['Pole kempingowe, własny namiot lub kamper (os./noc)',60],['Sprzątanie jednorazowe',400],['Przygotowanie balii z drewnem',300],['Sauna (godzina)',50],['Drewno na ognisko',50],['Drewno do balii',60],['Wypożyczenie kiltu do sauny',10],['Zgubiona piłka golfowa',10],['Parasol grzewczy z butlą 11 kg',200],['Wyjazd do 16:00 (jeśli możliwe)',200],['Wyjazd do 14:00 (jeśli możliwe)',120],['Przyjazd od 12:00 (jeśli możliwe)',200],['Przyjazd od 14:00 (jeśli możliwe)',120],['Brak segregacji śmieci',150],['Dodatkowe sprzątanie',200]];
-FEES.push(['Namiot glampingowy na 3 osoby (noc)',360],['Namiot glampingowy na 4 osoby (noc)',480],['Prąd: 100 kWh w cenie, każda kolejna kWh','0,5 ct'],['Ładowanie samochodu elektrycznego (kWh)','0,5 ct'],['Kaucja zwrotna (wydarzenia: wycena indywidualna)',1000]);
+FEES.push(['Namiot glampingowy na 3 osoby (noc)',360],['Namiot glampingowy na 4 osoby (noc)',480],['Prąd: 100 kWh w cenie, każda kolejna kWh',2],['Ładowanie samochodu elektrycznego (kWh)',2],['Kaucja zwrotna (wydarzenia: wycena indywidualna)',1000]);
 $('#fees').innerHTML=FEES.map(f=>`<div><span>${f[0]}</span><span>${typeof f[1]==='number'?f[1]+' zł':f[1]}</span></div>`).join('');
 
 /* ---------- Events ---------- */

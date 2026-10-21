@@ -963,7 +963,7 @@ function calc(){
   $('#calcLines').innerHTML=lines.map(l=>`<div><span>${l[0]}</span><span>${pln(l[1])}</span></div>`).join('')+tbd.map(t=>`<div><span>${t}</span><span>price on request</span></div>`).join('');
   $('#calcTotal').textContent=pln(total);
   lastCalc={start:$('#dIn').value,end:$('#dOut').value,nights,guests:st.guests,totalPLN:total,extras:{...st}};
-  $('#calcNote').textContent=`Plus a refundable deposit of ${pln(1000)} (set individually for events). A 50% down payment confirms the booking. Electricity: 100 kWh included, above that 0.5 ct per kWh. We confirm the final price by email.`;
+  $('#calcNote').textContent=`Plus a refundable deposit of ${pln(1000)} (set individually for events). A 50% down payment confirms the booking. Electricity: 100 kWh included, above that ${pln(2)} per kWh. We confirm the final price by email.`;
 
   // Pakiety
   const packs=[];
@@ -995,8 +995,8 @@ if(NARNIA_API)fetch(NARNIA_API+'/api/availability').then(r=>r.json()).then(d=>{B
 
 /* ---------- Fees ---------- */
 const FEES=[['Dog or cat (per stay)',100],['Each person above 10 (per night)',100],['Camping field, own tent or camper (person/night)',60],['One-off cleaning',400],['Hot tub preparation with firewood',300],['Sauna (per hour)',50],['Campfire wood',50],['Hot tub firewood',60],['Sauna kilt rental',10],['Lost golf ball',10],['Patio heater with 11 kg gas bottle',200],['Departure until 4 pm (if possible)',200],['Departure until 2 pm (if possible)',120],['Arrival from 12 noon (if possible)',200],['Arrival from 2 pm (if possible)',120],['Waste not sorted',150],['Extra cleaning',200]];
-FEES.push(['Glamping tent for 3 (night)',360],['Glamping tent for 4 (night)',480],['Electricity: 100 kWh included, each further kWh','0.5 ct'],['Electric car charging (kWh)','0.5 ct'],['Refundable deposit (events: individual quote)',1000]);
-$('#fees').innerHTML=FEES.map(f=>`<div><span>${f[0]}</span><span>${typeof f[1]==='number'?(f[1]/4).toLocaleString('en-GB')+' €':f[1]}</span></div>`).join('');
+FEES.push(['Glamping tent for 3 (night)',360],['Glamping tent for 4 (night)',480],['Electricity: 100 kWh included, each further kWh',2],['Electric car charging (kWh)',2],['Refundable deposit (events: individual quote)',1000]);
+$('#fees').innerHTML=FEES.map(f=>`<div><span>${f[0]}</span><span>${typeof f[1]==='number'?(f[1]/4).toLocaleString('en-GB',{minimumFractionDigits:f[1]%4?2:0})+' €':f[1]}</span></div>`).join('');
 
 /* ---------- Events ---------- */
 const EVENTS=[

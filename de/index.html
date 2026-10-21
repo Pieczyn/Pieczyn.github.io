@@ -963,7 +963,7 @@ function calc(){
   $('#calcLines').innerHTML=lines.map(l=>`<div><span>${l[0]}</span><span>${pln(l[1])}</span></div>`).join('')+tbd.map(t=>`<div><span>${t}</span><span>Preis auf Anfrage</span></div>`).join('');
   $('#calcTotal').textContent=pln(total);
   lastCalc={start:$('#dIn').value,end:$('#dOut').value,nights,guests:st.guests,totalPLN:total,extras:{...st}};
-  $('#calcNote').textContent=`Dazu eine Kaution von ${pln(1000)} (bei Events individuell). Eine Anzahlung von 50 % bestätigt die Buchung. Strom: 100 kWh inklusive, darüber 0,5 ct pro kWh. Den Endpreis bestätigen wir per E-Mail.`;
+  $('#calcNote').textContent=`Dazu eine Kaution von ${pln(1000)} (bei Events individuell). Eine Anzahlung von 50 % bestätigt die Buchung. Strom: 100 kWh inklusive, darüber ${pln(2)} pro kWh. Den Endpreis bestätigen wir per E-Mail.`;
 
   // Pakiety
   const packs=[];
@@ -995,8 +995,8 @@ if(NARNIA_API)fetch(NARNIA_API+'/api/availability').then(r=>r.json()).then(d=>{B
 
 /* ---------- Fees ---------- */
 const FEES=[['Hund oder Katze (pro Aufenthalt)',100],['Jede Person über 10 (pro Nacht)',100],['Zeltwiese, eigenes Zelt oder Camper (Pers./Nacht)',60],['Einmalige Endreinigung',400],['Vorbereitung des Badezubers mit Holz',300],['Sauna (pro Stunde)',50],['Holz fürs Lagerfeuer',50],['Holz für den Badezuber',60],['Saunakilt leihen',10],['Verlorener Golfball',10],['Heizstrahler mit 11-kg-Gasflasche',200],['Abreise bis 16:00 (wenn möglich)',200],['Abreise bis 14:00 (wenn möglich)',120],['Anreise ab 12:00 (wenn möglich)',200],['Anreise ab 14:00 (wenn möglich)',120],['Müll nicht getrennt',150],['Zusätzliche Reinigung',200]];
-FEES.push(['Glampingzelt für 3 (Nacht)',360],['Glampingzelt für 4 (Nacht)',480],['Strom: 100 kWh inklusive, jede weitere kWh','0,5 ct'],['Laden eines E-Autos (kWh)','0,5 ct'],['Kaution (Events: individuell)',1000]);
-$('#fees').innerHTML=FEES.map(f=>`<div><span>${f[0]}</span><span>${typeof f[1]==='number'?(f[1]/4).toLocaleString('de-DE')+' €':f[1]}</span></div>`).join('');
+FEES.push(['Glampingzelt für 3 (Nacht)',360],['Glampingzelt für 4 (Nacht)',480],['Strom: 100 kWh inklusive, jede weitere kWh',2],['Laden eines E-Autos (kWh)',2],['Kaution (Events: individuell)',1000]);
+$('#fees').innerHTML=FEES.map(f=>`<div><span>${f[0]}</span><span>${typeof f[1]==='number'?(f[1]/4).toLocaleString('de-DE',{minimumFractionDigits:f[1]%4?2:0})+' €':f[1]}</span></div>`).join('');
 
 /* ---------- Events ---------- */
 const EVENTS=[

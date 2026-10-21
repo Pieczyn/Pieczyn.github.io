@@ -449,9 +449,9 @@ PAIRS += [
 ("if(st.late)ex.push(['Późniejszy wyjazd',120]);", "if(st.late)ex.push(['Late departure',120]);", "if(st.late)ex.push(['Spätere Abreise',120]);"),
 ("if(st.umb)ex.push(['Parasol grzewczy',200]);", "if(st.umb)ex.push(['Patio heater',200]);", "if(st.umb)ex.push(['Heizstrahler',200]);"),
 ("<span>cena do potw.</span>", "<span>price on request</span>", "<span>Preis auf Anfrage</span>"),
-("$('#calcNote').textContent=`Do tego kaucja zwrotna ${pln(1000)} (przy wydarzeniach ustalana indywidualnie). Rezerwację potwierdza zadatek 50%. Prąd: 100 kWh w cenie, powyżej 0,5 ct za kWh. Ostateczną cenę potwierdzamy mailowo.`;",
- "$('#calcNote').textContent=`Plus a refundable deposit of ${pln(1000)} (set individually for events). A 50% down payment confirms the booking. Electricity: 100 kWh included, above that 0.5 ct per kWh. We confirm the final price by email.`;",
- "$('#calcNote').textContent=`Dazu eine Kaution von ${pln(1000)} (bei Events individuell). Eine Anzahlung von 50 % bestätigt die Buchung. Strom: 100 kWh inklusive, darüber 0,5 ct pro kWh. Den Endpreis bestätigen wir per E-Mail.`;"),
+("$('#calcNote').textContent=`Do tego kaucja zwrotna ${pln(1000)} (przy wydarzeniach ustalana indywidualnie). Rezerwację potwierdza zadatek 50%. Prąd: 100 kWh w cenie, powyżej ${pln(2)} za kWh. Ostateczną cenę potwierdzamy mailowo.`;",
+ "$('#calcNote').textContent=`Plus a refundable deposit of ${pln(1000)} (set individually for events). A 50% down payment confirms the booking. Electricity: 100 kWh included, above that ${pln(2)} per kWh. We confirm the final price by email.`;",
+ "$('#calcNote').textContent=`Dazu eine Kaution von ${pln(1000)} (bei Events individuell). Eine Anzahlung von 50 % bestätigt die Buchung. Strom: 100 kWh inklusive, darüber ${pln(2)} pro kWh. Den Endpreis bestätigen wir per E-Mail.`;"),
 ("packs.push({n:'Magiczny weekend'+(nights>2?` + ${nights-2} ${nights===3?'dzień':'dni'}`:'')",
  "packs.push({n:'Magical Weekend'+(nights>2?` + ${nights-2} ${nights===3?'day':'days'}`:'')",
  "packs.push({n:'Magisches Wochenende'+(nights>2?` + ${nights-2} ${nights===3?'Tag':'Tage'}`:'')"),
@@ -467,9 +467,9 @@ PAIRS += [
 ("const FEES=[['Pies lub kot (za pobyt)',100],['Każda osoba ponad 10 (za noc)',100],['Pole kempingowe, własny namiot lub kamper (os./noc)',60],['Sprzątanie jednorazowe',400],['Przygotowanie balii z drewnem',300],['Sauna (godzina)',50],['Drewno na ognisko',50],['Drewno do balii',60],['Wypożyczenie kiltu do sauny',10],['Zgubiona piłka golfowa',10],['Parasol grzewczy z butlą 11 kg',200],['Wyjazd do 16:00 (jeśli możliwe)',200],['Wyjazd do 14:00 (jeśli możliwe)',120],['Przyjazd od 12:00 (jeśli możliwe)',200],['Przyjazd od 14:00 (jeśli możliwe)',120],['Brak segregacji śmieci',150],['Dodatkowe sprzątanie',200]];",
  "const FEES=[['Dog or cat (per stay)',100],['Each person above 10 (per night)',100],['Camping field, own tent or camper (person/night)',60],['One-off cleaning',400],['Hot tub preparation with firewood',300],['Sauna (per hour)',50],['Campfire wood',50],['Hot tub firewood',60],['Sauna kilt rental',10],['Lost golf ball',10],['Patio heater with 11 kg gas bottle',200],['Departure until 4 pm (if possible)',200],['Departure until 2 pm (if possible)',120],['Arrival from 12 noon (if possible)',200],['Arrival from 2 pm (if possible)',120],['Waste not sorted',150],['Extra cleaning',200]];",
  "const FEES=[['Hund oder Katze (pro Aufenthalt)',100],['Jede Person über 10 (pro Nacht)',100],['Zeltwiese, eigenes Zelt oder Camper (Pers./Nacht)',60],['Einmalige Endreinigung',400],['Vorbereitung des Badezubers mit Holz',300],['Sauna (pro Stunde)',50],['Holz fürs Lagerfeuer',50],['Holz für den Badezuber',60],['Saunakilt leihen',10],['Verlorener Golfball',10],['Heizstrahler mit 11-kg-Gasflasche',200],['Abreise bis 16:00 (wenn möglich)',200],['Abreise bis 14:00 (wenn möglich)',120],['Anreise ab 12:00 (wenn möglich)',200],['Anreise ab 14:00 (wenn möglich)',120],['Müll nicht getrennt',150],['Zusätzliche Reinigung',200]];"),
-("FEES.push(['Namiot glampingowy na 3 osoby (noc)',360],['Namiot glampingowy na 4 osoby (noc)',480],['Prąd: 100 kWh w cenie, każda kolejna kWh','0,5 ct'],['Ładowanie samochodu elektrycznego (kWh)','0,5 ct'],['Kaucja zwrotna (wydarzenia: wycena indywidualna)',1000]);",
- "FEES.push(['Glamping tent for 3 (night)',360],['Glamping tent for 4 (night)',480],['Electricity: 100 kWh included, each further kWh','0.5 ct'],['Electric car charging (kWh)','0.5 ct'],['Refundable deposit (events: individual quote)',1000]);",
- "FEES.push(['Glampingzelt für 3 (Nacht)',360],['Glampingzelt für 4 (Nacht)',480],['Strom: 100 kWh inklusive, jede weitere kWh','0,5 ct'],['Laden eines E-Autos (kWh)','0,5 ct'],['Kaution (Events: individuell)',1000]);"),
+("FEES.push(['Namiot glampingowy na 3 osoby (noc)',360],['Namiot glampingowy na 4 osoby (noc)',480],['Prąd: 100 kWh w cenie, każda kolejna kWh',2],['Ładowanie samochodu elektrycznego (kWh)',2],['Kaucja zwrotna (wydarzenia: wycena indywidualna)',1000]);",
+ "FEES.push(['Glamping tent for 3 (night)',360],['Glamping tent for 4 (night)',480],['Electricity: 100 kWh included, each further kWh',2],['Electric car charging (kWh)',2],['Refundable deposit (events: individual quote)',1000]);",
+ "FEES.push(['Glampingzelt für 3 (Nacht)',360],['Glampingzelt für 4 (Nacht)',480],['Strom: 100 kWh inklusive, jede weitere kWh',2],['Laden eines E-Autos (kWh)',2],['Kaution (Events: individuell)',1000]);"),
 ("f[1]+' zł ('+(f[1]/4).toLocaleString('pl-PL')+' €)'", "f[1]+' zł ('+(f[1]/4).toLocaleString('en-GB')+' €)'", "f[1]+' zł ('+(f[1]/4).toLocaleString('de-DE')+' €)'"),
 
 # ---------- skrypt: wydarzenia ----------
@@ -602,7 +602,7 @@ def eur_fix(s, lang):
     s = re.sub(PAIR_ZL_EUR, r"\2 €", s)
     s = re.sub(r"(\d+) € / (\d+) zł", r"\1 €", s)
     s = s.replace("p+' zł ('+p/EUR+' €)", "p/EUR+' €")
-    s = re.sub(r"f\[1\]\+' zł \('\+\(f\[1\]/4\)\.toLocaleString\('[a-zA-Z-]+'\)\+' €\)'", lambda m: f"(f[1]/4).toLocaleString('{loc}')+' €'", s)
+    s = re.sub(r"f\[1\]\+' zł \('\+\(f\[1\]/4\)\.toLocaleString\('[a-zA-Z-]+'\)\+' €\)'", lambda m: f"(f[1]/4).toLocaleString('{loc}',{{minimumFractionDigits:f[1]%4?2:0}})+' €'", s)
     s = s.replace(">0 zł<", ">0 €<")
     s = re.sub(r"(?<![=\d])(?<!= )\b(\d+) zł\b", lambda m: num(m.group(1)) + " €", s)
     return s
