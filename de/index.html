@@ -113,7 +113,7 @@ section{padding-block:clamp(56px,9vw,112px)}
 .hero-copy{display:grid;gap:22px;min-width:0}
 .hero-ctas{display:flex;flex-wrap:wrap;gap:12px}
 .hero-photo{aspect-ratio:4/5;border-radius:220px 220px var(--r) var(--r);max-width:100%;box-shadow:0 30px 80px -30px var(--glow)}
-.season{display:inline-flex;align-items:center;gap:10px;font-size:.92rem;color:var(--ink-2);background:var(--surface);border:1px solid var(--line);padding:8px 14px;border-radius:999px;width:fit-content}
+.season{display:inline-flex;align-items:center;gap:10px;font-size:.92rem;color:var(--ink-2);background:var(--surface);border:1px solid var(--line);padding:8px 14px;border-radius:14px;width:fit-content;line-height:1.4}
 .season .dot{width:9px;height:9px;border-radius:50%;background:var(--accent);box-shadow:0 0 0 0 var(--glow);animation:pulse 2.4s infinite}
 @keyframes pulse{0%{box-shadow:0 0 0 0 var(--accent)}70%{box-shadow:0 0 0 10px transparent}100%{box-shadow:0 0 0 0 transparent}}
 .facts{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-top:1px solid var(--line);margin-top:clamp(36px,5vw,64px)}
@@ -722,7 +722,7 @@ $$('#nav a').forEach(a=>a.onclick=()=>$('#nav').classList.remove('open'));
 const MONTHS=['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
 const today=new Date(); today.setHours(12,0,0,0);
 const isHigh=d=>d.getMonth()>=4&&d.getMonth()<=8;
-$('#seasonTxt').textContent=(isHigh(today)?'Jetzt Hauptsaison: ab 325 € pro Nacht':'Jetzt Nebensaison: ab 300 € pro Nacht')+' für das ganze Anwesen';
+$('#seasonTxt').textContent=(isHigh(today)?'Jetzt Hauptsaison: ab 325 € pro Nacht':'Jetzt Nebensaison: ab 300 € pro Nacht')+' für das ganze Anwesen (bis 10 Personen) + 100 € Endreinigung einmalig';
 function markRates(on,txt){['high','low'].forEach(k=>{const el=$('#rate-'+k);if(!el)return;const h=on.includes(k);el.classList.toggle('is-now',h);const b=el.querySelector('.now-badge');if(b)b.remove();if(h)el.querySelector('header').insertAdjacentHTML('beforeend','<span class="now-badge">'+txt+'</span>')})}
 const markNow=()=>markRates([isHigh(today)?'high':'low'],'jetzt');
 markNow();
