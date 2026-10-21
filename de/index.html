@@ -722,7 +722,7 @@ $$('#nav a').forEach(a=>a.onclick=()=>$('#nav').classList.remove('open'));
 const MONTHS=['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
 const today=new Date(); today.setHours(12,0,0,0);
 const isHigh=d=>d.getMonth()>=4&&d.getMonth()<=8;
-$('#seasonTxt').textContent=(isHigh(today)?'Jetzt Hauptsaison: ab 325 € pro Nacht':'Jetzt Nebensaison: ab 300 € pro Nacht')+' für das ganze Anwesen (bis 10 Personen) + 100 € Endreinigung einmalig';
+$('#seasonTxt').textContent=(isHigh(today)?'Jetzt Hauptsaison: ab 325 € pro Nacht':'Jetzt Nebensaison: ab 300 € pro Nacht')+' für das ganze Anwesen (bis 10 Personen) + einmalige Endreinigung 100 €';
 function markRates(on,txt){['high','low'].forEach(k=>{const el=$('#rate-'+k);if(!el)return;const h=on.includes(k);el.classList.toggle('is-now',h);const b=el.querySelector('.now-badge');if(b)b.remove();if(h)el.querySelector('header').insertAdjacentHTML('beforeend','<span class="now-badge">'+txt+'</span>')})}
 const markNow=()=>markRates([isHigh(today)?'high':'low'],'jetzt');
 markNow();

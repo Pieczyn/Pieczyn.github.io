@@ -722,7 +722,7 @@ $$('#nav a').forEach(a=>a.onclick=()=>$('#nav').classList.remove('open'));
 const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];
 const today=new Date(); today.setHours(12,0,0,0);
 const isHigh=d=>d.getMonth()>=4&&d.getMonth()<=8;
-$('#seasonTxt').textContent=(isHigh(today)?'Now high season: from 325 € per night':'Now low season: from 300 € per night')+' for the whole property (up to 10 guests) + 100 € cleaning once per stay';
+$('#seasonTxt').textContent=(isHigh(today)?'Now high season: from 325 € per night':'Now low season: from 300 € per night')+' for the whole property (up to 10 guests) + one-off cleaning fee 100 €';
 function markRates(on,txt){['high','low'].forEach(k=>{const el=$('#rate-'+k);if(!el)return;const h=on.includes(k);el.classList.toggle('is-now',h);const b=el.querySelector('.now-badge');if(b)b.remove();if(h)el.querySelector('header').insertAdjacentHTML('beforeend','<span class="now-badge">'+txt+'</span>')})}
 const markNow=()=>markRates([isHigh(today)?'high':'low'],'now');
 markNow();

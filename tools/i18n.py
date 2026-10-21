@@ -248,9 +248,9 @@ PAIRS = [
 ("const MONTHS=['styczeń','luty','marzec','kwiecień','maj','czerwiec','lipiec','sierpień','wrzesień','październik','listopad','grudzień'];",
  "const MONTHS=['January','February','March','April','May','June','July','August','September','October','November','December'];",
  "const MONTHS=['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];"),
-("$('#seasonTxt').textContent=(isHigh(today)?'Teraz sezon wysoki: od 1300 zł za noc':'Teraz sezon niski: od 1200 zł za noc')+' za cały obiekt (do 10 osób) + 400 zł sprzątanie raz na pobyt';",
- "$('#seasonTxt').textContent=(isHigh(today)?'Now high season: from 1300 zł (325 €) per night':'Now low season: from 1200 zł (300 €) per night')+' for the whole property (up to 10 guests) + 400 zł (100 €) cleaning once per stay';",
- "$('#seasonTxt').textContent=(isHigh(today)?'Jetzt Hauptsaison: ab 1300 zł (325 €) pro Nacht':'Jetzt Nebensaison: ab 1200 zł (300 €) pro Nacht')+' für das ganze Anwesen (bis 10 Personen) + 400 zł (100 €) Endreinigung einmalig';"),
+("$('#seasonTxt').textContent=(isHigh(today)?'Teraz sezon wysoki: od 1300 zł za noc':'Teraz sezon niski: od 1200 zł za noc')+' za cały obiekt (do 10 osób) + jednorazowa dopłata 400 zł za sprzątanie';",
+ "$('#seasonTxt').textContent=(isHigh(today)?'Now high season: from 1300 zł (325 €) per night':'Now low season: from 1200 zł (300 €) per night')+' for the whole property (up to 10 guests) + one-off cleaning fee 400 zł (100 €)';",
+ "$('#seasonTxt').textContent=(isHigh(today)?'Jetzt Hauptsaison: ab 1300 zł (325 €) pro Nacht':'Jetzt Nebensaison: ab 1200 zł (300 €) pro Nacht')+' für das ganze Anwesen (bis 10 Personen) + einmalige Endreinigung 400 zł (100 €)';"),
 ("?'high':'low'],'teraz')", "?'high':'low'],'now')", "?'high':'low'],'jetzt')"),
 ("'low':''],'Twój termin')", "'low':''],'your dates')", "'low':''],'Ihr Termin')"),
 

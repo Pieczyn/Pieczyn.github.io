@@ -721,7 +721,7 @@ $$('#nav a').forEach(a=>a.onclick=()=>$('#nav').classList.remove('open'));
 const MONTHS=['styczeń','luty','marzec','kwiecień','maj','czerwiec','lipiec','sierpień','wrzesień','październik','listopad','grudzień'];
 const today=new Date(); today.setHours(12,0,0,0);
 const isHigh=d=>d.getMonth()>=4&&d.getMonth()<=8;
-$('#seasonTxt').textContent=(isHigh(today)?'Teraz sezon wysoki: od 1300 zł za noc':'Teraz sezon niski: od 1200 zł za noc')+' za cały obiekt (do 10 osób) + 400 zł sprzątanie raz na pobyt';
+$('#seasonTxt').textContent=(isHigh(today)?'Teraz sezon wysoki: od 1300 zł za noc':'Teraz sezon niski: od 1200 zł za noc')+' za cały obiekt (do 10 osób) + jednorazowa dopłata 400 zł za sprzątanie';
 function markRates(on,txt){['high','low'].forEach(k=>{const el=$('#rate-'+k);if(!el)return;const h=on.includes(k);el.classList.toggle('is-now',h);const b=el.querySelector('.now-badge');if(b)b.remove();if(h)el.querySelector('header').insertAdjacentHTML('beforeend','<span class="now-badge">'+txt+'</span>')})}
 const markNow=()=>markRates([isHigh(today)?'high':'low'],'teraz');
 markNow();
