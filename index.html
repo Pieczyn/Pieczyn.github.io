@@ -961,7 +961,7 @@ function calc(){
   $('#calcWarn').innerHTML=warn.map(w=>`<p class="warn">${w}</p>`).join('');
   $('#calcLines').innerHTML=lines.map(l=>`<div><span>${l[0]}</span><span>${pln(l[1])}</span></div>`).join('')+tbd.map(t=>`<div><span>${t}</span><span>cena do potw.</span></div>`).join('');
   $('#calcTotal').textContent=pln(total);
-  lastCalc={start:$('#dIn').value,end:$('#dOut').value,nights,guests:st.guests,totalPLN:total};
+  lastCalc={start:$('#dIn').value,end:$('#dOut').value,nights,guests:st.guests,totalPLN:total,extras:{...st}};
   $('#calcNote').textContent=`Do tego kaucja zwrotna ${pln(1000)} (przy wydarzeniach ustalana indywidualnie). Rezerwację potwierdza zadatek 50%. Prąd: 100 kWh w cenie, powyżej 0,5 ct za kWh. Ostateczną cenę potwierdzamy mailowo.`;
 
   // Pakiety

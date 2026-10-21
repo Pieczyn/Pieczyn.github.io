@@ -962,7 +962,7 @@ function calc(){
   $('#calcWarn').innerHTML=warn.map(w=>`<p class="warn">${w}</p>`).join('');
   $('#calcLines').innerHTML=lines.map(l=>`<div><span>${l[0]}</span><span>${pln(l[1])}</span></div>`).join('')+tbd.map(t=>`<div><span>${t}</span><span>price on request</span></div>`).join('');
   $('#calcTotal').textContent=pln(total);
-  lastCalc={start:$('#dIn').value,end:$('#dOut').value,nights,guests:st.guests,totalPLN:total};
+  lastCalc={start:$('#dIn').value,end:$('#dOut').value,nights,guests:st.guests,totalPLN:total,extras:{...st}};
   $('#calcNote').textContent=`Plus a refundable deposit of ${pln(1000)} (set individually for events). A 50% down payment confirms the booking. Electricity: 100 kWh included, above that 0.5 ct per kWh. We confirm the final price by email.`;
 
   // Pakiety
