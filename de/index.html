@@ -147,6 +147,7 @@ section{padding-block:clamp(56px,9vw,112px)}
 .spot .ph{aspect-ratio:16/10}
 .spot div.txt{padding:16px 18px 20px;display:grid;gap:6px;align-content:start}
 .spot p{font-size:.95rem;color:var(--ink-2)}
+.freewk{margin:-2px 0 14px}.fw-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}.fw-list button{font:500 .85rem var(--body);border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:5px 12px;cursor:pointer}.fw-list button:hover,.fw-list button[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 2px var(--glow)}
 /* ---------- Plan terenu ---------- */
 .plan{--pl-forest:#2f4a33;--pl-tree:#3f6140;--pl-grass:#a9bf8f;--pl-path:#efe6cf;--pl-water:#7fb0c4;--pl-sand:#ead6a6;--pl-bld:#6e4b2c;--pl-txt:#16261f;display:grid;grid-template-columns:minmax(0,1.6fr) minmax(260px,1fr);gap:20px;align-items:start}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .plan{--pl-forest:#13221a;--pl-tree:#1f3527;--pl-grass:#4b6544;--pl-path:#8a8064;--pl-water:#2f6075;--pl-sand:#a08a5a;--pl-bld:#d1a77c;--pl-txt:#e9ede4}}
@@ -550,6 +551,7 @@ footer.foot a:hover{color:var(--accent)}
           <div class="field"><label for="dIn">Anreise</label><input type="date" id="dIn"></div>
           <div class="field"><label for="dOut">Abreise</label><input type="date" id="dOut"></div>
         </div>
+        <div class="freewk" id="freeWk" hidden><span class="fs-label">Nächste freie Wochenenden</span><div class="fw-list" id="freeWkList"></div></div>
         <div class="row2">
           <div class="field"><span class="fs-label" id="lg">Personen im Haus</span>
             <div class="stepper" role="group" aria-labelledby="lg"><button type="button" data-step="guests" data-d="-1" aria-label="Weniger Personen">−</button><output id="guests">8</output><button type="button" data-step="guests" data-d="1" aria-label="Mehr Personen">+</button></div></div>
@@ -914,10 +916,13 @@ const iso=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+Stri
 const parse=s=>{const [y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d,12)};
 let fri=addDays(today,14);while(fri.getDay()!==5)fri=addDays(fri,1);
 $('#dIn').value=iso(fri);$('#dOut').value=iso(addDays(fri,2));$('#dIn').min=iso(today);
-$('#dIn').onchange=()=>{const a=parse($('#dIn').value);if(!$('#dOut').value||parse($('#dOut').value)<=a)$('#dOut').value=iso(addDays(a,2));calc()};
-$('#dOut').onchange=calc;
+$('#dIn').onchange=()=>{datesTouched=true;const a=parse($('#dIn').value);if(!$('#dOut').value||parse($('#dOut').value)<=a)$('#dOut').value=iso(addDays(a,2));calc()};
+$('#dOut').onchange=()=>{datesTouched=true;calc()};
 
 let lastQuote='',lastCalc=null;
+// busy dates
+let BUSY=[],datesTouched=false;
+const overlaps=(a,b)=>BUSY.some(([s,e])=>a<e&&b>s);
 function calc(){
   const warn=[],lines=[];lastCalc=null;
   if(!$('#dIn').value||!$('#dOut').value){markNow();$('#calcLines').innerHTML='';$('#calcTotal').textContent='–';return}
@@ -931,6 +936,7 @@ function calc(){
     if(p){wk++;}else{slow++;} sum+=p?r.wk:r.slow;
     if(d.getMonth()===6||d.getMonth()===7)julAug=true; if(d.getMonth()>=5&&d.getMonth()<=7)junAug=true; if(isHol(d)||isHol(addDays(d,1)))anyHol=true; if(d.getMonth()<5||d.getMonth()>8)allJunSep=false; if(!isWarm(d))allWarm=false;}
   {let hN=0;for(let i=0;i<nights;i++)if(isHigh(addDays(a,i)))hN++;markRates([hN?'high':'',hN<nights?'low':''],'Ihr Termin')}
+  if(overlaps($('#dIn').value,$('#dOut').value))warn.push('Dieser Termin ist leider schon belegt. Bitte wählen Sie andere Daten – die nächsten freien Wochenenden stehen oben – oder schreiben Sie uns.');
   const minN=julAug?3:2;
   if(nights<minN)warn.push(`Der Mindestaufenthalt in diesem Zeitraum beträgt ${minN} Nächte${julAug?' (im Sommer 3 Nächte)':''}.`);
   if(!allWarm&&st.guests>10)warn.push('Von Oktober bis März übernachten bis zu 10 Personen im Haus.');
@@ -975,6 +981,17 @@ function calc(){
   $('#formSummary').textContent=lastQuote;
 }
 calc();
+
+function freeWeekends(){const out=[];let d=addDays(today,1);while(d.getDay()!==5)d=addDays(d,1);
+  for(let i=0;i<52&&out.length<6;i++,d=addDays(d,7)){const m=d.getMonth(),n=(m===6||m===7)?3:2,a=iso(d),b=iso(addDays(d,n));if(!overlaps(a,b))out.push([a,b])}return out}
+function drawFree(){const L=document.documentElement.lang||'pl',f=freeWeekends();if(!f.length)return;
+  const short=v=>parse(v).toLocaleDateString(L,{day:'numeric',month:'short'});
+  $('#freeWkList').innerHTML=f.map(([a,b])=>`<button type="button" data-a="${a}" data-b="${b}">${parse(a).getMonth()===parse(b).getMonth()?parse(a).getDate():short(a)}–${short(b)}</button>`).join('');
+  $('#freeWk').hidden=false;
+  $$('#freeWkList button').forEach(x=>x.onclick=()=>{$('#dIn').value=x.dataset.a;$('#dOut').value=x.dataset.b;datesTouched=true;$$('#freeWkList button').forEach(y=>y.setAttribute('aria-pressed',y===x));calc()})}
+if(NARNIA_API)fetch(NARNIA_API+'/api/availability').then(r=>r.json()).then(d=>{BUSY=Array.isArray(d.busy)?d.busy:[];
+  if(!datesTouched&&overlaps($('#dIn').value,$('#dOut').value)){const f=freeWeekends();if(f[0]){$('#dIn').value=f[0][0];$('#dOut').value=f[0][1]}}
+  drawFree();calc()}).catch(()=>{});
 
 /* ---------- Fees ---------- */
 const FEES=[['Hund oder Katze (pro Aufenthalt)',100],['Jede Person über 10 (pro Nacht)',100],['Zeltwiese, eigenes Zelt oder Camper (Pers./Nacht)',60],['Einmalige Endreinigung',400],['Vorbereitung des Badezubers mit Holz',300],['Sauna (pro Stunde)',50],['Holz fürs Lagerfeuer',50],['Holz für den Badezuber',60],['Saunakilt leihen',10],['Verlorener Golfball',10],['Heizstrahler mit 11-kg-Gasflasche',200],['Abreise bis 16:00 (wenn möglich)',200],['Abreise bis 14:00 (wenn möglich)',120],['Anreise ab 12:00 (wenn möglich)',200],['Anreise ab 14:00 (wenn möglich)',120],['Müll nicht getrennt',150],['Zusätzliche Reinigung',200]];
