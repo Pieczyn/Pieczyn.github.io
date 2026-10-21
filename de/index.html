@@ -921,7 +921,8 @@ $('#dOut').onchange=()=>{datesTouched=true;calc()};
 
 let lastQuote='',lastCalc=null;
 // busy dates
-let BUSY=[],datesTouched=false;
+let BUSY=[],PROMOS=[],datesTouched=false;
+const promoAt=d=>PROMOS.find(x=>d>=x.start&&d<x.end);
 const overlaps=(a,b)=>BUSY.some(([s,e])=>a<e&&b>s);
 function calc(){
   const warn=[],lines=[];lastCalc=null;
@@ -931,13 +932,14 @@ function calc(){
   if(nights>0){stayN=nights;NIGHTLY.forEach(k=>{if(st[k]>nights){st[k]=nights;$('#'+k).textContent=nights}})}
   $('#xgRow').hidden=st.guests<=10;
   if(nights<1){markNow();$('#calcWarn').innerHTML='<p class="warn">Das Abreisedatum muss nach dem Anreisedatum liegen.</p>';$('#calcLines').innerHTML='';$('#calcTotal').textContent='–';$('#calcPacks').innerHTML='';return}
-  let wk=0,slow=0,sum=0,junAug=false,julAug=false,anyHol=false,allJunSep=true,allWarm=true;
+  let wk=0,slow=0,sum=0,promoAmt=0,promoLbl='',promoMin=0,junAug=false,julAug=false,anyHol=false,allJunSep=true,allWarm=true;
   for(let i=0;i<nights;i++){const d=addDays(a,i),hi=isHigh(d),p=isPremium(d),r=RATES[hi?'high':'low'];
     if(p){wk++;}else{slow++;} sum+=p?r.wk:r.slow;
+    {const pr=promoAt(iso(d));if(pr){promoAmt+=(p?r.wk:r.slow)*pr.pct/100;promoLbl=pr.label;if(pr.minNights)promoMin=pr.minNights}}
     if(d.getMonth()===6||d.getMonth()===7)julAug=true; if(d.getMonth()>=5&&d.getMonth()<=7)junAug=true; if(isHol(d)||isHol(addDays(d,1)))anyHol=true; if(d.getMonth()<5||d.getMonth()>8)allJunSep=false; if(!isWarm(d))allWarm=false;}
   {let hN=0;for(let i=0;i<nights;i++)if(isHigh(addDays(a,i)))hN++;markRates([hN?'high':'',hN<nights?'low':''],'Ihr Termin')}
   if(overlaps($('#dIn').value,$('#dOut').value))warn.push('Dieser Termin ist leider schon belegt. Bitte wählen Sie andere Daten – die nächsten freien Wochenenden stehen oben – oder schreiben Sie uns.');
-  const minN=julAug?3:2;
+  const minN=promoMin?Math.min(promoMin,julAug?3:2):julAug?3:2;
   if(nights<minN)warn.push(`Der Mindestaufenthalt in diesem Zeitraum beträgt ${minN} Nächte${julAug?' (im Sommer 3 Nächte)':''}.`);
   if(!allWarm&&st.guests>10)warn.push('Von Oktober bis März übernachten bis zu 10 Personen im Haus.');
   if(!allWarm&&(st.g3||st.g4))warn.push('Glampingzelte gibt es von April bis September.');
@@ -945,6 +947,7 @@ function calc(){
   if(onSite>20)warn.push(`Auf dem Gelände können insgesamt bis zu 20 Personen übernachten, gewählt: ${onSite}.`);
   lines.push([`Übernachtung: ${nights} ${nights===1?'Nacht':'Nächte'} (${wk} Wochenende/Feiertag, ${slow} SLOW)`,sum]);
   const extraG=Math.max(0,st.guests-10); if(extraG&&st.xgN)lines.push([`Personen über 10: ${extraG} × ${pln(100)} × ${st.xgN} ${st.xgN===1?'Nacht':'Nächte'}`,extraG*100*st.xgN]);
+  if(promoAmt)lines.push([promoLbl,-Math.round(promoAmt)]);
   lines.push(['Endreinigung',400]);
   if(st.pets)lines.push([`Haustiere: ${st.pets} × ${pln(100)}`,st.pets*100]);
   const ex=[];
@@ -986,10 +989,10 @@ function freeWeekends(){const out=[];let d=addDays(today,1);while(d.getDay()!==5
   for(let i=0;i<52&&out.length<6;i++,d=addDays(d,7)){const m=d.getMonth(),n=(m===6||m===7)?3:2,a=iso(d),b=iso(addDays(d,n));if(!overlaps(a,b))out.push([a,b])}return out}
 function drawFree(){const L=document.documentElement.lang||'pl',f=freeWeekends();if(!f.length)return;
   const short=v=>parse(v).toLocaleDateString(L,{day:'numeric',month:'short'});
-  $('#freeWkList').innerHTML=f.map(([a,b])=>`<button type="button" data-a="${a}" data-b="${b}">${parse(a).getMonth()===parse(b).getMonth()?parse(a).getDate():short(a)}–${short(b)}</button>`).join('');
+  $('#freeWkList').innerHTML=f.map(([a,b])=>`<button type="button" data-a="${a}" data-b="${b}">${parse(a).getMonth()===parse(b).getMonth()?parse(a).getDate():short(a)}–${short(b)}${promoAt(a)&&promoAt(a).pct>0?' 🔥 −'+promoAt(a).pct+'%':''}</button>`).join('');
   $('#freeWk').hidden=false;
   $$('#freeWkList button').forEach(x=>x.onclick=()=>{$('#dIn').value=x.dataset.a;$('#dOut').value=x.dataset.b;datesTouched=true;$$('#freeWkList button').forEach(y=>y.setAttribute('aria-pressed',y===x));calc()})}
-if(NARNIA_API)fetch(NARNIA_API+'/api/availability').then(r=>r.json()).then(d=>{BUSY=Array.isArray(d.busy)?d.busy:[];
+if(NARNIA_API)fetch(NARNIA_API+'/api/availability').then(r=>r.json()).then(d=>{BUSY=Array.isArray(d.busy)?d.busy:[];PROMOS=Array.isArray(d.promos)?d.promos.map(x=>({...x,label:x.label&&(x.label[document.documentElement.lang]||x.label.pl)||''})):[];
   if(!datesTouched&&overlaps($('#dIn').value,$('#dOut').value)){const f=freeWeekends();if(f[0]){$('#dIn').value=f[0][0];$('#dOut').value=f[0][1]}}
   drawFree();calc()}).catch(()=>{});
 
