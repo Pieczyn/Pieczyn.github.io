@@ -866,6 +866,7 @@ const RATES={high:{wk:1800,slow:1300},low:{wk:1600,slow:1200}};
 // Ceny namiotów glampingowych za noc: wpisz liczbę, gdy będzie znana (null = do potwierdzenia)
 const PRICES={glamp3:360,glamp4:480}; // 90 € i 120 € za noc, osoby w namiocie nie płacą za pole kempingowe
 const EUR=4; // 1 € = 4 zł
+const SP=()=>cur==='eur'?17*EUR:70; // sauna: 17.50 € / 17 € za godzinę
 let cur='eur';
 const isWarm=d=>d.getMonth()>=3&&d.getMonth()<=8; // kwiecień–wrzesień: 12 miejsc w domu, namioty czynne
 const priceTxt=p=>p==null?'to be confirmed':p/EUR+' € / night';
@@ -889,8 +890,8 @@ const fmt=d=>d.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'nume
 
 const EXTRAS=[
   {id:'balia',n:'Hot tub with firewood',p:300,unit:'each',type:'count',max:7},
-  {id:'sauna',n:'Sauna',p:50,unit:'hour',type:'count',max:20},
-  {id:'ogn',n:'Campfire wood',p:50,unit:'portion',type:'count',max:10},
+  {id:'sauna',n:'Sauna',p:70,eur:17,unit:'hour',type:'count',max:20},
+  {id:'ogn',n:'Campfire wood',p:60,unit:'portion',type:'count',max:10},
   {id:'early',n:'Early arrival from 2 pm',p:120,unit:'if possible',type:'bool'},
   {id:'late',n:'Late departure until 2 pm',p:120,unit:'if possible',type:'bool'},
   {id:'umb',n:'Patio heater for the barn',p:200,unit:'with 11 kg gas bottle',type:'bool'},
@@ -900,8 +901,8 @@ const EXTRAS=[
   {id:'tentN',n:'Camping field: for how many nights',p:null,unit:'',type:'count',max:60,nightly:true}
 ];
 const st={guests:8,pets:0,balia:1,sauna:2,ogn:1,early:false,late:false,umb:false,g3:0,g4:0,tent:0,tentN:0,xgN:0};
-$('#extras').innerHTML=EXTRAS.map(x=>`<div class="extra"><span class="lbl"><span>${x.n}</span>${x.p==null?'':`<small data-p="${x.p}" data-u="${x.unit}"></small>`}</span>${x.type==='bool'?`<input type="checkbox" id="x-${x.id}" aria-label="${x.n}">`:`<div class="stepper" role="group" aria-label="${x.n}"><button type="button" data-step="${x.id}" data-d="-1" aria-label="Less">−</button><output id="${x.id}">${st[x.id]}</output><button type="button" data-step="${x.id}" data-d="1" aria-label="More">+</button></div>`}</div>`).join('');
-function labels(){$$('#extras small[data-p]').forEach(e=>e.textContent=pln(+e.dataset.p)+' · '+e.dataset.u)}
+$('#extras').innerHTML=EXTRAS.map(x=>`<div class="extra"><span class="lbl"><span>${x.n}</span>${x.p==null?'':`<small data-p="${x.p}"${x.eur?` data-e="${x.eur}"`:''} data-u="${x.unit}"></small>`}</span>${x.type==='bool'?`<input type="checkbox" id="x-${x.id}" aria-label="${x.n}">`:`<div class="stepper" role="group" aria-label="${x.n}"><button type="button" data-step="${x.id}" data-d="-1" aria-label="Less">−</button><output id="${x.id}">${st[x.id]}</output><button type="button" data-step="${x.id}" data-d="1" aria-label="More">+</button></div>`}</div>`).join('');
+function labels(){$$('#extras small[data-p]').forEach(e=>e.textContent=pln(cur==='eur'&&e.dataset.e?e.dataset.e*EUR:+e.dataset.p)+' · '+e.dataset.u)}
 labels();
 $$('[data-cur]').forEach(b=>b.onclick=()=>{cur=b.dataset.cur;$$('[data-cur]').forEach(x=>x.setAttribute('aria-pressed',x===b));labels();calc()});
 const LIMITS={guests:[1,12],pets:[0,4],xgN:[0,60]};const NIGHTLY=new Set(['g3','g4','tentN','xgN']);let stayN=2;EXTRAS.forEach(x=>{if(x.type==='count')LIMITS[x.id]=[0,x.max]});
@@ -953,8 +954,8 @@ function calc(){
   if(st.pets)lines.push([`Pets: ${st.pets} × ${pln(100)}`,st.pets*100]);
   const ex=[];
   if(st.balia)ex.push([`Hot tub × ${st.balia}`,st.balia*300]);
-  if(st.sauna)ex.push([`Sauna ${st.sauna} h`,st.sauna*50]);
-  if(st.ogn)ex.push([`Campfire wood × ${st.ogn}`,st.ogn*50]);
+  if(st.sauna)ex.push([`Sauna ${st.sauna} h`,st.sauna*SP()]);
+  if(st.ogn)ex.push([`Campfire wood × ${st.ogn}`,st.ogn*60]);
   let tbd=[];
   [['g3',3,PRICES.glamp3],['g4',4,PRICES.glamp4]].forEach(([k,n,p])=>{if(!st[k])return;if(p==null)tbd.push(`Glamping tent for ${n}`);else ex.push([`Glamping tent for ${n} × ${st[k]} ${st[k]===1?'night':'nights'}`,p*st[k]])});
   if(st.tent&&st.tentN)ex.push([`Camping field: ${st.tent} people × ${st.tentN} ${st.tentN===1?'night':'nights'}`,st.tent*60*st.tentN]);
@@ -973,7 +974,7 @@ function calc(){
   // Pakiety
   const packs=[];
   const extrasCost=(incl)=>{ // dodatki ponad to, co pakiet zawiera
-    let c=Math.max(0,st.balia-incl.balia)*300+Math.max(0,st.sauna-incl.sauna)*50+Math.max(0,st.ogn-incl.ogn)*50+st.tent*60*st.tentN+st.pets*100+(PRICES.glamp3?PRICES.glamp3*st.g3:0)+(PRICES.glamp4?PRICES.glamp4*st.g4:0)+Math.max(0,st.guests-(incl.guests||10))*100*st.xgN+(st.umb?200:0);
+    let c=Math.max(0,st.balia-incl.balia)*300+Math.max(0,st.sauna-incl.sauna)*SP()+Math.max(0,st.ogn-incl.ogn)*60+st.tent*60*st.tentN+st.pets*100+(PRICES.glamp3?PRICES.glamp3*st.g3:0)+(PRICES.glamp4?PRICES.glamp4*st.g4:0)+Math.max(0,st.guests-(incl.guests||10))*100*st.xgN+(st.umb?200:0);
     if(!incl.early&&st.early)c+=120; if(!incl.early&&st.late)c+=120; return c};
   if(a.getDay()===5&&nights>=2&&nights<=4&&!junAug&&!anyHol&&st.guests<=12){
     const base=nights===2?3700:nights===3?3700+599:3700+999;
@@ -1012,7 +1013,7 @@ function waitBox(){const t=WT[document.documentElement.lang]||WT.pl,box=document
       .then(r=>{$('#wlForm').hidden=true;$('#wlOpen').hidden=true;$('#wlOk').hidden=false;$('#wlOk').textContent=r.ok?t[4]:t[5]}).catch(()=>{$('#wlOk').hidden=false;$('#wlOk').textContent=t[5]})}}
 
 /* ---------- Fees ---------- */
-const FEES=[['Dog or cat (per stay)',100],['Each person above 10 (per night)',100],['Camping field, own tent or camper (person/night)',60],['One-off cleaning',400],['Hot tub preparation with firewood',300],['Sauna (per hour)',50],['Campfire wood',50],['Hot tub firewood',60],['Sauna kilt rental',10],['Lost golf ball',10],['Patio heater with 11 kg gas bottle',200],['Departure until 4 pm (if possible)',200],['Departure until 2 pm (if possible)',120],['Arrival from 12 noon (if possible)',200],['Arrival from 2 pm (if possible)',120],['Waste not sorted',150],['Extra cleaning',200]];
+const FEES=[['Dog or cat (per stay)',100],['Each person above 10 (per night)',100],['Camping field, own tent or camper (person/night)',60],['One-off cleaning',400],['Hot tub preparation with firewood',300],['Sauna (per hour)',68],['Campfire wood',60],['Hot tub firewood',60],['Sauna kilt rental',10],['Lost golf ball',10],['Patio heater with 11 kg gas bottle',200],['Departure until 4 pm (if possible)',200],['Departure until 2 pm (if possible)',120],['Arrival from 12 noon (if possible)',200],['Arrival from 2 pm (if possible)',120],['Waste not sorted',150],['Extra cleaning',200]];
 FEES.push(['Glamping tent for 3 (night)',360],['Glamping tent for 4 (night)',480],['Electricity: 100 kWh included, each further kWh',2],['Electric car charging (kWh)',2],['Refundable deposit (events: individual quote)',1000]);
 $('#fees').innerHTML=FEES.map(f=>`<div><span>${f[0]}</span><span>${typeof f[1]==='number'?(f[1]/4).toLocaleString('en-GB',{minimumFractionDigits:f[1]%4?2:0})+' €':f[1]}</span></div>`).join('');
 
