@@ -648,6 +648,7 @@ footer.foot a:hover{color:var(--accent)}
           <a href="https://www.airbnb.de/rooms/558402001846597864" target="_blank" rel="noopener">Airbnb</a>
           <a href="https://r.alohacamp.com/oj7w9" target="_blank" rel="noopener">AlohaCamp</a>
         </div></div>
+        <div><div class="k" id="bonK">🎁 Prezent</div><div class="portals" style="margin-top:6px"><a id="bonLink" href="https://narnia-concierge.rafal-70a.workers.dev/bon" target="_blank" rel="noopener">Bon podarunkowy</a></div></div>
         <div><div class="k">Folgen</div><div class="portals" style="margin-top:6px">
           <a href="https://www.facebook.com/NarniaGlamp" target="_blank" rel="noopener">Facebook</a>
           <a href="https://www.instagram.com/narniaglamp/" target="_blank" rel="noopener">Instagram</a>
@@ -997,6 +998,7 @@ if(NARNIA_API)fetch(NARNIA_API+'/api/availability').then(r=>r.json()).then(d=>{B
   if(!datesTouched&&overlaps($('#dIn').value,$('#dOut').value)){const f=freeWeekends();if(f[0]){$('#dIn').value=f[0][0];$('#dOut').value=f[0][1]}}
   drawFree();calc()}).catch(()=>{});
 
+{const L=document.documentElement.lang;const bl=document.getElementById('bonLink');if(bl){bl.href=(NARNIA_API||'https://narnia-concierge.rafal-70a.workers.dev')+'/bon?lang='+L;if(L!=='pl'){bl.textContent=L==='de'?'Geschenkgutschein':'Gift voucher';document.getElementById('bonK').textContent=L==='de'?'🎁 Geschenk':'🎁 Gift'}}}
 /* ---------- Lista oczekujących ---------- */
 const WT={pl:['Powiadom mnie, gdy ten termin się zwolni','Imię','E-mail lub telefon','Zapisz mnie','Zapisane — damy znać, jeśli termin się zwolni.','Nie udało się zapisać.'],
   en:['Notify me if these dates become free','Name','E-mail or phone','Add me','Saved — we will let you know if the dates free up.','Could not save.'],
