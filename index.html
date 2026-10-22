@@ -962,6 +962,7 @@ function calc(){
   lines.push(...ex);
   const total=lines.reduce((s,l)=>s+l[1],0);
   $('#calcWarn').innerHTML=warn.map(w=>`<p class="warn">${w}</p>`).join('');
+  if(NARNIA_API&&overlaps($('#dIn').value,$('#dOut').value))waitBox();
   $('#calcLines').innerHTML=lines.map(l=>`<div><span>${l[0]}</span><span>${pln(l[1])}</span></div>`).join('')+tbd.map(t=>`<div><span>${t}</span><span>cena do potw.</span></div>`).join('');
   $('#calcTotal').textContent=pln(total);
   lastCalc={start:$('#dIn').value,end:$('#dOut').value,nights,guests:st.guests,totalPLN:total,extras:{...st}};
@@ -994,6 +995,18 @@ function drawFree(){const L=document.documentElement.lang||'pl',f=freeWeekends()
 if(NARNIA_API)fetch(NARNIA_API+'/api/availability').then(r=>r.json()).then(d=>{BUSY=Array.isArray(d.busy)?d.busy:[];PROMOS=Array.isArray(d.promos)?d.promos.map(x=>({...x,label:x.label&&(x.label[document.documentElement.lang]||x.label.pl)||''})):[];
   if(!datesTouched&&overlaps($('#dIn').value,$('#dOut').value)){const f=freeWeekends();if(f[0]){$('#dIn').value=f[0][0];$('#dOut').value=f[0][1]}}
   drawFree();calc()}).catch(()=>{});
+
+/* ---------- Lista oczekujących ---------- */
+const WT={pl:['Powiadom mnie, gdy ten termin się zwolni','Imię','E-mail lub telefon','Zapisz mnie','Zapisane — damy znać, jeśli termin się zwolni.','Nie udało się zapisać.'],
+  en:['Notify me if these dates become free','Name','E-mail or phone','Add me','Saved — we will let you know if the dates free up.','Could not save.'],
+  de:['Benachrichtigen, wenn der Termin frei wird','Name','E-Mail oder Telefon','Eintragen','Gespeichert — wir melden uns, wenn der Termin frei wird.','Speichern fehlgeschlagen.']};
+function waitBox(){const t=WT[document.documentElement.lang]||WT.pl,box=document.createElement('div');box.className='waitbox';
+  box.innerHTML=`<button type="button" class="chip" id="wlOpen">🔔 ${t[0]}</button><form id="wlForm" hidden style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px"><input id="wlName" required placeholder="${t[1]}" style="flex:1;min-width:120px"><input id="wlC" required placeholder="${t[2]}" style="flex:1;min-width:160px"><button class="chip" type="submit">${t[3]}</button></form><p id="wlOk" hidden></p>`;
+  $('#calcWarn').append(box);
+  $('#wlOpen').onclick=()=>{$('#wlForm').hidden=false;$('#wlName').focus()};
+  $('#wlForm').onsubmit=e=>{e.preventDefault();const c=$('#wlC').value.trim();
+    fetch(NARNIA_API+'/api/waitlist',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:$('#wlName').value.trim(),email:/@/.test(c)?c:'',phone:/@/.test(c)?'':c,start:$('#dIn').value,end:$('#dOut').value,guests:st.guests,lang:document.documentElement.lang})})
+      .then(r=>{$('#wlForm').hidden=true;$('#wlOpen').hidden=true;$('#wlOk').hidden=false;$('#wlOk').textContent=r.ok?t[4]:t[5]}).catch(()=>{$('#wlOk').hidden=false;$('#wlOk').textContent=t[5]})}}
 
 /* ---------- Fees ---------- */
 const FEES=[['Pies lub kot (za pobyt)',100],['Każda osoba ponad 10 (za noc)',100],['Pole kempingowe, własny namiot lub kamper (os./noc)',60],['Sprzątanie jednorazowe',400],['Przygotowanie balii z drewnem',300],['Sauna (godzina)',50],['Drewno na ognisko',50],['Drewno do balii',60],['Wypożyczenie kiltu do sauny',10],['Zgubiona piłka golfowa',10],['Parasol grzewczy z butlą 11 kg',200],['Wyjazd do 16:00 (jeśli możliwe)',200],['Wyjazd do 14:00 (jeśli możliwe)',120],['Przyjazd od 12:00 (jeśli możliwe)',200],['Przyjazd od 14:00 (jeśli możliwe)',120],['Brak segregacji śmieci',150],['Dodatkowe sprzątanie',200]];
