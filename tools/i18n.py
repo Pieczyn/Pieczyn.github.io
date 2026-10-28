@@ -18,6 +18,7 @@ LANGS = ["en", "de"]
 
 # (pl, en, de) — dokładne fragmenty z index.html. Dłuższe fragmenty są podmieniane jako pierwsze.
 PAIRS = [
+('rel="nofollow">Panel gospodarza</a>', 'rel="nofollow">Host login</a>', 'rel="nofollow">Gastgeber-Login</a>'),
 ('<span class="fs-label">Najbliższe wolne weekendy</span>', '<span class="fs-label">Next free weekends</span>', '<span class="fs-label">Nächste freie Wochenenden</span>'),
 ("warn.push('Ten termin jest już zajęty. Wybierz inne daty – najbliższe wolne weekendy są nad kalkulatorem – albo napisz do nas.')", "warn.push('These dates are already booked. Please pick other dates – the next free weekends are shown above – or write to us.')", "warn.push('Dieser Termin ist leider schon belegt. Bitte wählen Sie andere Daten – die nächsten freien Wochenenden stehen oben – oder schreiben Sie uns.')"),
 ("// Zajęte terminy z kalendarza Narnii (rezerwacje + Airbnb/Booking); daty jako RRRR-MM-DD, wyjazd = dzień wolny", "// busy dates", "// busy dates"),
