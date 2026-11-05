@@ -147,7 +147,7 @@ section{padding-block:clamp(56px,9vw,112px)}
 .spot .ph{aspect-ratio:16/10}
 .spot div.txt{padding:16px 18px 20px;display:grid;gap:6px;align-content:start}
 .spot p{font-size:.95rem;color:var(--ink-2)}
-.freewk{margin:-2px 0 14px}.fw-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}.fw-list button{font:500 .85rem var(--body);border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:5px 12px;cursor:pointer}.fw-list button:hover,.fw-list button[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 2px var(--glow)}
+.avcal{margin:-6px 0 14px;border:1px solid var(--line);border-radius:var(--r);padding:10px;background:var(--bg)}.avc-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:6px}.avc-head button{font:600 1rem var(--body);width:34px;height:34px;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;cursor:pointer}.avc-head button:disabled{opacity:.35;cursor:default}.avc-months{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:14px}.avc-m h4{margin:0 0 4px;font:600 .9rem var(--body);text-align:center;text-transform:capitalize}.avc-g{display:grid;grid-template-columns:repeat(7,1fr);gap:2px}.avc-g span{font:500 .7rem var(--body);color:var(--ink-2);text-align:center;padding:2px 0}.avc-g button{--bz:color-mix(in srgb,var(--ink-2) 34%,transparent);aspect-ratio:1;min-width:0;font:500 .82rem var(--body);border:0;border-radius:4px;background:transparent;color:var(--ink);cursor:pointer;padding:0;position:relative}.avc-g button:hover:not([aria-disabled="true"]){box-shadow:inset 0 0 0 2px var(--accent)}.avc-g button.past{color:var(--ink-2);opacity:.4;cursor:default}.avc-g button.busy{background:var(--bz);color:var(--ink-2);text-decoration:line-through}.avc-g button.bin{background:linear-gradient(135deg,transparent 50%,var(--bz) 50%)}.avc-g button.bout{background:linear-gradient(135deg,var(--bz) 50%,transparent 50%)}.avc-g button[aria-disabled="true"]{cursor:not-allowed}.avc-g button.sel{background:color-mix(in srgb,var(--accent) 28%,transparent);text-decoration:none;color:var(--ink)}.avc-g button.end{background:var(--accent);color:var(--accent-ink);font-weight:700;text-decoration:none}.avc-g button.promo:not(.busy):not(.sel):not(.end)::after{content:"";position:absolute;left:50%;bottom:3px;width:4px;height:4px;margin-left:-2px;border-radius:50%;background:var(--accent)}.avc-leg{display:flex;flex-wrap:wrap;gap:4px 14px;margin-top:8px;font-size:.78rem;color:var(--ink-2)}.avc-leg i{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-2px;margin-right:5px;border:1px solid var(--line)}.avc-hint{margin:6px 0 0;font-size:.85rem;font-weight:600}.freewk{margin:-2px 0 14px}.fw-list{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}.fw-list button{font:500 .85rem var(--body);border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:5px 12px;cursor:pointer}.fw-list button:hover,.fw-list button[aria-pressed="true"]{border-color:var(--accent);box-shadow:0 0 0 2px var(--glow)}
 /* ---------- Plan terenu ---------- */
 .plan{--pl-forest:#2f4a33;--pl-tree:#3f6140;--pl-grass:#a9bf8f;--pl-path:#efe6cf;--pl-water:#7fb0c4;--pl-sand:#ead6a6;--pl-bld:#6e4b2c;--pl-txt:#16261f;display:grid;grid-template-columns:minmax(0,1.6fr) minmax(260px,1fr);gap:20px;align-items:start}
 @media (prefers-color-scheme: dark){:root:not([data-theme="light"]) .plan{--pl-forest:#13221a;--pl-tree:#1f3527;--pl-grass:#4b6544;--pl-path:#8a8064;--pl-water:#2f6075;--pl-sand:#a08a5a;--pl-bld:#d1a77c;--pl-txt:#e9ede4}}
@@ -550,6 +550,7 @@ footer.foot a:hover{color:var(--accent)}
           <div class="field"><label for="dIn">Przyjazd</label><input type="date" id="dIn"></div>
           <div class="field"><label for="dOut">Wyjazd</label><input type="date" id="dOut"></div>
         </div>
+        <div class="avcal" id="avCal" hidden></div>
         <div class="freewk" id="freeWk" hidden><span class="fs-label">Najbliższe wolne weekendy</span><div class="fw-list" id="freeWkList"></div></div>
         <div class="row2">
           <div class="field"><span class="fs-label" id="lg">Osoby w domu</span>
@@ -917,16 +918,49 @@ const iso=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+Stri
 const parse=s=>{const [y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d,12)};
 let fri=addDays(today,14);while(fri.getDay()!==5)fri=addDays(fri,1);
 $('#dIn').value=iso(fri);$('#dOut').value=iso(addDays(fri,2));$('#dIn').min=iso(today);
-$('#dIn').onchange=()=>{datesTouched=true;const a=parse($('#dIn').value);if(!$('#dOut').value||parse($('#dOut').value)<=a)$('#dOut').value=iso(addDays(a,2));calc()};
-$('#dOut').onchange=()=>{datesTouched=true;calc()};
+$('#dIn').onchange=()=>{datesTouched=true;calPick=false;const a=parse($('#dIn').value);if(!$('#dOut').value||parse($('#dOut').value)<=a)$('#dOut').value=iso(addDays(a,2));calc()};
+$('#dOut').onchange=()=>{datesTouched=true;calPick=false;calc()};
 
 let lastQuote='',lastCalc=null;
 // Zajęte terminy z kalendarza Narnii (rezerwacje + Airbnb/Booking); daty jako RRRR-MM-DD, wyjazd = dzień wolny
 let BUSY=[],PROMOS=[],datesTouched=false;
 const promoAt=d=>PROMOS.find(x=>d>=x.start&&d<x.end);
 const overlaps=(a,b)=>BUSY.some(([s,e])=>a<e&&b>s);
+/* ---------- Kalendarz zajetych terminow ---------- */
+const CT={pl:['Poprzedni miesiąc','Następny miesiąc','Wolne','Zajęte','Twój termin','Wybierz dzień wyjazdu','Kropka = promocja','Kalendarz dostępności'],
+  en:['Previous month','Next month','Free','Booked','Your stay','Now pick your departure day','Dot = special offer','Availability calendar'],
+  de:['Voriger Monat','Nächster Monat','Frei','Belegt','Ihr Aufenthalt','Wählen Sie jetzt den Abreisetag','Punkt = Angebot','Belegungskalender']};
+let calM=null,calPick=false,calOn=false;
+const nightBusy=d=>BUSY.some(([s,e])=>d>=s&&d<e);
+function drawCal(follow){const box=$('#avCal');if(!box||!calOn)return;
+  const L=document.documentElement.lang||'pl',t=CT[L]||CT.pl,a=$('#dIn').value,b=$('#dOut').value,t0=iso(today);
+  const first=new Date(today.getFullYear(),today.getMonth(),1,12),last=new Date(today.getFullYear(),today.getMonth()+16,1,12);
+  if(!calM||(follow&&a)){const x=a?parse(a):today,m=new Date(x.getFullYear(),x.getMonth(),1,12);
+    if(!calM||m<calM||m>new Date(calM.getFullYear(),calM.getMonth()+1,1,12))calM=m<first?first:m>last?last:m}
+  const wd=[...Array(7)].map((_,i)=>new Date(2024,0,1+i,12).toLocaleDateString(L,{weekday:'short'}).replace('.','').slice(0,2));
+  const month=m=>{const y=m.getFullYear(),mo=m.getMonth(),n=new Date(y,mo+1,0).getDate(),off=(new Date(y,mo,1).getDay()+6)%7;let h='';
+    for(let i=0;i<off;i++)h+='<i></i>';
+    for(let d=1;d<=n;d++){const x=new Date(y,mo,d,12),v=iso(x),prev=iso(addDays(x,-1)),past=v<t0,bz=nightBusy(v),bzPrev=nightBusy(prev);
+      const inSel=a&&b&&v>a&&v<b,isEnd=v===a||(v===b&&a&&b),okIn=!past&&!bz,okOut=calPick&&a&&v>a&&!overlaps(a,v);
+      const cls=[past?'past':'',bz&&bzPrev?'busy':bz?'bin':bzPrev?'bout':'',inSel?'sel':'',isEnd?'end':'',promoAt(v)&&promoAt(v).pct>0?'promo':''].filter(Boolean).join(' ');
+      const lbl=x.toLocaleDateString(L,{weekday:'long',day:'numeric',month:'long'})+(bz?' – '+t[3]:'');
+      h+=`<button type="button" data-d="${v}" class="${cls}" aria-label="${lbl}"${okIn||okOut?'':' aria-disabled="true"'}${isEnd?' aria-pressed="true"':''}>${d}</button>`}
+    return `<div class="avc-m"><h4>${m.toLocaleDateString(L,{month:'long',year:'numeric'})}</h4><div class="avc-g">${wd.map(w=>`<span>${w}</span>`).join('')}${h}</div></div>`};
+  const m2=new Date(calM.getFullYear(),calM.getMonth()+1,1,12);
+  box.innerHTML=`<div class="avc-head"><button type="button" data-cal="-1" aria-label="${t[0]}"${calM<=first?' disabled':''}>‹</button><span class="fs-label">${t[7]}</span><button type="button" data-cal="1" aria-label="${t[1]}"${calM>=last?' disabled':''}>›</button></div>`+
+    `<div class="avc-months">${month(calM)}${month(m2)}</div>`+
+    `<div class="avc-leg"><span><i></i>${t[2]}</span><span><i style="background:color-mix(in srgb,var(--ink-2) 34%,transparent)"></i>${t[3]}</span><span><i style="background:var(--accent);border-color:var(--accent)"></i>${t[4]}</span>${PROMOS.some(x=>x.pct>0)?`<span>${t[6]}</span>`:''}</div>`+
+    (calPick?`<p class="avc-hint">${t[5]}</p>`:'')}
+document.addEventListener('click',e=>{const nb=e.target.closest('[data-cal]');
+  if(nb){calM=new Date(calM.getFullYear(),calM.getMonth()+(+nb.dataset.cal),1,12);drawCal(false);return}
+  const c=e.target.closest('#avCal button[data-d]');if(!c||c.getAttribute('aria-disabled')==='true')return;
+  const v=c.dataset.d,a=$('#dIn').value;
+  if(calPick&&a&&v>a&&!overlaps(a,v)){$('#dOut').value=v;calPick=false}
+  else if(!nightBusy(v)&&v>=iso(today)){$('#dIn').value=v;const mo=parse(v).getMonth();$('#dOut').value=iso(addDays(parse(v),mo===6||mo===7?3:2));calPick=true}
+  else return;
+  datesTouched=true;$$('#freeWkList button').forEach(y=>y.setAttribute('aria-pressed','false'));calc()});
 function calc(){
-  const warn=[],lines=[];lastCalc=null;
+  const warn=[],lines=[];lastCalc=null;drawCal(true);
   if(!$('#dIn').value||!$('#dOut').value){markNow();$('#calcLines').innerHTML='';$('#calcTotal').textContent='–';return}
   const a=parse($('#dIn').value),b=parse($('#dOut').value);
   const nights=Math.round((b-a)/864e5);
@@ -993,10 +1027,10 @@ function drawFree(){const L=document.documentElement.lang||'pl',f=freeWeekends()
   const short=v=>parse(v).toLocaleDateString(L,{day:'numeric',month:'short'});
   $('#freeWkList').innerHTML=f.map(([a,b])=>`<button type="button" data-a="${a}" data-b="${b}">${parse(a).getMonth()===parse(b).getMonth()?parse(a).getDate():short(a)}–${short(b)}${promoAt(a)&&promoAt(a).pct>0?' 🔥 −'+promoAt(a).pct+'%':''}</button>`).join('');
   $('#freeWk').hidden=false;
-  $$('#freeWkList button').forEach(x=>x.onclick=()=>{$('#dIn').value=x.dataset.a;$('#dOut').value=x.dataset.b;datesTouched=true;$$('#freeWkList button').forEach(y=>y.setAttribute('aria-pressed',y===x));calc()})}
+  $$('#freeWkList button').forEach(x=>x.onclick=()=>{$('#dIn').value=x.dataset.a;$('#dOut').value=x.dataset.b;datesTouched=true;calPick=false;$$('#freeWkList button').forEach(y=>y.setAttribute('aria-pressed',y===x));calc()})}
 if(NARNIA_API)fetch(NARNIA_API+'/api/availability').then(r=>r.json()).then(d=>{BUSY=Array.isArray(d.busy)?d.busy:[];PROMOS=Array.isArray(d.promos)?d.promos.map(x=>({...x,label:x.label&&(x.label[document.documentElement.lang]||x.label.pl)||''})):[];
   if(!datesTouched&&overlaps($('#dIn').value,$('#dOut').value)){const f=freeWeekends();if(f[0]){$('#dIn').value=f[0][0];$('#dOut').value=f[0][1]}}
-  drawFree();calc()}).catch(()=>{});
+  calOn=true;$('#avCal').hidden=false;drawFree();calc()}).catch(()=>{});
 
 {const L=document.documentElement.lang;const bl=document.getElementById('bonLink');if(bl){bl.href=(NARNIA_API||'https://narnia-concierge.rafal-70a.workers.dev')+'/bon?lang='+L;if(L!=='pl'){bl.textContent=L==='de'?'Geschenkgutschein':'Gift voucher';document.getElementById('bonK').textContent=L==='de'?'🎁 Geschenk':'🎁 Gift'}}}
 /* ---------- Lista oczekujących ---------- */
