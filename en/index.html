@@ -327,6 +327,9 @@ textarea{min-height:110px;resize:vertical}
 .portals a:hover{border-color:var(--accent);color:var(--accent)}
 .form{background:var(--surface);color:var(--ink);border-radius:var(--r);padding:clamp(18px,3vw,28px);display:grid;gap:14px;align-content:start}
 .form .summary{font:.85rem var(--mono);background:var(--bg-2);padding:10px 12px;border-radius:var(--r);white-space:pre-wrap}
+.code-tg{justify-self:start;background:none;border:0;padding:0;font:inherit;font-size:.92rem;color:var(--ink-2);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.code-row{display:flex;gap:8px}.code-row input{flex:1;min-width:0;text-transform:uppercase}.code-row .btn{padding:10px 18px}
+.code-msg{margin:0;font-size:.92rem}.code-msg.ok{color:var(--moss)}.code-msg.bad{color:#b4442a}
 .sent{display:grid;gap:10px}
 .sent pre{white-space:pre-wrap;font:.85rem var(--mono);background:var(--bg-2);padding:12px;border-radius:var(--r);margin:0;max-height:260px;overflow:auto}
 @media (max-width:820px){.contact-grid{grid-template-columns:1fr}}
@@ -666,6 +669,9 @@ footer.foot a:hover{color:var(--accent)}
       </div>
       <div class="field"><label for="fEmail">E-mail</label><input type="email" id="fEmail" autocomplete="email" required></div>
       <div class="field"><label for="fMsg">Message</label><textarea id="fMsg" placeholder="Occasion, questions, wishes…"></textarea></div>
+      <div class="field"><button type="button" class="code-tg" id="fCodeTg" aria-expanded="false" aria-controls="fCodeRow">Have a discount code?</button>
+        <div class="code-row" id="fCodeRow" hidden><input type="text" id="fCode" maxlength="24" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-label="Discount code" placeholder="Discount code"><button type="button" class="btn ghost" id="fCodeBtn">Apply</button></div>
+        <p class="code-msg" id="fCodeMsg" role="status" hidden></p></div>
       <input type="checkbox" id="fHp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
       <p id="fErr" class="warn" hidden></p>
       <button class="btn" type="submit">Send enquiry</button>
@@ -1059,15 +1065,30 @@ $('#form').addEventListener('submit',async e=>{
   const name=$('#fName').value.trim(),email=$('#fEmail').value.trim(),err=$('#fErr');
   if(!name||!/^\S+@\S+\.\S+$/.test(email)){err.textContent='Please enter your name and a valid email address so we can reply.';err.hidden=false;return}
   err.hidden=true;
-  const body=`[EN] ${lastQuote}\n\nOd: ${name}\nE-mail: ${email}\nTelefon: ${$('#fPhone').value.trim()||'–'}\n\n${$('#fMsg').value.trim()}`;
+  const code=$('#fCode').value.trim().toUpperCase();
+  const body=`[EN] ${lastQuote}${code?`\nKod rabatowy: ${code}`:''}\n\nOd: ${name}\nE-mail: ${email}\nTelefon: ${$('#fPhone').value.trim()||'–'}\n\n${$('#fMsg').value.trim()}`;
   if($('#fHp').checked)return;
   const sendBtn=$('#form button[type=submit]');sendBtn.disabled=true;
-  const toPanel=NARNIA_API?fetch(NARNIA_API+'/api/inquiry',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,email,phone:$('#fPhone').value.trim(),message:$('#fMsg').value.trim(),quote:lastQuote,lang:document.documentElement.lang,...(lastCalc||{})})}).then(r=>r.ok,()=>false):Promise.resolve(false);
+  const toPanel=NARNIA_API?fetch(NARNIA_API+'/api/inquiry',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name,email,phone:$('#fPhone').value.trim(),message:$('#fMsg').value.trim(),quote:lastQuote,lang:document.documentElement.lang,...(lastCalc||{}),...(code?{code}:{})})}).then(r=>r.ok,()=>false):Promise.resolve(false);
   const toMail=WEB3FORMS_KEY?fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({access_key:WEB3FORMS_KEY,name,email,replyto:email,from_name:'Strona Narnia',message:body,subject:'Zapytanie o termin (EN) – Narnia'})}).then(r=>r.ok,()=>false):Promise.resolve(false);
   const [okPanel,okMail]=await Promise.all([toPanel,toMail]);sendBtn.disabled=false;
-  if(okPanel||okMail){$('#sent').innerHTML='<p><strong>Thank you!</strong> Your enquiry has arrived – we will reply by email.</p>';$('#sent').hidden=false;$('#form').querySelectorAll('input,textarea').forEach(x=>{if(x.id!=='fHp')x.value=''});return}
+  if(okPanel||okMail){$('#sent').innerHTML='<p><strong>Thank you!</strong> Your enquiry has arrived – we will reply by email.</p>';$('#sent').hidden=false;$('#form').querySelectorAll('input,textarea').forEach(x=>{if(x.id!=='fHp')x.value=''});$('#fCodeMsg').hidden=true;return}
   err.textContent='The message could not be sent. Please try again or write to info@narniaglamp.com.';err.hidden=false;
 });
+/* ---------- discount code ---------- */
+{const L=document.documentElement.lang||'pl',CT={pl:['cena z rabatem ok.','Nie udało się sprawdzić kodu. Wyślij zapytanie – sprawdzimy go przy wycenie.'],en:['price with discount approx.','We could not check the code. Send the enquiry – we will check it when preparing your offer.'],de:['Preis mit Rabatt ca.','Der Code konnte nicht geprüft werden. Senden Sie die Anfrage – wir prüfen ihn beim Angebot.']}[L]||[];
+  const inp=$('#fCode'),msg=$('#fCodeMsg');let tm;
+  $('#fCodeTg').onclick=()=>{const r=$('#fCodeRow');r.hidden=!r.hidden;$('#fCodeTg').setAttribute('aria-expanded',!r.hidden);if(!r.hidden)inp.focus()};
+  async function check(){const c=inp.value.trim();if(!c){msg.hidden=true;return}if(!NARNIA_API)return;
+    try{const r=await fetch(NARNIA_API+'/api/discount',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({code:c,lang:L,...(lastCalc||{})})});const d=await r.json();
+      if(d.ok){msg.className='code-msg ok';msg.textContent='✓ '+d.label+(d.discount&&lastCalc?`: −${pln(d.discount)} · ${CT[0]} ${pln(lastCalc.totalPLN-d.discount)}`:'')}
+      else{msg.className='code-msg bad';msg.textContent=d.message||CT[1]}}
+    catch(e){msg.className='code-msg';msg.textContent=CT[1]}
+    msg.hidden=false}
+  $('#fCodeBtn').onclick=check;inp.addEventListener('keydown',e=>{if(e.key==='Enter'){e.preventDefault();check()}});
+  // recheck on calculator change
+  const cs=document.getElementById('cennik');if(cs)['input','change'].forEach(ev=>cs.addEventListener(ev,()=>{if(!inp.value.trim()||msg.hidden)return;clearTimeout(tm);tm=setTimeout(check,500)}));
+}
 $('#toForm').onclick=()=>setTimeout(()=>$('#fName').focus({preventScroll:true}),400);
 
 /* ---------- Czat ---------- */
