@@ -580,8 +580,8 @@ footer.foot a:hover{color:var(--accent)}
         <ul><li>bis zu 12 Personen, Freitag – Sonntag</li><li>frühere Anreise ab 14:00, spätere Abreise bis 14:00</li><li>Badezuber, Endreinigung und 2 Stunden Sauna inklusive</li><li>Verlängerung um 1 Tag 149,75 €, um 2 Tage 249,75 €</li><li>nicht im Juni, Juli, August und an Feiertagen</li></ul>
       </article>
       <article class="package">
-        <span class="eyebrow">Paket</span><h3>Sommerwochen 2027</h3><span class="price num">2125 € / 7 Tage</span>
-        <ul><li>bis zu 10 Personen, Juni – September</li><li>Badezuber und Endreinigung inklusive</li><li>2 Stunden Sauna pro Tag</li><li>3 Portionen Holz</li></ul>
+        <span class="eyebrow">Paket</span><h3>Sommerwochen 2027</h3><span class="price num">2000 € / 7 Tage</span>
+        <ul><li>bis zu 10 Personen, Juni – September</li><li>Badezuber und Endreinigung inklusive</li><li>6 Stunden Sauna pro Aufenthalt</li><li>3 Portionen Holz</li></ul>
       </article>
     </div>
 
@@ -980,7 +980,7 @@ function calc(){
     const base=nights===2?3700:nights===3?3700+599:3700+999;
     packs.push({n:'Magisches Wochenende'+(nights>2?` + ${nights-2} ${nights===3?'Tag':'Tage'}`:''),p:base+extrasCost({balia:1,sauna:2,ogn:0,early:true,guests:12})});
   }
-  if(nights===7&&allJunSep&&st.guests<=10){packs.push({n:'Sommerwoche, 7 Tage',p:8500+extrasCost({balia:1,sauna:14,ogn:3,early:false})})}
+  if(nights===7&&allJunSep&&st.guests<=10){packs.push({n:'Sommerwoche, 7 Tage',p:8000+extrasCost({balia:1,sauna:6,ogn:3,early:false})})}
   $('#calcPacks').innerHTML=packs.map(p=>{const save=total-p.p;return `<div class="pack${save>0?' best':''}"><strong>${p.n}: ${pln(p.p)}</strong><span>${save>0?pln(save)+' günstiger als der Standardpreis.':'Mit diesen Extras ist das Paket nicht günstiger.'}</span></div>`}).join('');
 
   lastQuote=`Termin: ${fmt(a)} – ${fmt(b)} (${nights} Nächte)\nPersonen im Haus: ${st.guests}${st.g3?` + Glampingzelt für 3 (${st.g3} N.)`:''}${st.g4?` + Glampingzelt für 4 (${st.g4} N.)`:''}${st.tent&&st.tentN?` + ${st.tent} Pers. auf der Zeltwiese (${st.tentN} N.)`:''}${st.pets?`, Haustiere: ${st.pets}`:''}\nExtras: ${ex.map(e=>e[0]).concat(tbd).join(', ')||'keine'}\nPreisschätzung: ${pln(total)}${packs.length?`\nPaket: ${packs.map(p=>p.n+' '+pln(p.p)).join('; ')}`:''}`;

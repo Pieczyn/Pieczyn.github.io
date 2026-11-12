@@ -579,8 +579,8 @@ footer.foot a:hover{color:var(--accent)}
         <ul><li>do 12 osób, piątek – niedziela</li><li>wcześniejszy przyjazd od 14:00, późniejszy wyjazd do 14:00</li><li>balia, sprzątanie i 2 godziny sauny w cenie</li><li>przedłużenie o 1 dzień 599 zł, o 2 dni 999 zł</li><li>poza czerwcem, lipcem, sierpniem i świętami</li></ul>
       </article>
       <article class="package">
-        <span class="eyebrow">Pakiet</span><h3>Turnusy wakacyjne 2027</h3><span class="price num">8500 zł / 7 dni</span>
-        <ul><li>do 10 osób, czerwiec – wrzesień</li><li>balia i sprzątanie w cenie</li><li>2 godziny sauny dziennie</li><li>3 porcje drewna</li></ul>
+        <span class="eyebrow">Pakiet</span><h3>Turnusy wakacyjne 2027</h3><span class="price num">8000 zł / 7 dni</span>
+        <ul><li>do 10 osób, czerwiec – wrzesień</li><li>balia i sprzątanie w cenie</li><li>6 godzin sauny na pobyt</li><li>3 porcje drewna</li></ul>
       </article>
     </div>
 
@@ -979,7 +979,7 @@ function calc(){
     const base=nights===2?3700:nights===3?3700+599:3700+999;
     packs.push({n:'Magiczny weekend'+(nights>2?` + ${nights-2} ${nights===3?'dzień':'dni'}`:''),p:base+extrasCost({balia:1,sauna:2,ogn:0,early:true,guests:12})});
   }
-  if(nights===7&&allJunSep&&st.guests<=10){packs.push({n:'Turnus wakacyjny 7 dni',p:8500+extrasCost({balia:1,sauna:14,ogn:3,early:false})})}
+  if(nights===7&&allJunSep&&st.guests<=10){packs.push({n:'Turnus wakacyjny 7 dni',p:8000+extrasCost({balia:1,sauna:6,ogn:3,early:false})})}
   $('#calcPacks').innerHTML=packs.map(p=>{const save=total-p.p;return `<div class="pack${save>0?' best':''}"><strong>${p.n}: ${pln(p.p)}</strong><span>${save>0?'Taniej o '+pln(save)+' niż cena standardowa.':'Pakiet nie wychodzi taniej przy tych dodatkach.'}</span></div>`}).join('');
 
   lastQuote=`Termin: ${fmt(a)} – ${fmt(b)} (${nights} noce)\nOsoby w domu: ${st.guests}${st.g3?` + namiot glampingowy 3 os. (${st.g3} n.)`:''}${st.g4?` + namiot glampingowy 4 os. (${st.g4} n.)`:''}${st.tent&&st.tentN?` + ${st.tent} os. na polu kempingowym (${st.tentN} n.)`:''}${st.pets?`, zwierzęta: ${st.pets}`:''}\nDodatki: ${ex.map(e=>e[0]).concat(tbd).join(', ')||'brak'}\nWycena orientacyjna: ${pln(total)}${packs.length?`\nPakiet: ${packs.map(p=>p.n+' '+pln(p.p)).join('; ')}`:''}`;

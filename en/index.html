@@ -580,8 +580,8 @@ footer.foot a:hover{color:var(--accent)}
         <ul><li>up to 12 people, Friday – Sunday</li><li>early arrival from 2 pm, late departure until 2 pm</li><li>hot tub, cleaning and 2 hours of sauna included</li><li>extra day 149.75 €, two extra days 249.75 €</li><li>not in June, July, August or on public holidays</li></ul>
       </article>
       <article class="package">
-        <span class="eyebrow">Package</span><h3>Summer weeks 2027</h3><span class="price num">2125 € / 7 days</span>
-        <ul><li>up to 10 people, June – September</li><li>hot tub and cleaning included</li><li>2 hours of sauna a day</li><li>3 portions of firewood</li></ul>
+        <span class="eyebrow">Package</span><h3>Summer weeks 2027</h3><span class="price num">2000 € / 7 days</span>
+        <ul><li>up to 10 people, June – September</li><li>hot tub and cleaning included</li><li>6 hours of sauna per stay</li><li>3 portions of firewood</li></ul>
       </article>
     </div>
 
@@ -980,7 +980,7 @@ function calc(){
     const base=nights===2?3700:nights===3?3700+599:3700+999;
     packs.push({n:'Magical Weekend'+(nights>2?` + ${nights-2} ${nights===3?'day':'days'}`:''),p:base+extrasCost({balia:1,sauna:2,ogn:0,early:true,guests:12})});
   }
-  if(nights===7&&allJunSep&&st.guests<=10){packs.push({n:'Summer week, 7 days',p:8500+extrasCost({balia:1,sauna:14,ogn:3,early:false})})}
+  if(nights===7&&allJunSep&&st.guests<=10){packs.push({n:'Summer week, 7 days',p:8000+extrasCost({balia:1,sauna:6,ogn:3,early:false})})}
   $('#calcPacks').innerHTML=packs.map(p=>{const save=total-p.p;return `<div class="pack${save>0?' best':''}"><strong>${p.n}: ${pln(p.p)}</strong><span>${save>0?pln(save)+' cheaper than the standard price.':'With these extras the package is not cheaper.'}</span></div>`}).join('');
 
   lastQuote=`Dates: ${fmt(a)} – ${fmt(b)} (${nights} nights)\nPeople in the house: ${st.guests}${st.g3?` + glamping tent for 3 (${st.g3} n.)`:''}${st.g4?` + glamping tent for 4 (${st.g4} n.)`:''}${st.tent&&st.tentN?` + ${st.tent} on the camping field (${st.tentN} n.)`:''}${st.pets?`, pets: ${st.pets}`:''}\nExtras: ${ex.map(e=>e[0]).concat(tbd).join(', ')||'none'}\nEstimated price: ${pln(total)}${packs.length?`\nPackage: ${packs.map(p=>p.n+' '+pln(p.p)).join('; ')}`:''}`;
